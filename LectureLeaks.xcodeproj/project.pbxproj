@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D960FFA5139DB6EC00CD6795 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA4139DB6EC00CD6795 /* UIKit.framework */; };
+		D960FFA7139DB6EC00CD6795 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA6139DB6EC00CD6795 /* Foundation.framework */; };
+		D960FFA9139DB6EC00CD6795 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA8139DB6EC00CD6795 /* CoreGraphics.framework */; };
+		D960FFAF139DB6EC00CD6795 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D960FFAD139DB6EC00CD6795 /* InfoPlist.strings */; };
+		D960FFB2139DB6EC00CD6795 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D960FFB1139DB6EC00CD6795 /* main.m */; };
+		D960FFB5139DB6EC00CD6795 /* LectureLeaksAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D960FFB4139DB6EC00CD6795 /* LectureLeaksAppDelegate.m */; };
+		D960FFB8139DB6EC00CD6795 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFB6139DB6EC00CD6795 /* MainWindow.xib */; };
+		D960FFBB139DB6EC00CD6795 /* LectureLeaksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.m */; };
+		D960FFBE139DB6EC00CD6795 /* LectureLeaksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D960FFA0139DB6EC00CD6795 /* LectureLeaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LectureLeaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D960FFA4139DB6EC00CD6795 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D960FFA6139DB6EC00CD6795 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D960FFA8139DB6EC00CD6795 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D960FFAC139DB6EC00CD6795 /* LectureLeaks-Info.plist */ = {isa = PBXFileReference; path = "LectureLeaks-Info.plist"; sourceTree = "<group>"; };
+		D960FFAE139DB6EC00CD6795 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D960FFB0139DB6EC00CD6795 /* LectureLeaks-Prefix.pch */ = {isa = PBXFileReference; path = "LectureLeaks-Prefix.pch"; sourceTree = "<group>"; };
+		D960FFB1139DB6EC00CD6795 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D960FFB3139DB6EC00CD6795 /* LectureLeaksAppDelegate.h */ = {isa = PBXFileReference; path = LectureLeaksAppDelegate.h; sourceTree = "<group>"; };
+		D960FFB4139DB6EC00CD6795 /* LectureLeaksAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LectureLeaksAppDelegate.m; sourceTree = "<group>"; };
+		D960FFB7139DB6EC00CD6795 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		D960FFB9139DB6EC00CD6795 /* LectureLeaksViewController.h */ = {isa = PBXFileReference; path = LectureLeaksViewController.h; sourceTree = "<group>"; };
+		D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LectureLeaksViewController.m; sourceTree = "<group>"; };
+		D960FFBD139DB6EC00CD6795 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LectureLeaksViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D960FF9D139DB6EC00CD6795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D960FFA5139DB6EC00CD6795 /* UIKit.framework in Frameworks */,
+				D960FFA7139DB6EC00CD6795 /* Foundation.framework in Frameworks */,
+				D960FFA9139DB6EC00CD6795 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D960FF95139DB6EC00CD6795 = {
+			isa = PBXGroup;
+			children = (
+				D960FFAA139DB6EC00CD6795 /* LectureLeaks */,
+				D960FFA3139DB6EC00CD6795 /* Frameworks */,
+				D960FFA1139DB6EC00CD6795 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D960FFA1139DB6EC00CD6795 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D960FFA0139DB6EC00CD6795 /* LectureLeaks.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D960FFA3139DB6EC00CD6795 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D960FFA4139DB6EC00CD6795 /* UIKit.framework */,
+				D960FFA6139DB6EC00CD6795 /* Foundation.framework */,
+				D960FFA8139DB6EC00CD6795 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D960FFAA139DB6EC00CD6795 /* LectureLeaks */ = {
+			isa = PBXGroup;
+			children = (
+				D960FFB3139DB6EC00CD6795 /* LectureLeaksAppDelegate.h */,
+				D960FFB4139DB6EC00CD6795 /* LectureLeaksAppDelegate.m */,
+				D960FFB6139DB6EC00CD6795 /* MainWindow.xib */,
+				D960FFB9139DB6EC00CD6795 /* LectureLeaksViewController.h */,
+				D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.m */,
+				D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */,
+				D960FFAB139DB6EC00CD6795 /* Supporting Files */,
+			);
+			path = LectureLeaks;
+			sourceTree = "<group>";
+		};
+		D960FFAB139DB6EC00CD6795 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D960FFAC139DB6EC00CD6795 /* LectureLeaks-Info.plist */,
+				D960FFAD139DB6EC00CD6795 /* InfoPlist.strings */,
+				D960FFB0139DB6EC00CD6795 /* LectureLeaks-Prefix.pch */,
+				D960FFB1139DB6EC00CD6795 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D960FF9F139DB6EC00CD6795 /* LectureLeaks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D960FFC1139DB6EC00CD6795 /* Build configuration list for PBXNativeTarget "LectureLeaks" */;
+			buildPhases = (
+				D960FF9C139DB6EC00CD6795 /* Sources */,
+				D960FF9D139DB6EC00CD6795 /* Frameworks */,
+				D960FF9E139DB6EC00CD6795 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LectureLeaks;
+			productName = LectureLeaks;
+			productReference = D960FFA0139DB6EC00CD6795 /* LectureLeaks.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D960FF97139DB6EC00CD6795 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = D960FF9A139DB6EC00CD6795 /* Build configuration list for PBXProject "LectureLeaks" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D960FF95139DB6EC00CD6795;
+			productRefGroup = D960FFA1139DB6EC00CD6795 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D960FF9F139DB6EC00CD6795 /* LectureLeaks */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D960FF9E139DB6EC00CD6795 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D960FFAF139DB6EC00CD6795 /* InfoPlist.strings in Resources */,
+				D960FFB8139DB6EC00CD6795 /* MainWindow.xib in Resources */,
+				D960FFBE139DB6EC00CD6795 /* LectureLeaksViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D960FF9C139DB6EC00CD6795 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D960FFB2139DB6EC00CD6795 /* main.m in Sources */,
+				D960FFB5139DB6EC00CD6795 /* LectureLeaksAppDelegate.m in Sources */,
+				D960FFBB139DB6EC00CD6795 /* LectureLeaksViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D960FFAD139DB6EC00CD6795 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D960FFAE139DB6EC00CD6795 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D960FFB6139DB6EC00CD6795 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D960FFB7139DB6EC00CD6795 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D960FFBD139DB6EC00CD6795 /* en */,
+			);
+			name = LectureLeaksViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D960FFBF139DB6EC00CD6795 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D960FFC0139DB6EC00CD6795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		D960FFC2139DB6EC00CD6795 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LectureLeaks/LectureLeaks-Prefix.pch";
+				INFOPLIST_FILE = "LectureLeaks/LectureLeaks-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D960FFC3139DB6EC00CD6795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LectureLeaks/LectureLeaks-Prefix.pch";
+				INFOPLIST_FILE = "LectureLeaks/LectureLeaks-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D960FF9A139DB6EC00CD6795 /* Build configuration list for PBXProject "LectureLeaks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D960FFBF139DB6EC00CD6795 /* Debug */,
+				D960FFC0139DB6EC00CD6795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D960FFC1139DB6EC00CD6795 /* Build configuration list for PBXNativeTarget "LectureLeaks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D960FFC2139DB6EC00CD6795 /* Debug */,
+				D960FFC3139DB6EC00CD6795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D960FF97139DB6EC00CD6795 /* Project object */;
+}
