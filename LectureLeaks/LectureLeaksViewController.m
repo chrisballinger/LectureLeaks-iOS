@@ -7,11 +7,17 @@
 //
 
 #import "LectureLeaksViewController.h"
+#import "RecordViewController.h"
+#import "LearnViewController.h"
+#import "AboutViewController.h"
+#import "ScheduleViewController.h"
 
 @implementation LectureLeaksViewController
+@synthesize navigationController;
 
 - (void)dealloc
 {
+    [navigationController release];
     [super dealloc];
 }
 
@@ -46,4 +52,27 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)recordPressed:(id)sender 
+{
+    RecordViewController *recordController = [[RecordViewController alloc] init];
+    [navigationController pushViewController:recordController animated:YES];
+}
+
+- (IBAction)learnPressed:(id)sender 
+{
+    LearnViewController *learnController = [[LearnViewController alloc] init];
+    [navigationController pushViewController:learnController animated:YES];
+}
+
+- (IBAction)schedulePressed:(id)sender 
+{
+    ScheduleViewController *scheduleController = [[ScheduleViewController alloc] init];
+    [navigationController pushViewController:scheduleController animated:YES];
+}
+
+- (IBAction)aboutPressed:(id)sender 
+{
+    AboutViewController *aboutController = [[AboutViewController alloc] init];
+    [navigationController pushViewController:aboutController animated:YES];
+}
 @end

@@ -11,6 +11,9 @@
 
 @implementation LearnViewController
 
+@synthesize tableView;
+@synthesize navigationController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,6 +25,8 @@
 
 - (void)dealloc
 {
+    [tableView release];
+    [navigationController release];
     [super dealloc];
 }
 
@@ -43,6 +48,7 @@
 
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

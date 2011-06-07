@@ -13,4 +13,6 @@
     
 }
 
+@property (nonatomic, retain) UINavigationController* navigationController;
+
 @end

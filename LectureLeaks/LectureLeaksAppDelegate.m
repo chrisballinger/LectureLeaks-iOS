@@ -14,14 +14,19 @@
 
 
 @synthesize window=_window;
-
 @synthesize viewController=_viewController;
+@synthesize navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-     
-    self.window.rootViewController = self.viewController;
+    
+    navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    self.viewController.navigationController = self.navigationController;
+        
+    //self.window.rootViewController = self.navigationController;
+    [self.window addSubview:[self.navigationController view]];                   // works on iOS 3.x
+
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -69,6 +74,7 @@
 {
     [_window release];
     [_viewController release];
+    [navigationController release];
     [super dealloc];
 }
 
