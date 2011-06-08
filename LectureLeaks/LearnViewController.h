@@ -14,6 +14,5 @@
     UITableView *tableView;
 }
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) UINavigationController* navigationController;
 
 @end

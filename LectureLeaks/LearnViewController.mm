@@ -12,7 +12,6 @@
 @implementation LearnViewController
 
 @synthesize tableView;
-@synthesize navigationController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +25,6 @@
 - (void)dealloc
 {
     [tableView release];
-    [navigationController release];
     [super dealloc];
 }
 

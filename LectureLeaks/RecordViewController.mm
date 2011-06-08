@@ -7,24 +7,28 @@
 //
 
 #import "RecordViewController.h"
-
+#import "RecordingViewController.h"
+#import "LectureLeaksAppDelegate.h"
 
 @implementation RecordViewController
 
-@synthesize navigationController;
+@synthesize recordingHasBeenMade;
+@synthesize submitButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        recordingHasBeenMade = NO;
+        submitButton.enabled = NO;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [navigationController release];
+    [submitButton release];
     [super dealloc];
 }
 
@@ -46,6 +50,7 @@
 
 - (void)viewDidUnload
 {
+    [self setSubmitButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -57,4 +62,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)recordPressed:(id)sender 
+{
+    recordingHasBeenMade = YES;
+    RecordingViewController *recordingController = [[RecordingViewController alloc] init];
+    recordingController.recordController = self;
+    UIApplication *app = [UIApplication sharedApplication];
+    [((LectureLeaksAppDelegate*)(app.delegate)).navigationController pushViewController:recordingController animated:YES];
+}
 @end

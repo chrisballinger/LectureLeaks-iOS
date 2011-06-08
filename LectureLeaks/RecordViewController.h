@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 
 
-@interface RecordViewController : UIViewController {
+@interface RecordViewController : UIViewController 
+{
     
+    UIButton *submitButton;
 }
+@property (nonatomic, retain) IBOutlet UIButton *submitButton;
 
-@property (nonatomic, retain) UINavigationController* navigationController;
+@property (nonatomic)   BOOL recordingHasBeenMade;
+- (IBAction)recordPressed:(id)sender;
 
 @end

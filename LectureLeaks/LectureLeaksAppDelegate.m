@@ -24,7 +24,7 @@
     navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     self.viewController.navigationController = self.navigationController;
         
-    //self.window.rootViewController = self.navigationController;
+    //self.window.rootViewController = self.navigationController;                // for iOS 4.0+
     [self.window addSubview:[self.navigationController view]];                   // works on iOS 3.x
 
     [self.window makeKeyAndVisible];

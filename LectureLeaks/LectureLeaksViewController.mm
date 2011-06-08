@@ -13,6 +13,7 @@
 #import "ScheduleViewController.h"
 
 @implementation LectureLeaksViewController
+
 @synthesize navigationController;
 
 - (void)dealloc
@@ -55,24 +56,25 @@
 - (IBAction)recordPressed:(id)sender 
 {
     RecordViewController *recordController = [[RecordViewController alloc] init];
-    [navigationController pushViewController:recordController animated:YES];
+    
+    [self.navigationController pushViewController:recordController animated:YES];
 }
 
 - (IBAction)learnPressed:(id)sender 
 {
     LearnViewController *learnController = [[LearnViewController alloc] init];
-    [navigationController pushViewController:learnController animated:YES];
+    [self.navigationController pushViewController:learnController animated:YES];
 }
 
 - (IBAction)schedulePressed:(id)sender 
 {
     ScheduleViewController *scheduleController = [[ScheduleViewController alloc] init];
-    [navigationController pushViewController:scheduleController animated:YES];
+    [self.navigationController pushViewController:scheduleController animated:YES];
 }
 
 - (IBAction)aboutPressed:(id)sender 
 {
     AboutViewController *aboutController = [[AboutViewController alloc] init];
-    [navigationController pushViewController:aboutController animated:YES];
+    [self.navigationController pushViewController:aboutController animated:YES];
 }
 @end
