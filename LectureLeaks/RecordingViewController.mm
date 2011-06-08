@@ -19,60 +19,7 @@
 @synthesize player;
 @synthesize playbackWasInterrupted;
 @synthesize playbackWasPaused;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    delete recorder;
-    delete player;
-    [recordingLabel release];
-    [recordButton release];
-    [playButton release];
-    [submitButton release];
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
--(void)stopPlayQueue
-{
-	player->StopQueue();
-	recordButton.enabled = YES;
-}
-
--(void)pausePlayQueue
-{
-	player->PauseQueue();
-	playbackWasPaused = YES;
-}
-
-# pragma mark Notification routines
-- (void)playbackQueueStopped:(NSNotification *)note
-{
-    playButton.title = @"Play";
-	recordButton.enabled = YES;
-}
-
-- (void)playbackQueueResumed:(NSNotification *)note
-{
-    playButton.title = @"Stop";
-	recordButton.enabled = NO;
-}
-
+@synthesize currentFileName;
 
 #pragma mark AudioSession listeners
 void interruptionListener(	void *	inClientData,
@@ -150,6 +97,98 @@ void propListener(	void *                  inClientData,
 	}
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        recorder = new AQRecorder();
+        player = new AQPlayer();
+        
+        OSStatus error = AudioSessionInitialize(NULL, NULL, interruptionListener, self);
+        if (error) printf("ERROR INITIALIZING AUDIO SESSION! %ld\n", error);
+        else 
+        {
+            UInt32 category = kAudioSessionCategory_PlayAndRecord;	
+            error = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+            if (error) printf("couldn't set audio category!");
+            
+            error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, propListener, self);
+            if (error) printf("ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
+            UInt32 inputAvailable = 0;
+            UInt32 size = sizeof(inputAvailable);
+            
+            // we do not want to allow recording if input is not available
+            error = AudioSessionGetProperty(kAudioSessionProperty_AudioInputAvailable, &size, &inputAvailable);
+            if (error) printf("ERROR GETTING INPUT AVAILABILITY! %ld\n", error);
+            //btn_record.enabled = (inputAvailable) ? YES : NO;
+            
+            // we also need to listen to see if input availability changes
+            error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, propListener, self);
+            if (error) printf("ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
+            
+            error = AudioSessionSetActive(true); 
+            if (error) 
+            {
+                printf("AudioSessionSetActive (true) failed");
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                [alert release];
+            }
+        }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueStopped:) name:@"playbackQueueStopped" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueResumed:) name:@"playbackQueueResumed" object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    delete recorder;
+    delete player;
+    [recordingLabel release];
+    [recordButton release];
+    [playButton release];
+    [submitButton release];
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+-(void)stopPlayQueue
+{
+	player->StopQueue();
+	recordButton.enabled = YES;
+}
+
+-(void)pausePlayQueue
+{
+	player->PauseQueue();
+	playbackWasPaused = YES;
+}
+
+# pragma mark Notification routines
+- (void)playbackQueueStopped:(NSNotification *)note
+{
+    playButton.title = @"Play";
+	recordButton.enabled = YES;
+}
+
+- (void)playbackQueueResumed:(NSNotification *)note
+{
+    playButton.title = @"Stop";
+	recordButton.enabled = NO;
+}
+
+
+
+
 
 
 #pragma mark - View lifecycle
@@ -163,48 +202,8 @@ void propListener(	void *                  inClientData,
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    recorder = new AQRecorder();
-    player = new AQPlayer();
     
-    OSStatus error = AudioSessionInitialize(NULL, NULL, interruptionListener, self);
-	if (error) printf("ERROR INITIALIZING AUDIO SESSION! %ld\n", error);
-	else 
-	{
-		UInt32 category = kAudioSessionCategory_PlayAndRecord;	
-		error = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
-		if (error) printf("couldn't set audio category!");
-        
-		error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, propListener, self);
-		if (error) printf("ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
-		UInt32 inputAvailable = 0;
-		UInt32 size = sizeof(inputAvailable);
-		
-		// we do not want to allow recording if input is not available
-		error = AudioSessionGetProperty(kAudioSessionProperty_AudioInputAvailable, &size, &inputAvailable);
-		if (error) printf("ERROR GETTING INPUT AVAILABILITY! %ld\n", error);
-		//btn_record.enabled = (inputAvailable) ? YES : NO;
-		
-		// we also need to listen to see if input availability changes
-		error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, propListener, self);
-		if (error) printf("ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
-        
-		error = AudioSessionSetActive(true); 
-		if (error) 
-        {
-            printf("AudioSessionSetActive (true) failed");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            [alert release];
-        }
-	}
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueStopped:) name:@"playbackQueueStopped" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueResumed:) name:@"playbackQueueResumed" object:nil];
 
-}
-
-- (void)awakeFromNib
-{
 }
 
 - (void)viewDidUnload
@@ -236,7 +235,7 @@ void propListener(	void *                  inClientData,
         player->DisposeQueue(true);
         
         // now create a new queue for the recorded file
-        player->CreateQueueForFile((CFStringRef)@"recordedFile.caf");
+        player->CreateQueueForFile((CFStringRef)currentFileName);
         recordButton.title = @"Record";
         playButton.enabled = YES;
         submitButton.enabled = YES;
@@ -244,7 +243,9 @@ void propListener(	void *                  inClientData,
     else
     {
         recordButton.title = @"Stop";
-        recorder->StartRecord(CFSTR("recordedFile.caf"));
+        time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
+        currentFileName = [[NSString stringWithFormat:@"%d.caf",unixTime] retain];
+        recorder->StartRecord((CFStringRef)currentFileName);
         playButton.enabled = NO;
         submitButton.enabled = NO;
     }
@@ -272,6 +273,11 @@ void propListener(	void *                  inClientData,
 }
 
 - (IBAction)submit:(id)sender {
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 
