@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RecordViewController.h"
 #import "AQRecorder.h"
 #import "AQPlayer.h"
 
@@ -18,19 +17,22 @@
     BOOL playbackWasInterrupted;
     BOOL playbackWasPaused;
     UILabel *recordingLabel;
-    UIButton *playButton;
-    UIButton *recordButton;
+    UIBarButtonItem *recordButton;
+    UIBarButtonItem *playButton;
+    UIBarButtonItem *submitButton;
 }
 @property (nonatomic, retain) IBOutlet UILabel *recordingLabel;
-@property (nonatomic, retain) IBOutlet UIButton *playButton;
-@property (nonatomic, retain) IBOutlet UIButton *recordButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *playButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *submitButton;
 
 @property (readonly) AQRecorder *recorder;
 @property (readonly) AQPlayer *player;
 @property BOOL playbackWasInterrupted;
 @property BOOL playbackWasPaused;
-@property (nonatomic, retain) RecordViewController *recordController;
-- (IBAction)stopPressed:(id)sender;
-- (IBAction)playPressed:(id)sender;
+
+- (IBAction)record:(id)sender;
+- (IBAction)play:(id)sender;
+- (IBAction)submit:(id)sender;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "LectureLeaksViewController.h"
-#import "RecordViewController.h"
+#import "RecordingViewController.h"
 #import "LearnViewController.h"
 #import "AboutViewController.h"
 #import "ScheduleViewController.h"
@@ -55,7 +55,7 @@
 
 - (IBAction)recordPressed:(id)sender 
 {
-    RecordViewController *recordController = [[RecordViewController alloc] init];
+    RecordingViewController *recordController = [[RecordingViewController alloc] init];
     
     [self.navigationController pushViewController:recordController animated:YES];
 }

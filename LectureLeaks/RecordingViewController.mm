@@ -11,10 +11,10 @@
 
 @implementation RecordingViewController
 
-@synthesize recordController;
 @synthesize recordingLabel;
-@synthesize playButton;
 @synthesize recordButton;
+@synthesize playButton;
+@synthesize submitButton;
 @synthesize recorder;
 @synthesize player;
 @synthesize playbackWasInterrupted;
@@ -34,8 +34,9 @@
     delete recorder;
     delete player;
     [recordingLabel release];
-    [playButton release];
     [recordButton release];
+    [playButton release];
+    [submitButton release];
     [super dealloc];
 }
 
@@ -62,13 +63,13 @@
 # pragma mark Notification routines
 - (void)playbackQueueStopped:(NSNotification *)note
 {
-    playButton.titleLabel.text = @"Play";
+    playButton.title = @"Play";
 	recordButton.enabled = YES;
 }
 
 - (void)playbackQueueResumed:(NSNotification *)note
 {
-    playButton.titleLabel.text = @"Stop";
+    playButton.title = @"Stop";
 	recordButton.enabled = NO;
 }
 
@@ -200,10 +201,6 @@ void propListener(	void *                  inClientData,
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueStopped:) name:@"playbackQueueStopped" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueResumed:) name:@"playbackQueueResumed" object:nil];
 
-    
-    recorder->StartRecord(CFSTR("recordedFile.caf"));
-    playButton.enabled = NO;
-
 }
 
 - (void)awakeFromNib
@@ -215,6 +212,9 @@ void propListener(	void *                  inClientData,
     [self setRecordingLabel:nil];
     [self setPlayButton:nil];
     [self setRecordButton:nil];
+    [self setRecordButton:nil];
+    [self setPlayButton:nil];
+    [self setSubmitButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -226,11 +226,10 @@ void propListener(	void *                  inClientData,
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)stopPressed:(id)sender 
+- (IBAction)record:(id)sender 
 {
     if(recorder->IsRunning())
     {
-        recordController.submitButton.enabled = YES;
         recorder->StopRecord();
         
         // dispose the previous playback queue
@@ -238,21 +237,21 @@ void propListener(	void *                  inClientData,
         
         // now create a new queue for the recorded file
         player->CreateQueueForFile((CFStringRef)@"recordedFile.caf");
-        recordButton.titleLabel.text = @"Record";
+        recordButton.title = @"Record";
         playButton.enabled = YES;
-        //UIApplication *app = [UIApplication sharedApplication];
-        //[((LectureLeaksAppDelegate*)(app.delegate)).navigationController popViewControllerAnimated:YES];
+        submitButton.enabled = YES;
     }
     else
     {
-        recordButton.titleLabel.text = @"Stop";
+        recordButton.title = @"Stop";
         recorder->StartRecord(CFSTR("recordedFile.caf"));
         playButton.enabled = NO;
+        submitButton.enabled = NO;
     }
 
 }
 
-- (IBAction)playPressed:(id)sender 
+- (IBAction)play:(id)sender 
 {
     if (player->IsRunning())
 	{
@@ -270,6 +269,9 @@ void propListener(	void *                  inClientData,
 		if (result == noErr)
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"playbackQueueResumed" object:self];
 	}
+}
+
+- (IBAction)submit:(id)sender {
 }
 
 

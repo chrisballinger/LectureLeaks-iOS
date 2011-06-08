@@ -21,8 +21,6 @@
 		D960FFB8139DB6EC00CD6795 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFB6139DB6EC00CD6795 /* MainWindow.xib */; };
 		D960FFBB139DB6EC00CD6795 /* LectureLeaksViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.mm */; };
 		D960FFBE139DB6EC00CD6795 /* LectureLeaksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */; };
-		D960FFC7139DB83700CD6795 /* RecordViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFC5139DB83700CD6795 /* RecordViewController.mm */; };
-		D960FFC8139DB83700CD6795 /* RecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFC6139DB83700CD6795 /* RecordViewController.xib */; };
 		D960FFCC139DBCCD00CD6795 /* LearnViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFCA139DBCCD00CD6795 /* LearnViewController.mm */; };
 		D960FFCD139DBCCD00CD6795 /* LearnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFCB139DBCCD00CD6795 /* LearnViewController.xib */; };
 		D960FFD1139DBE4300CD6795 /* AboutViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFCF139DBE4300CD6795 /* AboutViewController.mm */; };
@@ -54,9 +52,6 @@
 		D960FFB9139DB6EC00CD6795 /* LectureLeaksViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LectureLeaksViewController.h; sourceTree = "<group>"; };
 		D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LectureLeaksViewController.mm; sourceTree = "<group>"; };
 		D960FFBD139DB6EC00CD6795 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LectureLeaksViewController.xib; sourceTree = "<group>"; };
-		D960FFC4139DB83700CD6795 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
-		D960FFC5139DB83700CD6795 /* RecordViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordViewController.mm; sourceTree = "<group>"; };
-		D960FFC6139DB83700CD6795 /* RecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordViewController.xib; sourceTree = "<group>"; };
 		D960FFC9139DBCCD00CD6795 /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
 		D960FFCA139DBCCD00CD6795 /* LearnViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LearnViewController.mm; sourceTree = "<group>"; };
 		D960FFCB139DBCCD00CD6795 /* LearnViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearnViewController.xib; sourceTree = "<group>"; };
@@ -94,8 +89,6 @@
 				D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */,
 				D960FFC9139DBCCD00CD6795 /* LearnViewController.h */,
 				D960FFCA139DBCCD00CD6795 /* LearnViewController.mm */,
-				D960FFC4139DB83700CD6795 /* RecordViewController.h */,
-				D960FFC5139DB83700CD6795 /* RecordViewController.mm */,
 				D960FFCE139DBE4300CD6795 /* AboutViewController.h */,
 				D960FFCF139DBE4300CD6795 /* AboutViewController.mm */,
 				D91F3788139ECFB5007D2B9D /* RecordingViewController.h */,
@@ -173,7 +166,6 @@
 				D91F378A139ECFB5007D2B9D /* RecordingViewController.xib */,
 				D960FFD0139DBE4300CD6795 /* AboutViewController.xib */,
 				D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */,
-				D960FFC6139DB83700CD6795 /* RecordViewController.xib */,
 				D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */,
 			);
 			name = Resources;
@@ -229,7 +221,6 @@
 				D960FFAF139DB6EC00CD6795 /* InfoPlist.strings in Resources */,
 				D960FFB8139DB6EC00CD6795 /* MainWindow.xib in Resources */,
 				D960FFBE139DB6EC00CD6795 /* LectureLeaksViewController.xib in Resources */,
-				D960FFC8139DB83700CD6795 /* RecordViewController.xib in Resources */,
 				D960FFCD139DBCCD00CD6795 /* LearnViewController.xib in Resources */,
 				D960FFD2139DBE4300CD6795 /* AboutViewController.xib in Resources */,
 				D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */,
@@ -247,7 +238,6 @@
 				D960FFB2139DB6EC00CD6795 /* main.m in Sources */,
 				D960FFB5139DB6EC00CD6795 /* LectureLeaksAppDelegate.m in Sources */,
 				D960FFBB139DB6EC00CD6795 /* LectureLeaksViewController.mm in Sources */,
-				D960FFC7139DB83700CD6795 /* RecordViewController.mm in Sources */,
 				D960FFCC139DBCCD00CD6795 /* LearnViewController.mm in Sources */,
 				D960FFD1139DBE4300CD6795 /* AboutViewController.mm in Sources */,
 				D960FFD7139DC1E400CD6795 /* ScheduleViewController.mm in Sources */,
