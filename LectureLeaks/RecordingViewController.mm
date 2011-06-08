@@ -15,6 +15,9 @@
 @synthesize recordButton;
 @synthesize playButton;
 @synthesize submitButton;
+@synthesize titleTextField;
+@synthesize classTextField;
+@synthesize schoolTextField;
 @synthesize recorder;
 @synthesize player;
 @synthesize playbackWasInterrupted;
@@ -150,6 +153,9 @@ void propListener(	void *                  inClientData,
     [recordButton release];
     [playButton release];
     [submitButton release];
+    [titleTextField release];
+    [classTextField release];
+    [schoolTextField release];
     [super dealloc];
 }
 
@@ -214,6 +220,9 @@ void propListener(	void *                  inClientData,
     [self setRecordButton:nil];
     [self setPlayButton:nil];
     [self setSubmitButton:nil];
+    [self setTitleTextField:nil];
+    [self setClassTextField:nil];
+    [self setSchoolTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -242,12 +251,34 @@ void propListener(	void *                  inClientData,
     }
     else
     {
-        recordButton.title = @"Stop";
-        time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
-        currentFileName = [[NSString stringWithFormat:@"%d.caf",unixTime] retain];
-        recorder->StartRecord((CFStringRef)currentFileName);
-        playButton.enabled = NO;
-        submitButton.enabled = NO;
+        if([titleTextField.text isEqualToString:@""] || [classTextField.text isEqualToString:@""] || [schoolTextField.text isEqualToString:@""])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"More Info Please!" message:@"Please fill in all the fields and try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            [alert release];
+        }
+        else
+        {
+            recordButton.title = @"Stop";
+            time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
+            currentFileName = [[NSString stringWithFormat:@"%d.caf",unixTime] retain];
+            NSString* metadataFileName = [NSString stringWithFormat:@"%d.plist",unixTime];
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *metadataPath = [documentsDirectory stringByAppendingPathComponent:metadataFileName];
+            
+            
+            NSMutableDictionary *metadata = [[NSMutableDictionary alloc] init];
+            [metadata setObject:titleTextField.text forKey:@"title"];
+            [metadata setObject:classTextField.text forKey:@"class"];
+            [metadata setObject:schoolTextField.text forKey:@"school"];
+            [metadata writeToFile:metadataPath atomically:YES];
+             
+            recorder->StartRecord((CFStringRef)currentFileName);
+            playButton.enabled = NO;
+            submitButton.enabled = NO;
+        }
+        
     }
 
 }
