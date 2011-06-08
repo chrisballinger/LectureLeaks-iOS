@@ -3,7 +3,7 @@
 //  LectureLeaks
 //
 //  Created by Christopher Ballinger on 6/6/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011. All rights reserved.
 //
 
 #import "LectureLeaksViewController.h"
@@ -45,6 +45,18 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
