@@ -12,12 +12,9 @@
 @interface LearnViewController : UITableViewController 
 {
     NSMutableArray* listContent;
-    UITableView *lectureTableView;
 }
-@property (nonatomic, retain) IBOutlet UITableView *lectureTableView;
 
 @property (nonatomic, retain) NSMutableArray* listContent;
 
--(void)editButtonPressed;
 
 @end

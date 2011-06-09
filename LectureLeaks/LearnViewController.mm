@@ -12,7 +12,6 @@
 
 @implementation LearnViewController
 
-@synthesize lectureTableView;
 @synthesize listContent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -118,7 +117,6 @@
 
 - (void)dealloc
 {
-    [lectureTableView release];
     [super dealloc];
 }
 
@@ -141,15 +139,9 @@
     [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];    
 }
 
--(void)editButtonPressed
-{
-    [lectureTableView setEditing:YES animated:YES];
-}
-
 - (void)viewDidUnload
 {
-    [self setTableView:nil];
-    [self setLectureTableView:nil];
+    self.tableView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
