@@ -2,8 +2,8 @@
 //  LearnViewController.h
 //  LectureLeaks
 //
-//  Created by Christopher Ballinger on 6/6/11.
-//  Copyright 2011. All rights reserved.
+//  Created by Christopher Ballinger on 6/9/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,10 +11,9 @@
 
 @interface LearnViewController : UITableViewController 
 {
-    NSMutableArray* listContent;
+    NSMutableArray *contentArray;
 }
 
-@property (nonatomic, retain) NSMutableArray* listContent;
-
+@property (nonatomic, retain) NSMutableArray *contentArray;
 
 @end

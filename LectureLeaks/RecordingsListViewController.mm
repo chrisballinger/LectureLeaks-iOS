@@ -1,16 +1,16 @@
 //
-//  LearnViewController.m
+//  RecordingsListViewController.m
 //  LectureLeaks
 //
 //  Created by Christopher Ballinger on 6/6/11.
 //  Copyright 2011. All rights reserved.
 //
 
-#import "LearnViewController.h"
+#import "RecordingsListViewController.h"
 #import "LecturePlayerViewController.h"
 #import "Lecture.h"
 
-@implementation LearnViewController
+@implementation RecordingsListViewController
 
 @synthesize listContent;
 

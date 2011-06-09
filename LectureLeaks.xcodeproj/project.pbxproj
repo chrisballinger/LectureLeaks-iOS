@@ -21,6 +21,12 @@
 		D92B82E413A13C7A001A254A /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82E013A13C7A001A254A /* record.png */; };
 		D92B82E513A13C7A001A254A /* schedule.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82E113A13C7A001A254A /* schedule.png */; };
 		D92B82E813A13C94001A254A /* gradient_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82E713A13C94001A254A /* gradient_background.png */; };
+		D92B82F313A16385001A254A /* about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82EF13A16383001A254A /* about@2x.png */; };
+		D92B82F413A16385001A254A /* learn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82F013A16383001A254A /* learn@2x.png */; };
+		D92B82F513A16385001A254A /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82F113A16384001A254A /* record@2x.png */; };
+		D92B82F613A16385001A254A /* schedule@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82F213A16384001A254A /* schedule@2x.png */; };
+		D92B82FA13A1684A001A254A /* LearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B82F813A16849001A254A /* LearnViewController.m */; };
+		D92B82FB13A1684A001A254A /* LearnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92B82F913A1684A001A254A /* LearnViewController.xib */; };
 		D960FFA5139DB6EC00CD6795 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA4139DB6EC00CD6795 /* UIKit.framework */; };
 		D960FFA7139DB6EC00CD6795 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA6139DB6EC00CD6795 /* Foundation.framework */; };
 		D960FFA9139DB6EC00CD6795 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA8139DB6EC00CD6795 /* CoreGraphics.framework */; };
@@ -30,8 +36,8 @@
 		D960FFB8139DB6EC00CD6795 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFB6139DB6EC00CD6795 /* MainWindow.xib */; };
 		D960FFBB139DB6EC00CD6795 /* LectureLeaksViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.mm */; };
 		D960FFBE139DB6EC00CD6795 /* LectureLeaksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */; };
-		D960FFCC139DBCCD00CD6795 /* LearnViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFCA139DBCCD00CD6795 /* LearnViewController.mm */; };
-		D960FFCD139DBCCD00CD6795 /* LearnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFCB139DBCCD00CD6795 /* LearnViewController.xib */; };
+		D960FFCC139DBCCD00CD6795 /* RecordingsListViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFCA139DBCCD00CD6795 /* RecordingsListViewController.mm */; };
+		D960FFCD139DBCCD00CD6795 /* RecordingsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFCB139DBCCD00CD6795 /* RecordingsListViewController.xib */; };
 		D960FFD1139DBE4300CD6795 /* AboutViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFCF139DBE4300CD6795 /* AboutViewController.mm */; };
 		D960FFD2139DBE4300CD6795 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD0139DBE4300CD6795 /* AboutViewController.xib */; };
 		D960FFD7139DC1E400CD6795 /* ScheduleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */; };
@@ -58,6 +64,13 @@
 		D92B82E013A13C7A001A254A /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
 		D92B82E113A13C7A001A254A /* schedule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = schedule.png; sourceTree = "<group>"; };
 		D92B82E713A13C94001A254A /* gradient_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient_background.png; sourceTree = "<group>"; };
+		D92B82EF13A16383001A254A /* about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about@2x.png"; sourceTree = "<group>"; };
+		D92B82F013A16383001A254A /* learn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "learn@2x.png"; sourceTree = "<group>"; };
+		D92B82F113A16384001A254A /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
+		D92B82F213A16384001A254A /* schedule@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "schedule@2x.png"; sourceTree = "<group>"; };
+		D92B82F713A16849001A254A /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
+		D92B82F813A16849001A254A /* LearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnViewController.m; sourceTree = "<group>"; };
+		D92B82F913A1684A001A254A /* LearnViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearnViewController.xib; sourceTree = "<group>"; };
 		D960FFA0139DB6EC00CD6795 /* LectureLeaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LectureLeaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D960FFA4139DB6EC00CD6795 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D960FFA6139DB6EC00CD6795 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,9 +85,9 @@
 		D960FFB9139DB6EC00CD6795 /* LectureLeaksViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LectureLeaksViewController.h; sourceTree = "<group>"; };
 		D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LectureLeaksViewController.mm; sourceTree = "<group>"; };
 		D960FFBD139DB6EC00CD6795 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LectureLeaksViewController.xib; sourceTree = "<group>"; };
-		D960FFC9139DBCCD00CD6795 /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
-		D960FFCA139DBCCD00CD6795 /* LearnViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LearnViewController.mm; sourceTree = "<group>"; };
-		D960FFCB139DBCCD00CD6795 /* LearnViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearnViewController.xib; sourceTree = "<group>"; };
+		D960FFC9139DBCCD00CD6795 /* RecordingsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingsListViewController.h; sourceTree = "<group>"; };
+		D960FFCA139DBCCD00CD6795 /* RecordingsListViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordingsListViewController.mm; sourceTree = "<group>"; };
+		D960FFCB139DBCCD00CD6795 /* RecordingsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordingsListViewController.xib; sourceTree = "<group>"; };
 		D960FFCE139DBE4300CD6795 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		D960FFCF139DBE4300CD6795 /* AboutViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AboutViewController.mm; sourceTree = "<group>"; };
 		D960FFD0139DBE4300CD6795 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
@@ -108,10 +121,12 @@
 				D960FFB4139DB6EC00CD6795 /* LectureLeaksAppDelegate.m */,
 				D960FFB9139DB6EC00CD6795 /* LectureLeaksViewController.h */,
 				D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.mm */,
+				D92B82F713A16849001A254A /* LearnViewController.h */,
+				D92B82F813A16849001A254A /* LearnViewController.m */,
 				D960FFD4139DC1E400CD6795 /* ScheduleViewController.h */,
 				D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */,
-				D960FFC9139DBCCD00CD6795 /* LearnViewController.h */,
-				D960FFCA139DBCCD00CD6795 /* LearnViewController.mm */,
+				D960FFC9139DBCCD00CD6795 /* RecordingsListViewController.h */,
+				D960FFCA139DBCCD00CD6795 /* RecordingsListViewController.mm */,
 				D92B82CF13A0A94E001A254A /* LecturePlayerViewController.h */,
 				D92B82D013A0A94F001A254A /* LecturePlayerViewController.m */,
 				D960FFCE139DBE4300CD6795 /* AboutViewController.h */,
@@ -136,7 +151,6 @@
 		D960FF95139DB6EC00CD6795 = {
 			isa = PBXGroup;
 			children = (
-				D92B82D413A0ACC3001A254A /* AVFoundation.framework */,
 				D960FFAA139DB6EC00CD6795 /* LectureLeaks */,
 				D960FFA3139DB6EC00CD6795 /* Frameworks */,
 				D960FFA1139DB6EC00CD6795 /* Products */,
@@ -154,6 +168,7 @@
 		D960FFA3139DB6EC00CD6795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D92B82D413A0ACC3001A254A /* AVFoundation.framework */,
 				D91F37B8139EE19D007D2B9D /* AudioToolbox.framework */,
 				D960FFA4139DB6EC00CD6795 /* UIKit.framework */,
 				D960FFA6139DB6EC00CD6795 /* Foundation.framework */,
@@ -187,14 +202,19 @@
 		D960FFD3139DBE6300CD6795 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D92B82EF13A16383001A254A /* about@2x.png */,
+				D92B82F013A16383001A254A /* learn@2x.png */,
+				D92B82F113A16384001A254A /* record@2x.png */,
+				D92B82F213A16384001A254A /* schedule@2x.png */,
 				D92B82DE13A13C7A001A254A /* about.png */,
 				D92B82DF13A13C7A001A254A /* learn.png */,
 				D92B82E013A13C7A001A254A /* record.png */,
 				D92B82E113A13C7A001A254A /* schedule.png */,
 				D92B82E713A13C94001A254A /* gradient_background.png */,
+				D92B82F913A1684A001A254A /* LearnViewController.xib */,
 				D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */,
 				D960FFB6139DB6EC00CD6795 /* MainWindow.xib */,
-				D960FFCB139DBCCD00CD6795 /* LearnViewController.xib */,
+				D960FFCB139DBCCD00CD6795 /* RecordingsListViewController.xib */,
 				D91F378A139ECFB5007D2B9D /* RecordingViewController.xib */,
 				D960FFD0139DBE4300CD6795 /* AboutViewController.xib */,
 				D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */,
@@ -253,7 +273,7 @@
 				D960FFAF139DB6EC00CD6795 /* InfoPlist.strings in Resources */,
 				D960FFB8139DB6EC00CD6795 /* MainWindow.xib in Resources */,
 				D960FFBE139DB6EC00CD6795 /* LectureLeaksViewController.xib in Resources */,
-				D960FFCD139DBCCD00CD6795 /* LearnViewController.xib in Resources */,
+				D960FFCD139DBCCD00CD6795 /* RecordingsListViewController.xib in Resources */,
 				D960FFD2139DBE4300CD6795 /* AboutViewController.xib in Resources */,
 				D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */,
 				D91F378C139ECFB5007D2B9D /* RecordingViewController.xib in Resources */,
@@ -263,6 +283,11 @@
 				D92B82E413A13C7A001A254A /* record.png in Resources */,
 				D92B82E513A13C7A001A254A /* schedule.png in Resources */,
 				D92B82E813A13C94001A254A /* gradient_background.png in Resources */,
+				D92B82F313A16385001A254A /* about@2x.png in Resources */,
+				D92B82F413A16385001A254A /* learn@2x.png in Resources */,
+				D92B82F513A16385001A254A /* record@2x.png in Resources */,
+				D92B82F613A16385001A254A /* schedule@2x.png in Resources */,
+				D92B82FB13A1684A001A254A /* LearnViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +301,7 @@
 				D960FFB2139DB6EC00CD6795 /* main.m in Sources */,
 				D960FFB5139DB6EC00CD6795 /* LectureLeaksAppDelegate.m in Sources */,
 				D960FFBB139DB6EC00CD6795 /* LectureLeaksViewController.mm in Sources */,
-				D960FFCC139DBCCD00CD6795 /* LearnViewController.mm in Sources */,
+				D960FFCC139DBCCD00CD6795 /* RecordingsListViewController.mm in Sources */,
 				D960FFD1139DBE4300CD6795 /* AboutViewController.mm in Sources */,
 				D960FFD7139DC1E400CD6795 /* ScheduleViewController.mm in Sources */,
 				D91F378B139ECFB5007D2B9D /* RecordingViewController.mm in Sources */,
@@ -284,6 +309,7 @@
 				D91F37A5139EDD4D007D2B9D /* AQRecorder.mm in Sources */,
 				D92B82CD13A09BB7001A254A /* Lecture.m in Sources */,
 				D92B82D213A0A950001A254A /* LecturePlayerViewController.m in Sources */,
+				D92B82FA13A1684A001A254A /* LearnViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
