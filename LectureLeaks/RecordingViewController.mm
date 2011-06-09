@@ -270,7 +270,7 @@ void propListener(	void *                  inClientData,
             
             NSMutableDictionary *metadata = [[NSMutableDictionary alloc] init];
             [metadata setObject:titleTextField.text forKey:@"title"];
-            [metadata setObject:classTextField.text forKey:@"class"];
+            [metadata setObject:classTextField.text forKey:@"className"];
             [metadata setObject:schoolTextField.text forKey:@"school"];
             [metadata writeToFile:metadataPath atomically:YES];
              

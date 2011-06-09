@@ -15,9 +15,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
 @property (nonatomic, retain) IBOutlet LectureLeaksViewController *viewController;
-
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 

@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LearnViewController : UIViewController {
-    
-    UITableView *tableView;
+@interface LearnViewController : UITableViewController 
+{
+    NSArray* listContent;
 }
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+
+@property (nonatomic, retain) NSArray* listContent;
 
 @end
