@@ -7,6 +7,7 @@
 //
 
 #import "LearnViewController.h"
+#import "LecturePlayerViewController.h"
 #import "Lecture.h"
 
 @implementation LearnViewController
@@ -83,18 +84,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController *detailsViewController = [[UIViewController alloc] init];
+    LecturePlayerViewController *lecturePlayerController = [[LecturePlayerViewController alloc] init];
     
-	/*
-	 If the requesting table view is the search display controller's table view, configure the next view controller using the filtered content, otherwise use the main list.
-	 */
+
 	Lecture *lecture = nil;
     lecture = [self.listContent objectAtIndex:indexPath.row];
     
-	detailsViewController.title = lecture.title;
+	lecturePlayerController.title = lecture.title;
+    lecturePlayerController.lecture = lecture;
     
-    [[self navigationController] pushViewController:detailsViewController animated:YES];
-    [detailsViewController release];
+    [[self navigationController] pushViewController:lecturePlayerController animated:YES];
+    [lecturePlayerController release];
 }
 
 - (void)dealloc

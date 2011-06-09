@@ -13,6 +13,9 @@
 		D91F37A5139EDD4D007D2B9D /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = D91F37A3139EDD4D007D2B9D /* AQRecorder.mm */; };
 		D91F37B9139EE19D007D2B9D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91F37B8139EE19D007D2B9D /* AudioToolbox.framework */; };
 		D92B82CD13A09BB7001A254A /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B82CC13A09BB7001A254A /* Lecture.m */; };
+		D92B82D213A0A950001A254A /* LecturePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B82D013A0A94F001A254A /* LecturePlayerViewController.m */; };
+		D92B82D313A0A950001A254A /* LecturePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */; };
+		D92B82D513A0ACC3001A254A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92B82D413A0ACC3001A254A /* AVFoundation.framework */; };
 		D960FFA5139DB6EC00CD6795 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA4139DB6EC00CD6795 /* UIKit.framework */; };
 		D960FFA7139DB6EC00CD6795 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA6139DB6EC00CD6795 /* Foundation.framework */; };
 		D960FFA9139DB6EC00CD6795 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA8139DB6EC00CD6795 /* CoreGraphics.framework */; };
@@ -41,6 +44,10 @@
 		D91F37B8139EE19D007D2B9D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D92B82CB13A09BB7001A254A /* Lecture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lecture.h; sourceTree = "<group>"; };
 		D92B82CC13A09BB7001A254A /* Lecture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lecture.m; sourceTree = "<group>"; };
+		D92B82CF13A0A94E001A254A /* LecturePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LecturePlayerViewController.h; sourceTree = "<group>"; };
+		D92B82D013A0A94F001A254A /* LecturePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LecturePlayerViewController.m; sourceTree = "<group>"; };
+		D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LecturePlayerViewController.xib; sourceTree = "<group>"; };
+		D92B82D413A0ACC3001A254A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D960FFA0139DB6EC00CD6795 /* LectureLeaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LectureLeaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D960FFA4139DB6EC00CD6795 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D960FFA6139DB6EC00CD6795 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -71,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92B82D513A0ACC3001A254A /* AVFoundation.framework in Frameworks */,
 				D91F37B9139EE19D007D2B9D /* AudioToolbox.framework in Frameworks */,
 				D960FFA5139DB6EC00CD6795 /* UIKit.framework in Frameworks */,
 				D960FFA7139DB6EC00CD6795 /* Foundation.framework in Frameworks */,
@@ -94,6 +102,8 @@
 				D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */,
 				D960FFC9139DBCCD00CD6795 /* LearnViewController.h */,
 				D960FFCA139DBCCD00CD6795 /* LearnViewController.mm */,
+				D92B82CF13A0A94E001A254A /* LecturePlayerViewController.h */,
+				D92B82D013A0A94F001A254A /* LecturePlayerViewController.m */,
 				D960FFCE139DBE4300CD6795 /* AboutViewController.h */,
 				D960FFCF139DBE4300CD6795 /* AboutViewController.mm */,
 				D91F3788139ECFB5007D2B9D /* RecordingViewController.h */,
@@ -116,6 +126,7 @@
 		D960FF95139DB6EC00CD6795 = {
 			isa = PBXGroup;
 			children = (
+				D92B82D413A0ACC3001A254A /* AVFoundation.framework */,
 				D960FFAA139DB6EC00CD6795 /* LectureLeaks */,
 				D960FFA3139DB6EC00CD6795 /* Frameworks */,
 				D960FFA1139DB6EC00CD6795 /* Products */,
@@ -166,6 +177,7 @@
 		D960FFD3139DBE6300CD6795 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */,
 				D960FFB6139DB6EC00CD6795 /* MainWindow.xib */,
 				D960FFCB139DBCCD00CD6795 /* LearnViewController.xib */,
 				D91F378A139ECFB5007D2B9D /* RecordingViewController.xib */,
@@ -230,6 +242,7 @@
 				D960FFD2139DBE4300CD6795 /* AboutViewController.xib in Resources */,
 				D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */,
 				D91F378C139ECFB5007D2B9D /* RecordingViewController.xib in Resources */,
+				D92B82D313A0A950001A254A /* LecturePlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +263,7 @@
 				D91F37A4139EDD4D007D2B9D /* AQPlayer.mm in Sources */,
 				D91F37A5139EDD4D007D2B9D /* AQRecorder.mm in Sources */,
 				D92B82CD13A09BB7001A254A /* Lecture.m in Sources */,
+				D92B82D213A0A950001A254A /* LecturePlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
