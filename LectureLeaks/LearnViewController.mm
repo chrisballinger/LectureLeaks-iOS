@@ -12,6 +12,7 @@
 
 @implementation LearnViewController
 
+@synthesize lectureTableView;
 @synthesize listContent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -97,8 +98,27 @@
     [lecturePlayerController release];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) 
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+        NSString *documentsDirectoryPath = [paths objectAtIndex:0];
+        NSString *cafPath = [documentsDirectoryPath stringByAppendingPathComponent:[[listContent objectAtIndex:indexPath.row] fileName]];
+        NSString *plistPath = [cafPath stringByReplacingOccurrencesOfString:@"caf" withString:@"plist"];
+
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:cafPath error:NULL];
+        [fileManager removeItemAtPath:plistPath error:NULL];
+        
+        [listContent removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
+}
+
 - (void)dealloc
 {
+    [lectureTableView release];
     [super dealloc];
 }
 
@@ -115,11 +135,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view from its nib.    
+    
+    self.editButtonItem.target = self;
+    [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];    
+}
+
+-(void)editButtonPressed
+{
+    [lectureTableView setEditing:YES animated:YES];
 }
 
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
+    [self setLectureTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
