@@ -63,6 +63,7 @@
     [contentArray addObject:myRecordings];
     [contentArray addObject:featured];
     [contentArray addObject:allSchools];
+    
 }
 
 - (void)viewDidUnload

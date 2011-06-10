@@ -68,6 +68,8 @@
 	if (player == nil)
 		NSLog(@"%@",[error description]);
 
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
+
 }
 
 - (void)viewDidUnload

@@ -209,6 +209,7 @@ void propListener(	void *                  inClientData,
     // Do any additional setup after loading the view from its nib.
     
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
 
 }
 
