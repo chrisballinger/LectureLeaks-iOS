@@ -46,7 +46,7 @@
 					<object class="IBUIButton" id="454460138">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{44, 96}, {100, 100}}</string>
+						<string key="NSFrame">{{44, 130}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="236202573"/>
@@ -81,7 +81,7 @@
 					<object class="IBUIButton" id="236202573">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{176, 96}, {100, 100}}</string>
+						<string key="NSFrame">{{176, 130}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="844051359"/>
@@ -106,7 +106,7 @@
 					<object class="IBUIButton" id="691344114">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{44, 233}, {100, 100}}</string>
+						<string key="NSFrame">{{44, 267}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="580110123"/>
@@ -131,7 +131,7 @@
 					<object class="IBUIButton" id="580110123">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{176, 233}, {100, 100}}</string>
+						<string key="NSFrame">{{176, 267}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="300683492"/>
@@ -156,7 +156,7 @@
 					<object class="IBUILabel" id="917781032">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 20}, {280, 62}}</string>
+						<string key="NSFrame">{{20, 26}, {280, 62}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="454460138"/>
@@ -187,7 +187,7 @@
 					<object class="IBUILabel" id="844051359">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{67, 204}, {55, 21}}</string>
+						<string key="NSFrame">{{67, 238}, {55, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1040088582"/>
@@ -212,7 +212,7 @@
 					<object class="IBUILabel" id="1040088582">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{199, 203}, {55, 22}}</string>
+						<string key="NSFrame">{{199, 237}, {55, 22}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="691344114"/>
@@ -233,10 +233,9 @@
 					<object class="IBUILabel" id="807951027">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{199, 341}, {55, 22}}</string>
+						<string key="NSFrame">{{199, 375}, {55, 22}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -254,7 +253,7 @@
 					<object class="IBUILabel" id="300683492">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{59, 341}, {71, 22}}</string>
+						<string key="NSFrame">{{59, 375}, {71, 22}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="807951027"/>
@@ -359,7 +358,6 @@
 						<reference key="object" ref="774585933"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="917781032"/>
 							<reference ref="454460138"/>
 							<reference ref="236202573"/>
 							<reference ref="691344114"/>
@@ -368,6 +366,7 @@
 							<reference ref="1040088582"/>
 							<reference ref="807951027"/>
 							<reference ref="300683492"/>
+							<reference ref="917781032"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>

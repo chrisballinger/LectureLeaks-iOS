@@ -11,6 +11,7 @@
 #import "LearnViewController.h"
 #import "AboutViewController.h"
 #import "ScheduleViewController.h"
+#import "ScheduleNotSupportedViewController.h"
 
 @implementation LectureLeaksViewController
 
@@ -81,8 +82,17 @@
 
 - (IBAction)schedulePressed:(id)sender 
 {
-    ScheduleViewController *scheduleController = [[ScheduleViewController alloc] init];
-    [self.navigationController pushViewController:scheduleController animated:YES];
+    NSComparisonResult order = [[UIDevice currentDevice].systemVersion compare: @"4.0" options: NSNumericSearch];
+	if (order == NSOrderedSame || order == NSOrderedDescending)  // iOS 4+
+    {
+        ScheduleViewController *scheduleController = [[ScheduleViewController alloc] init];
+        [self.navigationController pushViewController:scheduleController animated:YES];
+    }
+    else                                                         // iOS 3
+    {
+        ScheduleNotSupportedViewController *scheduleController = [[ScheduleNotSupportedViewController alloc] init];
+        [self.navigationController pushViewController:scheduleController animated:YES];
+    }
 }
 
 - (IBAction)aboutPressed:(id)sender 

@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <EventKitUI/EventKitUI.h>
+#import "Kal.h"
+#import "EventKitDataSource.h"
 
-
-@interface ScheduleViewController : UIViewController {
+@interface ScheduleViewController : UIViewController <EKEventEditViewDelegate ,UITableViewDelegate> {
+    EventKitDataSource *dataSource;
     
 }
+
+@property (nonatomic, retain) EventKitDataSource *dataSource;
+
+- (IBAction)viewCalendar:(id)sender;
+- (IBAction)addClass:(id)sender;
 
 @end
