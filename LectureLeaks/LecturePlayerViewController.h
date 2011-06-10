@@ -18,7 +18,11 @@
     UILabel *classLabel;
     UILabel *schoolLabel;
     UIButton *playButton;
+    UILabel *durationLabel;
+    UILabel *currentTimeLabel;
     UILabel *dateLabel;
+    NSTimer *playerUpdateTimer;
+    UISlider *playerSlider;
     
 }
 @property (nonatomic, retain) Lecture* lecture;
@@ -27,8 +31,14 @@
 @property (nonatomic, retain) IBOutlet UILabel *schoolLabel;
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
 @property (nonatomic, retain) IBOutlet UIButton *playButton;
+@property (nonatomic, retain) IBOutlet UILabel *durationLabel;
+@property (nonatomic, retain) IBOutlet UILabel *currentTimeLabel;
+@property (nonatomic, retain)     NSTimer *playerUpdateTimer;
+@property (nonatomic, retain) IBOutlet UISlider *playerSlider;
 
 - (IBAction)playPressed:(id)sender;
 - (IBAction)stopPressed:(id)sender;
+- (void) updateElapsedTime:(NSTimer *) timer;
+- (IBAction)seek:(id)sender;
 
 @end

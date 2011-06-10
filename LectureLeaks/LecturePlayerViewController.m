@@ -14,8 +14,12 @@
 @synthesize classLabel;
 @synthesize schoolLabel;
 @synthesize playButton;
+@synthesize durationLabel;
+@synthesize currentTimeLabel;
 @synthesize dateLabel;
 @synthesize lecture;
+@synthesize playerUpdateTimer;
+@synthesize playerSlider;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +39,10 @@
     [dateLabel release];
     [player release];
     [lecture release];
+    [durationLabel release];
+    [currentTimeLabel release];
+    [playerUpdateTimer release];
+    [playerSlider release];
     [super dealloc];
 }
 
@@ -70,6 +78,14 @@
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
 
+    playerUpdateTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+                                                selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
+    int hour, minute, second;
+	NSTimeInterval elapsedTime = player.duration;
+	hour = elapsedTime / 3600;
+	minute = (elapsedTime - hour * 3600) / 60;
+	second = (elapsedTime - hour * 3600 - minute * 60);
+	durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
 }
 
 - (void)viewDidUnload
@@ -79,6 +95,9 @@
     [self setSchoolLabel:nil];
     [self setPlayButton:nil];
     [self setDateLabel:nil];
+    [self setDurationLabel:nil];
+    [self setCurrentTimeLabel:nil];
+    [self setPlayerSlider:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -89,6 +108,29 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+
+// Update the call timer once a second.
+- (void) updateElapsedTime:(NSTimer *) timer
+{
+	int hour, minute, second;
+	NSTimeInterval elapsedTime = player.currentTime;
+	hour = elapsedTime / 3600;
+	minute = (elapsedTime - hour * 3600) / 60;
+	second = (elapsedTime - hour * 3600 - minute * 60);
+	currentTimeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+    
+    if(player.duration != 0)
+        self.playerSlider.value = player.currentTime / player.duration;
+}
+
+- (IBAction)seek:(id)sender 
+{
+    player.currentTime = self.playerSlider.value * player.duration;
+    [self updateElapsedTime:nil];
+    [player play];
+}
+
 
 - (IBAction)playPressed:(id)sender 
 {
@@ -105,5 +147,7 @@
 - (IBAction)stopPressed:(id)sender 
 {
     [player stop];
+    player.currentTime = 0;
+    [self updateElapsedTime:nil];
 }
 @end

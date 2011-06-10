@@ -24,6 +24,8 @@
     UITextField *classTextField;
     UITextField *schoolTextField;
     NSString *currentFileName;
+    NSTimer *recordingTimer;
+    NSTimeInterval startTime;
 }
 @property (nonatomic, retain) IBOutlet UILabel *recordingLabel;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
@@ -34,6 +36,8 @@
 @property (nonatomic, retain) IBOutlet UITextField *schoolTextField;
 
 @property (nonatomic, retain) NSString *currentFileName;
+@property (nonatomic, retain) NSTimer *recordingTimer;
+@property NSTimeInterval startTime;
 
 @property (readonly) AQRecorder *recorder;
 @property (readonly) AQPlayer *player;
@@ -44,6 +48,7 @@
 - (void)stopPlayQueue;
 - (void)playbackQueueStopped:(NSNotification *)note;
 - (void)playbackQueueResumed:(NSNotification *)note;
+- (void) updateElapsedTime:(NSTimer *) timer;
 
 - (IBAction)record:(id)sender;
 - (IBAction)play:(id)sender;

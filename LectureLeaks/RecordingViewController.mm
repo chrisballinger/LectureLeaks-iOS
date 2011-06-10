@@ -23,6 +23,8 @@
 @synthesize playbackWasInterrupted;
 @synthesize playbackWasPaused;
 @synthesize currentFileName;
+@synthesize recordingTimer;
+@synthesize startTime;
 
 #pragma mark AudioSession listeners
 void interruptionListener(	void *	inClientData,
@@ -246,6 +248,7 @@ void propListener(	void *                  inClientData,
         
         // now create a new queue for the recorded file
         player->CreateQueueForFile((CFStringRef)currentFileName);
+        [recordingTimer invalidate];
         recordButton.title = @"Record";
         playButton.enabled = YES;
         submitButton.enabled = YES;
@@ -274,6 +277,10 @@ void propListener(	void *                  inClientData,
             [metadata setObject:classTextField.text forKey:@"className"];
             [metadata setObject:schoolTextField.text forKey:@"school"];
             [metadata writeToFile:metadataPath atomically:YES];
+            
+            startTime = [NSDate timeIntervalSinceReferenceDate];
+            recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+                                            selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
              
             recorder->StartRecord((CFStringRef)currentFileName);
             playButton.enabled = NO;
@@ -282,6 +289,16 @@ void propListener(	void *                  inClientData,
         
     }
 
+}
+
+- (void) updateElapsedTime:(NSTimer *) timer
+{
+	int hour, minute, second;
+	NSTimeInterval elapsedTime = [NSDate timeIntervalSinceReferenceDate] - startTime;
+	hour = elapsedTime / 3600;
+	minute = (elapsedTime - hour * 3600) / 60;
+	second = (elapsedTime - hour * 3600 - minute * 60);
+	recordingLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
 }
 
 - (IBAction)play:(id)sender 
