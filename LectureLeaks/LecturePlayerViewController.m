@@ -86,6 +86,9 @@
 	minute = (elapsedTime - hour * 3600) / 60;
 	second = (elapsedTime - hour * 3600 - minute * 60);
 	durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+    
+    self.title = @"Lecture";
+
 }
 
 - (void)viewDidUnload

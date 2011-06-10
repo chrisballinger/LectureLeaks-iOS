@@ -137,6 +137,8 @@
     
     self.editButtonItem.target = self;
     [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:YES];    
+    self.title = @"My Recordings";
+
 }
 
 - (void)viewDidUnload

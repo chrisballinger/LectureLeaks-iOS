@@ -64,6 +64,8 @@
     [contentArray addObject:featured];
     [contentArray addObject:allSchools];
     
+    self.title = @"Learn";
+
 }
 
 - (void)viewDidUnload

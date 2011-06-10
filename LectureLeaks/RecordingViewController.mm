@@ -212,6 +212,7 @@ void propListener(	void *                  inClientData,
     
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
+    self.title = @"Record";
 
 }
 
