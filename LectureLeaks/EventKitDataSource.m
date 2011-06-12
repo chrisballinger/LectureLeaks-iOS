@@ -29,7 +29,7 @@ static BOOL IsDateBetweenInclusive(NSDate *date, NSDate *begin, NSDate *end)
     eventStore = [[EKEventStore alloc] init];
     events = [[NSMutableArray alloc] init];
     items = [[NSMutableArray alloc] init];
-    eventStoreQueue = dispatch_queue_create("com.thepolypeptides.nativecalexample", NULL);
+    //eventStoreQueue = dispatch_queue_create("com.chrisballinger.LectureLeaks", NULL);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventStoreChanged:) name:EKEventStoreChangedNotification object:nil];
   }
   return self;
@@ -49,18 +49,18 @@ static BOOL IsDateBetweenInclusive(NSDate *date, NSDate *begin, NSDate *end)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *identifier = @"MyCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-  if (!cell) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-  }
-
-  EKEvent *event = [self eventAtIndexPath:indexPath];
-  cell.textLabel.text = event.title;
-  return cell;
+    static NSString *identifier = @"MyCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    
+    EKEvent *event = [self eventAtIndexPath:indexPath];
+    cell.textLabel.text = event.title;
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -73,18 +73,20 @@ static BOOL IsDateBetweenInclusive(NSDate *date, NSDate *begin, NSDate *end)
 - (void)presentingDatesFrom:(NSDate *)fromDate to:(NSDate *)toDate delegate:(id<KalDataSourceCallbacks>)delegate
 {
   // asynchronous callback on the main thread
-  [events removeAllObjects];
-  NSLog(@"Fetching events from EventKit between %@ and %@ on a GCD-managed background thread...", fromDate, toDate);
-  dispatch_async(eventStoreQueue, ^{
+  NSLog(@"Fetching events from EventKit between %@ and %@", fromDate, toDate);
+  //dispatch_async(eventStoreQueue, ^{
     NSDate *fetchProfilerStart = [NSDate date];
     NSPredicate *predicate = [eventStore predicateForEventsWithStartDate:fromDate endDate:toDate calendars:nil];
     NSArray *matchedEvents = [eventStore eventsMatchingPredicate:predicate];
-    dispatch_async(dispatch_get_main_queue(), ^{
-      NSLog(@"Fetched %d events in %f seconds", [matchedEvents count], -1.f * [fetchProfilerStart timeIntervalSinceNow]);
-      [events addObjectsFromArray:matchedEvents];
-      [delegate loadedDataSource:self];
+    NSLog(@"Fetched %d events in %f seconds", [matchedEvents count], -1.f * [fetchProfilerStart timeIntervalSinceNow]);
+    [events removeAllObjects];
+    [events addObjectsFromArray:matchedEvents];
+    [delegate loadedDataSource:self];
+    
+    /*dispatch_async(dispatch_get_main_queue(), ^{
+      
     });
-  });
+  });*/
 }
 
 - (NSArray *)markedDatesFrom:(NSDate *)fromDate to:(NSDate *)toDate
@@ -122,10 +124,10 @@ static BOOL IsDateBetweenInclusive(NSDate *date, NSDate *begin, NSDate *end)
   [[NSNotificationCenter defaultCenter] removeObserver:self name:EKEventStoreChangedNotification object:nil];
   [items release];
   [events release];
-  dispatch_sync(eventStoreQueue, ^{
+  //dispatch_sync(eventStoreQueue, ^{
     [eventStore release];
-  });
-  dispatch_release(eventStoreQueue);
+  //});
+  //dispatch_release(eventStoreQueue);
   [super dealloc];
 }
 

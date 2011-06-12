@@ -8,6 +8,7 @@
 #import "KalDataSource.h"
 #import "KalDate.h"
 #import "KalPrivate.h"
+#import "KalGridView.h"
 
 #define PROFILER 0
 #if PROFILER
@@ -39,6 +40,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 @implementation KalViewController
 
 @synthesize dataSource, delegate, initialDate, selectedDate;
+@synthesize selectTileAfterCalendarSlid, numberOfAppending;
 
 - (id)initWithSelectedDate:(NSDate *)date
 {
@@ -48,6 +50,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
     self.selectedDate = date;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:KalDataSourceChangedNotification object:nil];
+    self.numberOfAppending = 0;
   }
   return self;
 }
@@ -92,14 +95,36 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
   [self reloadData];
 }
 
+- (void)setSelectTileAfterCalendarSlid:(BOOL)doSelect {
+  [[self calendarView].gridView setSelectTileAfterCalendarSlid:doSelect];
+}
+
+- (void)setNumberOfAppending:(unsigned int)numOfDays {
+  if (numberOfAppending != numOfDays) {
+    numberOfAppending = numOfDays;
+    [[self calendarView].gridView selectDatesWithAppending:numberOfAppending];
+    [self didSelectDate:self.calendarView.selectedDate];
+  }
+}
+
+- (NSDate *)endOfDate {
+  if (numberOfAppending == 0) {
+    return [self selectedDate];
+  } else {
+    return [[self selectedDate] addTimeInterval:60*60*24*(numberOfAppending)];
+  }
+}
+
 // -----------------------------------------
 #pragma mark KalViewDelegate protocol
 
 - (void)didSelectDate:(KalDate *)date
 {
   self.selectedDate = [date NSDate];
+  [[self calendarView].gridView selectDatesWithAppending:numberOfAppending];
+  
   NSDate *from = [[date NSDate] cc_dateByMovingToBeginningOfDay];
-  NSDate *to = [[date NSDate] cc_dateByMovingToEndOfDay];
+  NSDate *to = [[self endOfDate] cc_dateByMovingToEndOfDay];
   [self clearTable];
   [dataSource loadItemsFromDate:from toDate:to];
   [tableView reloadData];
@@ -203,7 +228,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [tableView reloadData];
+  [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

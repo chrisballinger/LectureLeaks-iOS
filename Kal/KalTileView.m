@@ -43,13 +43,23 @@ extern const CGSize kTileSize;
     textColor = [UIColor whiteColor];
     shadowColor = [UIColor blackColor];
     markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
-  } else if ([self isToday] && !self.selected) {
+  } else if ([self isToday] && !self.selected && self.appended) {
+    [[[UIImage imageNamed:@"Kal.bundle/kal_tile_today_selected_append.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
+    textColor = [UIColor whiteColor];
+    shadowColor = [UIColor blackColor];
+    markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
+  } else if ([self isToday] && !self.selected && !self.appended) {
     [[[UIImage imageNamed:@"Kal.bundle/kal_tile_today.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
     textColor = [UIColor whiteColor];
     shadowColor = [UIColor blackColor];
     markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
   } else if (self.selected) {
     [[[UIImage imageNamed:@"Kal.bundle/kal_tile_selected.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
+    textColor = [UIColor whiteColor];
+    shadowColor = [UIColor blackColor];
+    markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
+  } else if (self.appended) {
+    [[[UIImage imageNamed:@"Kal.bundle/kal_tile_selected_append.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
     textColor = [UIColor whiteColor];
     shadowColor = [UIColor blackColor];
     markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
@@ -100,6 +110,7 @@ extern const CGSize kTileSize;
   flags.type = KalTileTypeRegular;
   flags.highlighted = NO;
   flags.selected = NO;
+  flags.appended = NO;
   flags.marked = NO;
 }
 
@@ -137,6 +148,31 @@ extern const CGSize kTileSize;
   }
   
   flags.selected = selected;
+  [self setNeedsDisplay];
+}
+
+- (BOOL)isAppended { return flags.appended; }
+
+- (void)setAppended:(BOOL)appended
+{
+  if (flags.appended == appended)
+    return;
+  
+  CGRect rect = self.frame;
+  if (![self isToday]) {
+    if (appended) {
+      rect.origin.x--;
+      rect.size.width++;
+      rect.size.height++;
+    } else {
+      rect.origin.x++;
+      rect.size.width--;
+      rect.size.height--;
+    }
+    self.frame = rect;
+  }
+  
+  flags.appended = appended;
   [self setNeedsDisplay];
 }
 

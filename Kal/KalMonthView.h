@@ -18,6 +18,7 @@
 - (void)showDates:(NSArray *)mainDates leadingAdjacentDates:(NSArray *)leadingAdjacentDates trailingAdjacentDates:(NSArray *)trailingAdjacentDates;
 - (KalTileView *)firstTileOfMonth;
 - (KalTileView *)tileForDate:(KalDate *)date;
+- (KalTileView *)tileForToday;
 - (void)markTilesForDates:(NSArray *)dates;
 
 @end

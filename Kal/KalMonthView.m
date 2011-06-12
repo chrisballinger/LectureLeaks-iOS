@@ -97,4 +97,12 @@ extern const CGSize kTileSize;
     tile.marked = [dates containsObject:tile.date];
 }
 
+- (KalTileView *)tileForToday {
+  for (KalTileView *tile in self.subviews) {
+    if ([tile isToday]) {
+      return tile;
+    }
+  }
+  return nil;
+}
 @end

@@ -20,6 +20,7 @@ typedef char KalTileType;
   CGPoint origin;
   struct {
     unsigned int selected : 1;
+    unsigned int appended : 1;
     unsigned int highlighted : 1;
     unsigned int marked : 1;
     unsigned int type : 2;
@@ -29,6 +30,7 @@ typedef char KalTileType;
 @property (nonatomic, retain) KalDate *date;
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
 @property (nonatomic, getter=isSelected) BOOL selected;
+@property (nonatomic, getter=isAppended) BOOL appended;
 @property (nonatomic, getter=isMarked) BOOL marked;
 @property (nonatomic) KalTileType type;
 

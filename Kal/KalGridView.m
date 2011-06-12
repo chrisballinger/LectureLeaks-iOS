@@ -30,6 +30,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 @implementation KalGridView
 
 @synthesize selectedTile, highlightedTile, transitioning;
+@synthesize selectedDate, selectTileAfterCalendarSlid;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)theLogic delegate:(id<KalViewDelegate>)theDelegate
 {
@@ -56,6 +57,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     [self addSubview:frontMonthView];
 
     [self jumpToSelectedMonth];
+    
+    selectTileAfterCalendarSlid = YES;
   }
   return self;
 }
@@ -94,6 +97,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     selectedTile.selected = NO;
     selectedTile = [tile retain];
     tile.selected = YES;
+    self.selectedDate = tile.date;
     [delegate didSelectDate:tile.date];
   }
 }
@@ -207,8 +211,24 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
                  || (direction == SLIDE_DOWN && [logic.daysInFirstWeekOfFollowingMonth count] > 0);
   
   [self swapMonthsAndSlide:direction keepOneRow:keepOneRow];
+
   
-  self.selectedTile = [frontMonthView firstTileOfMonth];
+  if (selectTileAfterCalendarSlid) {
+    // Select today if the calendar is this month.
+    KalTileView *todayTile = [frontMonthView tileForToday];
+    if (todayTile) {
+      self.selectedTile = todayTile;
+    } else {
+      self.selectedTile = [frontMonthView firstTileOfMonth];
+    }
+  } else {
+    // Remember selected date when the calendar was slid.
+    if ([selectedDate compare:self.selectedTile.date] == NSOrderedSame) {
+      self.selectedTile.selected = YES;
+    } else {
+      self.selectedTile.selected = NO;
+    }
+  }
 }
 
 - (void)slideUp { [self slide:SLIDE_UP]; }
@@ -227,6 +247,21 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
   self.selectedTile = [frontMonthView tileForDate:date];
 }
 
+- (void)selectDatesWithAppending:(unsigned int)numOfDays {
+  KalDate *from = selectedDate;
+  KalDate *to = [KalDate dateFromNSDate:[[selectedDate NSDate] addTimeInterval:60*60*24*(numOfDays)]];
+  for (KalTileView *tile in frontMonthView.subviews) {
+    if ([from compare:tile.date] == NSOrderedAscending
+               && [tile.date compare:to] == NSOrderedAscending) {
+      tile.appended = YES;
+    } else if ([from compare:tile.date] != NSOrderedSame && [to compare:tile.date] == NSOrderedSame) {
+      tile.appended = YES;
+    } else {
+      tile.appended = NO;
+    }
+  }
+}
+
 - (void)swapMonthViews
 {
   KalMonthView *tmp = backMonthView;
@@ -242,13 +277,15 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)markTilesForDates:(NSArray *)dates { [frontMonthView markTilesForDates:dates]; }
 
-- (KalDate *)selectedDate { return selectedTile.date; }
+//- (KalDate *)selectedDate { return selectedTile.date; }
+//- (KalDate *)selectedDate { return selectedDate; }
 
 #pragma mark -
 
 - (void)dealloc
 {
   [selectedTile release];
+  [selectedDate release];
   [highlightedTile release];
   [frontMonthView release];
   [backMonthView release];

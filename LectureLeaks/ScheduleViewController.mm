@@ -69,6 +69,7 @@
     KalViewController *calendar = [[[KalViewController alloc] init] autorelease];
     calendar.delegate = self;
     dataSource = [[EventKitDataSource alloc] init];
+    [dataSource retain];
     calendar.dataSource = dataSource;
     [self.navigationController pushViewController:calendar animated:YES];
 }
@@ -90,6 +91,7 @@
     // iOS 4+ only
     EKEventEditViewController *eventViewController = [[EKEventEditViewController alloc] init];
     EKEventStore *eventStore = [[EKEventStore alloc] init];
+    
     eventViewController.eventStore = eventStore;
     eventViewController.editViewDelegate = self;
     [self presentModalViewController: eventViewController animated:YES];
