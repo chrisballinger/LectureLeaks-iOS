@@ -13,10 +13,10 @@
 @synthesize titleLabel;
 @synthesize classLabel;
 @synthesize schoolLabel;
-@synthesize playButton;
 @synthesize durationLabel;
 @synthesize currentTimeLabel;
 @synthesize dateLabel;
+@synthesize submitLabel;
 @synthesize lecture;
 @synthesize playerUpdateTimer;
 @synthesize playerSlider;
@@ -35,7 +35,6 @@
     [titleLabel release];
     [classLabel release];
     [schoolLabel release];
-    [playButton release];
     [dateLabel release];
     [player release];
     [lecture release];
@@ -43,6 +42,7 @@
     [currentTimeLabel release];
     [playerUpdateTimer release];
     [playerSlider release];
+    [submitLabel release];
     [super dealloc];
 }
 
@@ -96,11 +96,11 @@
     [self setTitleLabel:nil];
     [self setClassLabel:nil];
     [self setSchoolLabel:nil];
-    [self setPlayButton:nil];
     [self setDateLabel:nil];
     [self setDurationLabel:nil];
     [self setCurrentTimeLabel:nil];
     [self setPlayerSlider:nil];
+    [self setSubmitLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -134,6 +134,9 @@
     [player play];
 }
 
+
+- (IBAction)submitPressed:(id)sender {
+}
 
 - (IBAction)playPressed:(id)sender 
 {

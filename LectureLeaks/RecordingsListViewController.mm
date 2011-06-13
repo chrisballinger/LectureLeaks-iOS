@@ -21,28 +21,17 @@
         NSFileManager *manager = [NSFileManager defaultManager];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];        
-        NSDictionary *metadata = nil;
         NSDirectoryEnumerator *direnum = [manager enumeratorAtPath:documentsDirectory];
         NSMutableArray *lectureList = [[NSMutableArray alloc] init];
         Lecture *newLecture;
         
         NSString *filename;
-        NSString *prefix;
         
         while ((filename = [direnum nextObject] )) 
         {
             if ([filename hasSuffix:@".plist"]) 
-            {   
-                metadata = [[NSDictionary alloc] initWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:filename]];
-                newLecture = [[Lecture alloc] init];
-                prefix = [[filename componentsSeparatedByString:@"."] objectAtIndex:0];
-                
-                newLecture.title = [metadata objectForKey:@"title"];
-                newLecture.className = [metadata objectForKey:@"className"];
-                newLecture.school = [metadata objectForKey:@"school"];
-                newLecture.fileName = [prefix stringByAppendingString:@".caf"];
-                newLecture.date = [[NSDate alloc] initWithTimeIntervalSince1970:[prefix doubleValue]];
-                                
+            {                                   
+                newLecture = [Lecture lectureWithFile:filename];
                 [lectureList addObject:newLecture];
             }
         }

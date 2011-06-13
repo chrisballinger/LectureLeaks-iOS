@@ -7,24 +7,21 @@
 //
 
 #import "RecordingViewController.h"
-#import "LectureLeaksAppDelegate.h"
+#import "LecturePlayerViewController.h"
+#import "LearnViewController.h"
+#import "RecordingsListViewController.h"
 
 @implementation RecordingViewController
 
 @synthesize recordingLabel;
 @synthesize recordButton;
-@synthesize playButton;
-@synthesize submitButton;
 @synthesize titleTextField;
 @synthesize classTextField;
 @synthesize schoolTextField;
 @synthesize recorder;
-@synthesize player;
-@synthesize playbackWasInterrupted;
-@synthesize playbackWasPaused;
-@synthesize currentFileName;
 @synthesize recordingTimer;
 @synthesize startTime;
+@synthesize lecture;
 
 #pragma mark AudioSession listeners
 void interruptionListener(	void *	inClientData,
@@ -33,22 +30,11 @@ void interruptionListener(	void *	inClientData,
 	RecordingViewController *THIS = (RecordingViewController*)inClientData;
 	if (inInterruptionState == kAudioSessionBeginInterruption)
 	{
-		if (THIS->recorder->IsRunning()) {
+		if (THIS->recorder->IsRunning()) 
+        {
 			THIS->recorder->StopRecord();
 		}
-		else if (THIS->player->IsRunning()) {
-			//the queue will stop itself on an interruption, we just need to update the UI
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"playbackQueueStopped" object:THIS];
-			THIS->playbackWasInterrupted = YES;
-		}
-	}
-	else if ((inInterruptionState == kAudioSessionEndInterruption) && THIS->playbackWasInterrupted)
-	{
-		// we were playing back when we were interrupted, so reset and resume now
-		THIS->player->StartQueue(true);
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"playbackQueueResumed" object:THIS];
-		THIS->playbackWasInterrupted = NO;
-	}
+    }
 }
 
 void propListener(	void *                  inClientData,
@@ -65,17 +51,10 @@ void propListener(	void *                  inClientData,
 		SInt32 reasonVal;
 		CFNumberGetValue(reason, kCFNumberSInt32Type, &reasonVal);
 		if (reasonVal != kAudioSessionRouteChangeReason_CategoryChange)
-		{
-			if (reasonVal == kAudioSessionRouteChangeReason_OldDeviceUnavailable)
-			{			
-				if (THIS->player->IsRunning()) {
-					[THIS pausePlayQueue];
-					[[NSNotificationCenter defaultCenter] postNotificationName:@"playbackQueueStopped" object:THIS];
-				}		
-			}
-            
+		{		
 			// stop the queue if we had a non-policy route change
-			if (THIS->recorder->IsRunning()) {
+			if (THIS->recorder->IsRunning()) 
+            {
                 THIS->recorder->StopRecord();
 			}
 		}	
@@ -107,7 +86,6 @@ void propListener(	void *                  inClientData,
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         recorder = new AQRecorder();
-        player = new AQPlayer();
         
         OSStatus error = AudioSessionInitialize(NULL, NULL, interruptionListener, self);
         if (error) printf("ERROR INITIALIZING AUDIO SESSION! %ld\n", error);
@@ -140,9 +118,6 @@ void propListener(	void *                  inClientData,
                 [alert release];
             }
         }
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueStopped:) name:@"playbackQueueStopped" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackQueueResumed:) name:@"playbackQueueResumed" object:nil];
     }
     return self;
 }
@@ -150,11 +125,8 @@ void propListener(	void *                  inClientData,
 - (void)dealloc
 {
     delete recorder;
-    delete player;
     [recordingLabel release];
     [recordButton release];
-    [playButton release];
-    [submitButton release];
     [titleTextField release];
     [classTextField release];
     [schoolTextField release];
@@ -168,36 +140,6 @@ void propListener(	void *                  inClientData,
     
     // Release any cached data, images, etc that aren't in use.
 }
-
--(void)stopPlayQueue
-{
-	player->StopQueue();
-	recordButton.enabled = YES;
-}
-
--(void)pausePlayQueue
-{
-	player->PauseQueue();
-	playbackWasPaused = YES;
-}
-
-# pragma mark Notification routines
-- (void)playbackQueueStopped:(NSNotification *)note
-{
-    playButton.title = @"Play";
-	recordButton.enabled = YES;
-}
-
-- (void)playbackQueueResumed:(NSNotification *)note
-{
-    playButton.title = @"Stop";
-	recordButton.enabled = NO;
-}
-
-
-
-
-
 
 #pragma mark - View lifecycle
 
@@ -219,11 +161,8 @@ void propListener(	void *                  inClientData,
 - (void)viewDidUnload
 {
     [self setRecordingLabel:nil];
-    [self setPlayButton:nil];
     [self setRecordButton:nil];
     [self setRecordButton:nil];
-    [self setPlayButton:nil];
-    [self setSubmitButton:nil];
     [self setTitleTextField:nil];
     [self setClassTextField:nil];
     [self setSchoolTextField:nil];
@@ -244,15 +183,23 @@ void propListener(	void *                  inClientData,
     {
         recorder->StopRecord();
         
-        // dispose the previous playback queue
-        player->DisposeQueue(true);
-        
-        // now create a new queue for the recorded file
-        player->CreateQueueForFile((CFStringRef)currentFileName);
         [recordingTimer invalidate];
-        recordButton.title = @"Record";
-        playButton.enabled = YES;
-        submitButton.enabled = YES;
+        
+        UINavigationController *navController = self.navigationController;
+        
+        LearnViewController *learnController = [[LearnViewController alloc] init];
+        RecordingsListViewController *recordingListController = [[RecordingsListViewController alloc] init];
+        LecturePlayerViewController *lecturePlayerController = [[LecturePlayerViewController alloc] init];
+        
+        lecturePlayerController.lecture = self.lecture;
+        
+        [[self retain] autorelease];
+        
+        [navController popViewControllerAnimated:NO];
+        [navController pushViewController:learnController animated:NO];
+        [navController pushViewController:recordingListController animated:NO];
+        [navController pushViewController:lecturePlayerController animated:YES];
+        [lecture release];
     }
     else
     {
@@ -265,27 +212,19 @@ void propListener(	void *                  inClientData,
         else
         {
             recordButton.title = @"Stop";
-            time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
-            currentFileName = [[NSString stringWithFormat:@"%d.caf",unixTime] retain];
-            NSString* metadataFileName = [NSString stringWithFormat:@"%d.plist",unixTime];
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *metadataPath = [documentsDirectory stringByAppendingPathComponent:metadataFileName];
+            NSDate* date = [NSDate date];
+            time_t unixTime = (time_t) [date timeIntervalSince1970];
+            NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
             
-            
-            NSMutableDictionary *metadata = [[NSMutableDictionary alloc] init];
-            [metadata setObject:titleTextField.text forKey:@"title"];
-            [metadata setObject:classTextField.text forKey:@"className"];
-            [metadata setObject:schoolTextField.text forKey:@"school"];
-            [metadata writeToFile:metadataPath atomically:YES];
+            lecture = [Lecture lectureWithTitle:titleTextField.text className:classTextField.text school:schoolTextField.text fileName:currentFileName date:date submitDate:nil];
+            [lecture saveMetadata];
+            [lecture retain];
             
             startTime = [NSDate timeIntervalSinceReferenceDate];
             recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
                                             selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
              
             recorder->StartRecord((CFStringRef)currentFileName);
-            playButton.enabled = NO;
-            submitButton.enabled = NO;
         }
         
     }
@@ -300,29 +239,6 @@ void propListener(	void *                  inClientData,
 	minute = (elapsedTime - hour * 3600) / 60;
 	second = (elapsedTime - hour * 3600 - minute * 60);
 	recordingLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
-}
-
-- (IBAction)play:(id)sender 
-{
-    if (player->IsRunning())
-	{
-		if (playbackWasPaused) {
-			OSStatus result = player->StartQueue(true);
-			if (result == noErr)
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"playbackQueueResumed" object:self];
-		}
-		else
-			[self stopPlayQueue];
-	}
-	else
-	{		
-		OSStatus result = player->StartQueue(false);
-		if (result == noErr)
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"playbackQueueResumed" object:self];
-	}
-}
-
-- (IBAction)submit:(id)sender {
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

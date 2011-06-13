@@ -17,10 +17,10 @@
     UILabel *titleLabel;
     UILabel *classLabel;
     UILabel *schoolLabel;
-    UIButton *playButton;
     UILabel *durationLabel;
     UILabel *currentTimeLabel;
     UILabel *dateLabel;
+    UILabel *submitLabel;
     NSTimer *playerUpdateTimer;
     UISlider *playerSlider;
     
@@ -30,12 +30,13 @@
 @property (nonatomic, retain) IBOutlet UILabel *classLabel;
 @property (nonatomic, retain) IBOutlet UILabel *schoolLabel;
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
-@property (nonatomic, retain) IBOutlet UIButton *playButton;
+@property (nonatomic, retain) IBOutlet UILabel *submitLabel;
 @property (nonatomic, retain) IBOutlet UILabel *durationLabel;
 @property (nonatomic, retain) IBOutlet UILabel *currentTimeLabel;
 @property (nonatomic, retain)     NSTimer *playerUpdateTimer;
 @property (nonatomic, retain) IBOutlet UISlider *playerSlider;
 
+- (IBAction)submitPressed:(id)sender;
 - (IBAction)playPressed:(id)sender;
 - (IBAction)stopPressed:(id)sender;
 - (void) updateElapsedTime:(NSTimer *) timer;

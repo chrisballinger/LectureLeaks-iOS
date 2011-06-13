@@ -57,6 +57,11 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBUIBarButtonItem" id="1065770677">
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<reference key="IBUIToolbar" ref="206597520"/>
+								<int key="IBUISystemItemIdentifier">5</int>
+							</object>
 							<object class="IBUIBarButtonItem" id="268695406">
 								<string key="IBUITitle">Record</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -64,21 +69,10 @@
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="206597520"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="298689584">
-								<bool key="IBUIEnabled">NO</bool>
-								<string key="IBUITitle">Play</string>
+							<object class="IBUIBarButtonItem" id="669711576">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<float key="IBUIWidth">96</float>
-								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="206597520"/>
-							</object>
-							<object class="IBUIBarButtonItem" id="261429953">
-								<bool key="IBUIEnabled">NO</bool>
-								<string key="IBUITitle">Submit</string>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<float key="IBUIWidth">96</float>
-								<int key="IBUIStyle">2</int>
-								<reference key="IBUIToolbar" ref="206597520"/>
+								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
 						</object>
 					</object>
@@ -258,7 +252,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
+				<reference key="NSNextKeyView" ref="866308464"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
 					<bytes key="NSRGB">MC40NDMxMzcyODgxIDAuNTc2NDcwNjEzNSAwLjcwOTgwMzkzODkAA</bytes>
@@ -287,44 +281,12 @@
 					<int key="connectionID">19</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">playButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="298689584"/>
-					</object>
-					<int key="connectionID">20</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">submitButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="261429953"/>
-					</object>
-					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">record:</string>
 						<reference key="source" ref="268695406"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">29</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">play:</string>
-						<reference key="source" ref="298689584"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">30</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">submit:</string>
-						<reference key="source" ref="261429953"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">31</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -397,7 +359,6 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="206597520"/>
 							<reference ref="866308464"/>
 							<reference ref="318285211"/>
 							<reference ref="1018610751"/>
@@ -405,6 +366,7 @@
 							<reference ref="260735173"/>
 							<reference ref="128443134"/>
 							<reference ref="707712764"/>
+							<reference ref="206597520"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -425,24 +387,14 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="268695406"/>
-							<reference ref="261429953"/>
-							<reference ref="298689584"/>
+							<reference ref="669711576"/>
+							<reference ref="1065770677"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
 						<reference key="object" ref="268695406"/>
-						<reference key="parent" ref="206597520"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="298689584"/>
-						<reference key="parent" ref="206597520"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">18</int>
-						<reference key="object" ref="261429953"/>
 						<reference key="parent" ref="206597520"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -480,6 +432,16 @@
 						<reference key="object" ref="707712764"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">43</int>
+						<reference key="object" ref="669711576"/>
+						<reference key="parent" ref="206597520"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">45</int>
+						<reference key="object" ref="1065770677"/>
+						<reference key="parent" ref="206597520"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -492,8 +454,6 @@
 					<string>1.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
-					<string>16.IBPluginDependency</string>
-					<string>18.IBPluginDependency</string>
 					<string>23.IBPluginDependency</string>
 					<string>24.IBPluginDependency</string>
 					<string>25.IBPluginDependency</string>
@@ -501,6 +461,8 @@
 					<string>27.IBPluginDependency</string>
 					<string>28.IBPluginDependency</string>
 					<string>38.IBPluginDependency</string>
+					<string>43.IBPluginDependency</string>
+					<string>45.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -533,7 +495,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">41</int>
+			<int key="maxID">45</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -542,42 +504,14 @@
 					<string key="className">RecordingViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>play:</string>
-							<string>record:</string>
-							<string>submit:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
+						<string key="NS.key.0">record:</string>
+						<string key="NS.object.0">id</string>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>play:</string>
-							<string>record:</string>
-							<string>submit:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">play:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">record:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">submit:</string>
-								<string key="candidateClassName">id</string>
-							</object>
+						<string key="NS.key.0">record:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">record:</string>
+							<string key="candidateClassName">id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -585,21 +519,17 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>classTextField</string>
-							<string>playButton</string>
 							<string>recordButton</string>
 							<string>recordingLabel</string>
 							<string>schoolTextField</string>
-							<string>submitButton</string>
 							<string>titleTextField</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UITextField</string>
 							<string>UIBarButtonItem</string>
-							<string>UIBarButtonItem</string>
 							<string>UILabel</string>
 							<string>UITextField</string>
-							<string>UIBarButtonItem</string>
 							<string>UITextField</string>
 						</object>
 					</object>
@@ -608,11 +538,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>classTextField</string>
-							<string>playButton</string>
 							<string>recordButton</string>
 							<string>recordingLabel</string>
 							<string>schoolTextField</string>
-							<string>submitButton</string>
 							<string>titleTextField</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -620,10 +548,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">classTextField</string>
 								<string key="candidateClassName">UITextField</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">playButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">recordButton</string>
@@ -636,10 +560,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">schoolTextField</string>
 								<string key="candidateClassName">UITextField</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">submitButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">titleTextField</string>
