@@ -12,9 +12,6 @@
 
 @interface RecordingViewController : UIViewController <UITextFieldDelegate>
 {
-    AQRecorder *recorder;
-    BOOL playbackWasInterrupted;
-    BOOL playbackWasPaused;
     UILabel *recordingLabel;
     UIBarButtonItem *recordButton;
     UITextField *titleTextField;
@@ -23,6 +20,8 @@
     NSTimer *recordingTimer;
     NSTimeInterval startTime;
     Lecture *lecture;
+@public
+    AQRecorder *recorder;
 }
 @property (nonatomic, retain) IBOutlet UILabel *recordingLabel;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
@@ -33,11 +32,9 @@
 @property (nonatomic, retain) NSTimer *recordingTimer;
 @property (nonatomic, retain) Lecture *lecture;
 @property NSTimeInterval startTime;
-
 @property (readonly) AQRecorder *recorder;
 
 - (void) updateElapsedTime:(NSTimer *) timer;
-
 - (IBAction)record:(id)sender;
 
 @end

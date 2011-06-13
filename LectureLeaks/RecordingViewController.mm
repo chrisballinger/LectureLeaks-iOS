@@ -23,100 +23,19 @@
 @synthesize startTime;
 @synthesize lecture;
 
-#pragma mark AudioSession listeners
-void interruptionListener(	void *	inClientData,
-                          UInt32	inInterruptionState)
-{
-	RecordingViewController *THIS = (RecordingViewController*)inClientData;
-	if (inInterruptionState == kAudioSessionBeginInterruption)
-	{
-		if (THIS->recorder->IsRunning()) 
-        {
-			THIS->recorder->StopRecord();
-		}
-    }
-}
-
-void propListener(	void *                  inClientData,
-                  AudioSessionPropertyID	inID,
-                  UInt32                  inDataSize,
-                  const void *            inData)
-{
-	RecordingViewController *THIS = (RecordingViewController*)inClientData;
-	if (inID == kAudioSessionProperty_AudioRouteChange)
-	{
-		CFDictionaryRef routeDictionary = (CFDictionaryRef)inData;			
-		//CFShow(routeDictionary);
-		CFNumberRef reason = (CFNumberRef)CFDictionaryGetValue(routeDictionary, CFSTR(kAudioSession_AudioRouteChangeKey_Reason));
-		SInt32 reasonVal;
-		CFNumberGetValue(reason, kCFNumberSInt32Type, &reasonVal);
-		if (reasonVal != kAudioSessionRouteChangeReason_CategoryChange)
-		{		
-			// stop the queue if we had a non-policy route change
-			if (THIS->recorder->IsRunning()) 
-            {
-                THIS->recorder->StopRecord();
-			}
-		}	
-	}
-	else if (inID == kAudioSessionProperty_AudioInputAvailable)
-	{
-		if (inDataSize == sizeof(UInt32)) {
-			UInt32 isAvailable = *(UInt32*)inData;
-			// disable recording if input is not available
-            if(isAvailable > 0)
-            {
-                //THIS->btn_record.enabled =  YES;
-                AudioSessionSetActive(true);
-            }
-            else
-            {
-                //THIS->btn_record.enabled =  NO;
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-                [alert release];
-            }
-		}
-	}
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         recorder = new AQRecorder();
         
-        OSStatus error = AudioSessionInitialize(NULL, NULL, interruptionListener, self);
-        if (error) NSLog(@"ERROR INITIALIZING AUDIO SESSION! %ld\n", error);
-        else 
+        OSStatus error = AudioSessionSetActive(true); 
+        if (error) 
         {
-            UInt32 category = kAudioSessionCategory_PlayAndRecord;	
-            error = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
-            if (error) NSLog(@"couldn't set audio category!");
-            
-            error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, propListener, self);
-            if (error) NSLog(@"ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
-            UInt32 inputAvailable = 0;
-            UInt32 size = sizeof(inputAvailable);
-            
-            // we do not want to allow recording if input is not available
-            error = AudioSessionGetProperty(kAudioSessionProperty_AudioInputAvailable, &size, &inputAvailable);
-            if (error) NSLog(@"ERROR GETTING INPUT AVAILABILITY! %ld\n", error);
-            //btn_record.enabled = (inputAvailable) ? YES : NO;
-            
-            // we also need to listen to see if input availability changes
-            error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, propListener, self);
-            if (error) NSLog(@"ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
-            
-            error = AudioSessionSetActive(true); 
-            if (error) 
-            {
-                NSLog(@"AudioSessionSetActive (true) failed");
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-                [alert release];
-            }
+            NSLog(@"AudioSessionSetActive (true) failed");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            [alert release];
         }
     }
     return self;
@@ -228,11 +147,13 @@ void propListener(	void *                  inClientData,
             classTextField.enabled = NO;
             schoolTextField.enabled = NO;
             
+                         
+            recorder->StartRecord((CFStringRef)currentFileName);
+            
             startTime = [NSDate timeIntervalSinceReferenceDate];
             recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
-                                            selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
-             
-            recorder->StartRecord((CFStringRef)currentFileName);
+                                                             selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
+
         }
         
     }
