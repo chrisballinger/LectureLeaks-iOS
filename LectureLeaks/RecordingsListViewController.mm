@@ -89,14 +89,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) 
     {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
-        NSString *documentsDirectoryPath = [paths objectAtIndex:0];
-        NSString *cafPath = [documentsDirectoryPath stringByAppendingPathComponent:[[listContent objectAtIndex:indexPath.row] fileName]];
-        NSString *plistPath = [cafPath stringByReplacingOccurrencesOfString:@"caf" withString:@"plist"];
-
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager removeItemAtPath:cafPath error:NULL];
-        [fileManager removeItemAtPath:plistPath error:NULL];
+        [[listContent objectAtIndex:indexPath.row] deleteFiles];
         
         [listContent removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

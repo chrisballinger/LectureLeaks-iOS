@@ -30,5 +30,6 @@
 + (id)lectureWithFile:(NSString*)filename;
 
 - (void)saveMetadata;
+- (void)deleteFiles;
 
 @end

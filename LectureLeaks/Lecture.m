@@ -37,7 +37,7 @@
     NSString* path = [documentsDirectory stringByAppendingPathComponent:filename];
 
     
-    NSDictionary *metadata = [[NSDictionary alloc] initWithContentsOfFile:path];
+    NSDictionary *metadata = [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
     Lecture *newLecture = [[[self alloc] init] autorelease];
     NSString *prefix = [[filename componentsSeparatedByString:@"."] objectAtIndex:0];
     
@@ -58,7 +58,7 @@
     NSString *metadataPath = [documentsDirectory stringByAppendingPathComponent:metadataFileName];
     
     
-    NSMutableDictionary *metadata = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *metadata = [[[NSMutableDictionary alloc] init] autorelease];
     [metadata setObject:title forKey:@"title"];
     [metadata setObject:className forKey:@"className"];
     [metadata setObject:school forKey:@"school"];
@@ -67,6 +67,18 @@
     else
         [metadata setObject:@"nil" forKey:@"submitDate"];
     [metadata writeToFile:metadataPath atomically:YES];
+}
+
+-(void)deleteFiles
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+    NSString *documentsDirectoryPath = [paths objectAtIndex:0];
+    NSString *cafPath = [documentsDirectoryPath stringByAppendingPathComponent: fileName];
+    NSString *plistPath = [cafPath stringByReplacingOccurrencesOfString:@"caf" withString:@"plist"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:cafPath error:nil];
+    [fileManager removeItemAtPath:plistPath error:nil];
 }
 
 -(void)dealloc
