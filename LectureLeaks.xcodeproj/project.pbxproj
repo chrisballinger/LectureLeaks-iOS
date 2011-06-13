@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D91F378B139ECFB5007D2B9D /* RecordingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D91F3789139ECFB5007D2B9D /* RecordingViewController.mm */; };
 		D91F378C139ECFB5007D2B9D /* RecordingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91F378A139ECFB5007D2B9D /* RecordingViewController.xib */; };
-		D91F37A4139EDD4D007D2B9D /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D91F37A1139EDD4C007D2B9D /* AQPlayer.mm */; };
 		D91F37A5139EDD4D007D2B9D /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = D91F37A3139EDD4D007D2B9D /* AQRecorder.mm */; };
 		D91F37B9139EE19D007D2B9D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91F37B8139EE19D007D2B9D /* AudioToolbox.framework */; };
 		D92B82CD13A09BB7001A254A /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B82CC13A09BB7001A254A /* Lecture.m */; };
@@ -74,8 +73,6 @@
 		D91F3788139ECFB5007D2B9D /* RecordingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingViewController.h; sourceTree = "<group>"; };
 		D91F3789139ECFB5007D2B9D /* RecordingViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordingViewController.mm; sourceTree = "<group>"; };
 		D91F378A139ECFB5007D2B9D /* RecordingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordingViewController.xib; sourceTree = "<group>"; };
-		D91F37A0139EDD4C007D2B9D /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
-		D91F37A1139EDD4C007D2B9D /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; };
 		D91F37A2139EDD4C007D2B9D /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
 		D91F37A3139EDD4D007D2B9D /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; };
 		D91F37B8139EE19D007D2B9D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -185,8 +182,6 @@
 		D91F37A6139EDD54007D2B9D /* AQ Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D91F37A0139EDD4C007D2B9D /* AQPlayer.h */,
-				D91F37A1139EDD4C007D2B9D /* AQPlayer.mm */,
 				D91F37A2139EDD4C007D2B9D /* AQRecorder.h */,
 				D91F37A3139EDD4D007D2B9D /* AQRecorder.mm */,
 			);
@@ -395,7 +390,6 @@
 				D960FFD1139DBE4300CD6795 /* AboutViewController.mm in Sources */,
 				D960FFD7139DC1E400CD6795 /* ScheduleViewController.mm in Sources */,
 				D91F378B139ECFB5007D2B9D /* RecordingViewController.mm in Sources */,
-				D91F37A4139EDD4D007D2B9D /* AQPlayer.mm in Sources */,
 				D91F37A5139EDD4D007D2B9D /* AQRecorder.mm in Sources */,
 				D92B82CD13A09BB7001A254A /* Lecture.m in Sources */,
 				D92B82D213A0A950001A254A /* LecturePlayerViewController.m in Sources */,
