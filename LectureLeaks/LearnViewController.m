@@ -8,6 +8,8 @@
 
 #import "LearnViewController.h"
 #import "RecordingsListViewController.h"
+#import "ASIHTTPRequest.h"
+#import "JSONKit.h"
 
 #define kCellIdentifier @"Cell"
 
@@ -48,24 +50,64 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSURL *url = [NSURL URLWithString:@"http://lectureleaks.pagekite.me/api4/schools/"];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setDelegate:self];
+    [request startAsynchronous]; 
         
     contentArray = [[NSMutableArray alloc] init];
     NSMutableArray *myRecordings = [[NSMutableArray alloc] init];
     [myRecordings addObject:@"My Recordings"];
-    NSMutableArray *featured = [[NSMutableArray alloc] init];
-    [featured addObject:@"Massachusetts Institute of Technology"];
-    [featured addObject:@"Yale University"];
-    NSMutableArray *allSchools = [[NSMutableArray alloc] init];
-    [allSchools addObject:@"Bob Jones University"];
-    [allSchools addObject:@"Barbara's Beauty School"];
-    [allSchools addObject:@"School of Hard Knocks"];
-    
+        
     [contentArray addObject:myRecordings];
-    [contentArray addObject:featured];
-    [contentArray addObject:allSchools];
     
     self.title = @"Learn";
 
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    // Use when fetching binary data
+    NSData *jsonData = [request responseData];
+    
+    JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
+    NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
+    
+    NSMutableArray *featuredSchools = [[NSMutableArray alloc] init];
+    NSMutableArray *allSchools = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [items count]; i++)
+    {
+        NSDictionary *tmp = [items objectAtIndex:i];
+        NSDictionary *tmp2 = [tmp objectForKey:@"fields"];
+        NSString *name = [tmp2 objectForKey:@"name"];
+        NSNumber *featured = [tmp2 objectForKey:@"featured"];
+        if([featured boolValue])
+        {
+            [featuredSchools addObject:name];
+        }
+        else
+        {
+            [allSchools addObject:name];
+        }
+            
+    }
+    
+    [contentArray addObject:featuredSchools];
+    [contentArray addObject:allSchools];
+    [items release];
+    
+    [self.tableView reloadData];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error = [request error];
+    NSLog(@"%@",error);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"A network error has occurred. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    [alert release];
 }
 
 - (void)viewDidUnload

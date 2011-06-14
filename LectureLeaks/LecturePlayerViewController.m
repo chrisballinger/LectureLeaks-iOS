@@ -131,8 +131,11 @@
     
     if(player.duration != 0)
         self.playerSlider.value = player.currentTime / player.duration;
-    else
+    if(player.currentTime == 0)
+    {
         stopButton.enabled = NO;
+        playButton.title = @"Play";
+    }
 }
 
 - (IBAction)seek:(id)sender 
