@@ -1,20 +1,15 @@
 //
-//  SchoolViewController.m
+//  CourseViewController.m
 //  LectureLeaks
 //
-//  Created by Christopher Ballinger on 6/13/11.
+//  Created by Christopher Ballinger on 6/14/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SchoolViewController.h"
-#import "SubjectViewController.h"
-#import "ASIHTTPRequest.h"
-#import "JSONKit.h"
+#import "CourseViewController.h"
 
-@implementation SchoolViewController
 
-@synthesize schoolName;
-@synthesize contentList;
+@implementation CourseViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -49,48 +44,6 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.pagekite.me/api4/school/%@/",schoolName];
-    urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSURL *url = [NSURL URLWithString:urlString];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request setDelegate:self];
-    [request startAsynchronous]; 
-    
-    contentList = [[NSMutableArray alloc] init];
-
-    self.title = schoolName;
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    // Use when fetching binary data
-    NSData *jsonData = [request responseData];
-    
-    JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
-    NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
-    
-    for(int i = 0; i < [items count]; i++)
-    {
-        NSDictionary *tmp = [items objectAtIndex:i];
-        NSDictionary *fields = [tmp objectForKey:@"fields"];
-        NSString *subject = [fields objectForKey:@"subject"];
-        if(subject)
-            [contentList addObject:subject];
-    }
-    
-    [items release];
-    
-    [self.tableView reloadData];
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    NSError *error = [request error];
-    NSLog(@"%@",error);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"A network error has occurred. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    [alert release];
 }
 
 - (void)viewDidUnload
@@ -128,11 +81,18 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 0;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [contentList count];
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,8 +105,6 @@
     }
     
     // Configure the cell...
-    cell.textLabel.text = [contentList objectAtIndex:indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -194,11 +152,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubjectViewController *subjectController = [[SubjectViewController alloc] init];
-    subjectController.subjectName = [contentList objectAtIndex:indexPath.row];
-    subjectController.schoolName = self.schoolName;
-    [self.navigationController pushViewController:subjectController animated:YES];
-    [subjectController release];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     [detailViewController release];
+     */
 }
 
 @end

@@ -11,23 +11,29 @@
 
 @interface Lecture : NSObject 
 {
-    NSString *title;
-    NSString *className;
+    NSString *name;
+    NSString *professor;
+    NSString *course;
     NSString *school;
-    NSString *fileName;
+    NSString *subject;
+    NSString *tags;
+    NSURL *url;
     NSDate *date;
     NSDate *submitDate;
 } 
 
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *className;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *course;
+@property (nonatomic, retain) NSString *professor;
 @property (nonatomic, retain) NSString *school;
-@property (nonatomic, retain) NSString *fileName;
+@property (nonatomic, retain) NSString *subject;
+@property (nonatomic, retain) NSString *tags;
+@property (nonatomic, retain) NSURL *url;
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) NSDate *submitDate;
 
-+ (id)lectureWithTitle:(NSString*)title className:(NSString*)className school:(NSString*)school fileName:(NSString*)fileName date:(NSDate*)date submitDate:(NSDate*)submitDate;
-+ (id)lectureWithFile:(NSString*)filename;
++ (id)lectureWithName:(NSString*)name course:(NSString*)course professor:(NSString*)professor school:(NSString*)school subject:(NSString*)subject tags:(NSString*)tags url:(NSURL*)url date:(NSDate*)date submitDate:(NSDate*)submitDate;
++ (id)lectureWithFile:(NSString*)fileName;
 
 - (void)saveMetadata;
 - (void)deleteFiles;

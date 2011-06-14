@@ -135,8 +135,12 @@
             NSDate* date = [NSDate date];
             time_t unixTime = (time_t) [date timeIntervalSince1970];
             NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];        
+            NSString* path = [documentsDirectory stringByAppendingPathComponent:currentFileName];
+            NSURL *url = [NSURL fileURLWithPath:path];
             
-            lecture = [Lecture lectureWithTitle:titleTextField.text className:classTextField.text school:schoolTextField.text fileName:currentFileName date:date submitDate:nil];
+            lecture = [Lecture lectureWithName:titleTextField.text course:classTextField.text professor:nil school:schoolTextField.text subject:nil tags:nil url:url date:date submitDate:nil];
             [lecture saveMetadata];
             [lecture retain];
             UIColor *grey = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];

@@ -63,19 +63,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    titleLabel.text = lecture.title;
-    classLabel.text = lecture.className;
+    titleLabel.text = lecture.name;
+    classLabel.text = lecture.course;
     schoolLabel.text = lecture.school;
     dateLabel.text = [lecture.date description];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];     
-    
-    NSString* path = [documentsDirectory stringByAppendingPathComponent:lecture.fileName];
-    NSURL *url = [NSURL fileURLWithPath:path];
-    
+        
 	NSError *error;
-	player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	player = [[AVAudioPlayer alloc] initWithContentsOfURL:lecture.url error:&error];
     
 	if (player == nil)
 		NSLog(@"%@",[error description]);

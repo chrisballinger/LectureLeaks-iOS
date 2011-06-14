@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SchoolViewController.h"
 
-
-@interface SubjectViewController : UITableViewController {
-    
+@interface SubjectViewController : SchoolViewController {
+    NSString *subjectName;
 }
+
+@property (nonatomic, retain) NSString *subjectName;
 
 @end

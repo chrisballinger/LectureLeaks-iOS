@@ -66,7 +66,7 @@
     
     lecture = [self.listContent objectAtIndex:indexPath.row];
     
-	cell.textLabel.text = lecture.title;
+	cell.textLabel.text = lecture.name;
 	return cell;
 }
 
@@ -79,7 +79,7 @@
 	Lecture *lecture = nil;
     lecture = [self.listContent objectAtIndex:indexPath.row];
     
-	lecturePlayerController.title = lecture.title;
+	lecturePlayerController.title = lecture.name;
     lecturePlayerController.lecture = lecture;
     
     [[self navigationController] pushViewController:lecturePlayerController animated:YES];
