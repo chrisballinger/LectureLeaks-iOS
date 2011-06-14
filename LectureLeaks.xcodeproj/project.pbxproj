@@ -56,8 +56,6 @@
 		D95DB04F13A2B458009ED227 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB04E13A2B457009ED227 /* EventKitUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D95DB08713A2C58F009ED227 /* libKal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB08613A2C58F009ED227 /* libKal.a */; };
 		D95DB08B13A2C5E6009ED227 /* Kal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D95DB08A13A2C5E6009ED227 /* Kal.bundle */; };
-		D95DB09313A2C766009ED227 /* ScheduleNotSupportedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95DB09113A2C765009ED227 /* ScheduleNotSupportedViewController.m */; };
-		D95DB09413A2C766009ED227 /* ScheduleNotSupportedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95DB09213A2C765009ED227 /* ScheduleNotSupportedViewController.xib */; };
 		D95DB0A913A2D0F3009ED227 /* EventKitDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D95DB0A813A2D0F2009ED227 /* EventKitDataSource.m */; };
 		D960FFA5139DB6EC00CD6795 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA4139DB6EC00CD6795 /* UIKit.framework */; };
 		D960FFA7139DB6EC00CD6795 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D960FFA6139DB6EC00CD6795 /* Foundation.framework */; };
@@ -166,9 +164,6 @@
 		D95DB07D13A2C48F009ED227 /* Kal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kal.xcodeproj; path = Kal/Kal.xcodeproj; sourceTree = "<group>"; };
 		D95DB08613A2C58F009ED227 /* libKal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libKal.a; sourceTree = SOURCE_ROOT; };
 		D95DB08A13A2C5E6009ED227 /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Kal.bundle; path = Kal/Kal.bundle; sourceTree = "<group>"; };
-		D95DB09013A2C764009ED227 /* ScheduleNotSupportedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleNotSupportedViewController.h; sourceTree = "<group>"; };
-		D95DB09113A2C765009ED227 /* ScheduleNotSupportedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleNotSupportedViewController.m; sourceTree = "<group>"; };
-		D95DB09213A2C765009ED227 /* ScheduleNotSupportedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleNotSupportedViewController.xib; sourceTree = "<group>"; };
 		D95DB0A713A2D0F1009ED227 /* EventKitDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventKitDataSource.h; sourceTree = "<group>"; };
 		D95DB0A813A2D0F2009ED227 /* EventKitDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventKitDataSource.m; sourceTree = "<group>"; };
 		D960FFA0139DB6EC00CD6795 /* LectureLeaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LectureLeaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,8 +325,6 @@
 			children = (
 				D95DB0A713A2D0F1009ED227 /* EventKitDataSource.h */,
 				D95DB0A813A2D0F2009ED227 /* EventKitDataSource.m */,
-				D95DB09013A2C764009ED227 /* ScheduleNotSupportedViewController.h */,
-				D95DB09113A2C765009ED227 /* ScheduleNotSupportedViewController.m */,
 				D960FFD4139DC1E400CD6795 /* ScheduleViewController.h */,
 				D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */,
 			);
@@ -433,7 +426,6 @@
 				D92B82E713A13C94001A254A /* gradient_background.png */,
 				D95555A113A7234800F28716 /* CourseViewController.xib */,
 				D955559113A70C4400F28716 /* SchoolViewController.xib */,
-				D95DB09213A2C765009ED227 /* ScheduleNotSupportedViewController.xib */,
 				D92B82F913A1684A001A254A /* LearnViewController.xib */,
 				D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */,
 				D960FFB6139DB6EC00CD6795 /* MainWindow.xib */,
@@ -532,7 +524,6 @@
 				D95DB04913A2AD43009ED227 /* icon.png in Resources */,
 				D95DB04B13A2AD4F009ED227 /* icon@2x.png in Resources */,
 				D95DB08B13A2C5E6009ED227 /* Kal.bundle in Resources */,
-				D95DB09413A2C766009ED227 /* ScheduleNotSupportedViewController.xib in Resources */,
 				D955559313A70C4400F28716 /* SchoolViewController.xib in Resources */,
 				D955559613A71AFA00F28716 /* logo.png in Resources */,
 				D955559713A71AFA00F28716 /* logo@2x.png in Resources */,
@@ -559,7 +550,6 @@
 				D92B82CD13A09BB7001A254A /* Lecture.m in Sources */,
 				D92B82D213A0A950001A254A /* LecturePlayerViewController.m in Sources */,
 				D92B82FA13A1684A001A254A /* LearnViewController.m in Sources */,
-				D95DB09313A2C766009ED227 /* ScheduleNotSupportedViewController.m in Sources */,
 				D95DB0A913A2D0F3009ED227 /* EventKitDataSource.m in Sources */,
 				D955557613A6FBE500F28716 /* ASIAuthenticationDialog.m in Sources */,
 				D955557713A6FBE500F28716 /* ASIDataCompressor.m in Sources */,
