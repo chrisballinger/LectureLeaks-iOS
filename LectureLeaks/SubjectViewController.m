@@ -7,6 +7,7 @@
 //
 
 #import "SubjectViewController.h"
+#import "CourseViewController.h"
 #import "ASIHTTPRequest.h"
 #import "JSONKit.h"
 
@@ -86,6 +87,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CourseViewController *courseController = [[CourseViewController alloc] init];
+    courseController.courseName = [contentList objectAtIndex:indexPath.row];
+    courseController.schoolName = self.schoolName;
+    courseController.subjectName = self.subjectName;
+    [self.navigationController pushViewController:courseController animated:YES];
+    [courseController release];
 }
 
 @end

@@ -20,6 +20,7 @@
     NSURL *url;
     NSDate *date;
     NSDate *submitDate;
+    NSNumber *approved;
 } 
 
 @property (nonatomic, retain) NSString *name;
@@ -31,8 +32,10 @@
 @property (nonatomic, retain) NSURL *url;
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) NSDate *submitDate;
+@property (nonatomic, retain) NSNumber *approved;
+@property BOOL isRemoteFile;
 
-+ (id)lectureWithName:(NSString*)name course:(NSString*)course professor:(NSString*)professor school:(NSString*)school subject:(NSString*)subject tags:(NSString*)tags url:(NSURL*)url date:(NSDate*)date submitDate:(NSDate*)submitDate;
++ (id)lectureWithName:(NSString*)name course:(NSString*)course professor:(NSString*)professor school:(NSString*)school subject:(NSString*)subject tags:(NSString*)tags url:(NSURL*)url approved:(NSNumber*)approved date:(NSDate*)date submitDate:(NSDate*)submitDate;
 + (id)lectureWithFile:(NSString*)fileName;
 
 - (void)saveMetadata;

@@ -10,7 +10,10 @@
 #import "SubjectViewController.h"
 
 @interface CourseViewController : SubjectViewController {
-    
+    NSString* courseName;
 }
+
+@property (nonatomic, retain) NSString* courseName;
+
 
 @end

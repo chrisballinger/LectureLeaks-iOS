@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SchoolViewController.h"
 
-@interface SubjectViewController : SchoolViewController {
+@interface SubjectViewController : SchoolViewController 
+{
     NSString *subjectName;
 }
 

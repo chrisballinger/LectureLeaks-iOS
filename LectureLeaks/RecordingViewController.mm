@@ -140,7 +140,7 @@
             NSString* path = [documentsDirectory stringByAppendingPathComponent:currentFileName];
             NSURL *url = [NSURL fileURLWithPath:path];
             
-            lecture = [Lecture lectureWithName:titleTextField.text course:classTextField.text professor:nil school:schoolTextField.text subject:nil tags:nil url:url date:date submitDate:nil];
+            lecture = [Lecture lectureWithName:titleTextField.text course:classTextField.text professor:nil school:schoolTextField.text subject:nil tags:nil url:url approved:FALSE date:date submitDate:nil];
             [lecture saveMetadata];
             [lecture retain];
             UIColor *grey = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];

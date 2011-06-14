@@ -20,8 +20,10 @@
 @synthesize url;
 @synthesize date;
 @synthesize submitDate;
+@synthesize approved;
+@synthesize isRemoteFile;
 
-+ (id)lectureWithName:(NSString*)name course:(NSString*)course professor:(NSString*)professor school:(NSString*)school subject:(NSString*)subject tags:(NSString*)tags url:(NSURL*)url date:(NSDate*)date submitDate:(NSDate*)submitDate
++ (id)lectureWithName:(NSString*)name course:(NSString*)course professor:(NSString*)professor school:(NSString*)school subject:(NSString*)subject tags:(NSString*)tags url:(NSURL*)url approved:(NSNumber*)approved date:(NSDate*)date submitDate:(NSDate*)submitDate
 {
     Lecture *newLecture = [[[self alloc] init] autorelease];
     newLecture.name = name;
@@ -33,6 +35,7 @@
     newLecture.url = url;
     newLecture.date = date;
     newLecture.submitDate = submitDate;
+    newLecture.approved = approved;
     return newLecture;
 }
 
@@ -58,6 +61,7 @@
     newLecture.url = url;
     newLecture.date = [[NSDate alloc] initWithTimeIntervalSince1970:[prefix doubleValue]];
     newLecture.submitDate = [metadata objectForKey:@"submitDate"];
+    newLecture.isRemoteFile = NO;
     
     return newLecture;
 }

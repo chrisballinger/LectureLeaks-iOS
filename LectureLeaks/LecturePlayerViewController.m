@@ -38,7 +38,7 @@
     [classLabel release];
     [schoolLabel release];
     [dateLabel release];
-    [player release];
+    [localPlayer release];
     [lecture release];
     [durationLabel release];
     [currentTimeLabel release];
@@ -69,22 +69,34 @@
     dateLabel.text = [lecture.date description];
         
 	NSError *error;
-	player = [[AVAudioPlayer alloc] initWithContentsOfURL:lecture.url error:&error];
+    if(!lecture.isRemoteFile)
+    {
+        localPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:lecture.url error:&error];
+        
+        if (localPlayer == nil)
+            NSLog(@"%@",[error description]);
+        
+        
+        
+        playerUpdateTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+                                                            selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
+        int hour, minute, second;
+        NSTimeInterval elapsedTime = localPlayer.duration;
+        hour = elapsedTime / 3600;
+        minute = (elapsedTime - hour * 3600) / 60;
+        second = (elapsedTime - hour * 3600 - minute * 60);
+        durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+    }
+    else
+    {
+        remotePlayer = [[AVPlayer alloc] initWithURL:lecture.url];
+        NSLog(@"remotePlayer: %@", remotePlayer.error);
+        [remotePlayer play];
+    }
     
-	if (player == nil)
-		NSLog(@"%@",[error description]);
 
+    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
-
-    playerUpdateTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
-                                                selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
-    int hour, minute, second;
-	NSTimeInterval elapsedTime = player.duration;
-	hour = elapsedTime / 3600;
-	minute = (elapsedTime - hour * 3600) / 60;
-	second = (elapsedTime - hour * 3600 - minute * 60);
-	durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
-    
     self.title = @"Lecture";
 
 }
@@ -117,15 +129,15 @@
 - (void) updateElapsedTime:(NSTimer *) timer
 {
 	int hour, minute, second;
-	NSTimeInterval elapsedTime = player.currentTime;
+	NSTimeInterval elapsedTime = localPlayer.currentTime;
 	hour = elapsedTime / 3600;
 	minute = (elapsedTime - hour * 3600) / 60;
 	second = (elapsedTime - hour * 3600 - minute * 60);
 	currentTimeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
     
-    if(player.duration != 0)
-        self.playerSlider.value = player.currentTime / player.duration;
-    if(player.currentTime == 0)
+    if(localPlayer.duration != 0)
+        self.playerSlider.value = localPlayer.currentTime / localPlayer.duration;
+    if(localPlayer.currentTime == 0)
     {
         stopButton.enabled = NO;
         playButton.title = @"Play";
@@ -134,9 +146,9 @@
 
 - (IBAction)seek:(id)sender 
 {
-    player.currentTime = self.playerSlider.value * player.duration;
+    localPlayer.currentTime = self.playerSlider.value * localPlayer.duration;
     [self updateElapsedTime:nil];
-    [player play];
+    [localPlayer play];
 }
 
 
@@ -145,23 +157,23 @@
 
 - (IBAction)playPressed:(id)sender 
 {
-    if(![player isPlaying])
+    if(![localPlayer isPlaying])
     {
-        [player play];
+        [localPlayer play];
         playButton.title = @"Pause";
         stopButton.enabled = YES;
     }
     else
     {
-        [player pause];
+        [localPlayer pause];
         playButton.title = @"Play";
     }
 }
 
 - (IBAction)stopPressed:(id)sender 
 {
-    [player stop];
-    player.currentTime = 0;
+    [localPlayer stop];
+    localPlayer.currentTime = 0;
     [self updateElapsedTime:nil];
     stopButton.enabled = NO;
     playButton.title = @"Play";

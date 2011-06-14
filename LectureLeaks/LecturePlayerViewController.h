@@ -13,7 +13,8 @@
 
 @interface LecturePlayerViewController : UIViewController {
     Lecture* lecture;
-    AVAudioPlayer* player;
+    AVAudioPlayer* localPlayer;
+    AVPlayer* remotePlayer;
     UILabel *titleLabel;
     UILabel *classLabel;
     UILabel *schoolLabel;

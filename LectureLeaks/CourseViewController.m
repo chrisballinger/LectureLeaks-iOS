@@ -7,9 +7,14 @@
 //
 
 #import "CourseViewController.h"
-
+#import "Lecture.h"
+#import "JSONKit.h"
+#import "ASIHTTPRequest.h"
+#import "LecturePlayerViewController.h"
 
 @implementation CourseViewController
+
+@synthesize courseName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,60 +44,68 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.pagekite.me/api4/school/%@/subject/%@/course/%@/",schoolName,subjectName,courseName];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setDelegate:self];
+    [request startAsynchronous]; 
+    
+    contentList = [[NSMutableArray alloc] init];
+    
+    self.title = courseName;
 }
 
-- (void)viewDidUnload
+- (void)requestFinished:(ASIHTTPRequest *)request
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    // Use when fetching binary data
+    NSData *jsonData = [request responseData];
+    
+    JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
+    NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
+    Lecture *lecture;
+    NSString *prefix = @"http://lectureleaks.pagekite.me/uploads/";
+    
+    for(int i = 0; i < [items count]; i++)
+    {
+        NSDictionary *tmp = [items objectAtIndex:i];
+        NSDictionary *fields = [tmp objectForKey:@"fields"];
+        NSString *school = schoolName;
+        NSString *name = [fields objectForKey:@"name"];
+        if(name)
+        {
+            NSString *tags = [fields objectForKey:@"tags"];
+            NSString *professor = [fields objectForKey:@"professor"];
+            NSString *course = courseName;
+            NSString *doc_file = [fields objectForKey:@"doc_file"];
+            NSString *dateString = [fields objectForKey:@"date"];
+            NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+            dateFormatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+            NSDate *date = [dateFormatter dateFromString:dateString];
+            
+            NSNumber *approved = [fields objectForKey:@"approved"];
+            NSString *subject = subjectName;
+            
+            NSURL* url = [NSURL URLWithString:[prefix stringByAppendingString:doc_file]];
+            
+            lecture = [Lecture lectureWithName:name course:course professor:professor school:school subject:subject tags:tags url:url approved:approved date:date submitDate:nil];
+            lecture.isRemoteFile = YES;
+            [contentList addObject:lecture];
+        }
+    }
+    
+    [items release];
+    
+    [self.tableView reloadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [contentList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,7 +118,9 @@
     }
     
     // Configure the cell...
-    
+    cell.textLabel.text = [[contentList objectAtIndex:indexPath.row] name];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     return cell;
 }
 
@@ -152,14 +167,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    LecturePlayerViewController *lecturePlayerController = [[LecturePlayerViewController alloc] init];
+    lecturePlayerController.lecture = [contentList objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:lecturePlayerController animated:YES];
+    [lecturePlayerController release];
 }
 
 @end
