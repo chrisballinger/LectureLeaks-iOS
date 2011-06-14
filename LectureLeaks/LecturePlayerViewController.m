@@ -207,5 +207,6 @@
     [self updateElapsedTime:nil];
     stopButton.enabled = NO;
     playButton.title = @"Play";
+    isPlaying = NO;
 }
 @end
