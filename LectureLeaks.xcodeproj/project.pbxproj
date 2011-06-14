@@ -40,6 +40,10 @@
 		D955558A13A7021D00F28716 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D955558913A7021D00F28716 /* SystemConfiguration.framework */; };
 		D955558C13A7022500F28716 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D955558B13A7022500F28716 /* MobileCoreServices.framework */; };
 		D955558E13A7024A00F28716 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D955558D13A7024A00F28716 /* libz.1.2.3.dylib */; };
+		D955559213A70C4400F28716 /* SchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D955559013A70C4400F28716 /* SchoolViewController.m */; };
+		D955559313A70C4400F28716 /* SchoolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D955559113A70C4400F28716 /* SchoolViewController.xib */; };
+		D955559613A71AFA00F28716 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D955559413A71AFA00F28716 /* logo.png */; };
+		D955559713A71AFA00F28716 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D955559513A71AFA00F28716 /* logo@2x.png */; };
 		D95DB04913A2AD43009ED227 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D95DB04813A2AD43009ED227 /* icon.png */; };
 		D95DB04B13A2AD4F009ED227 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D95DB04A13A2AD4F009ED227 /* icon@2x.png */; };
 		D95DB04D13A2B453009ED227 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB04C13A2B453009ED227 /* EventKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -136,6 +140,11 @@
 		D955558913A7021D00F28716 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D955558B13A7022500F28716 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D955558D13A7024A00F28716 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		D955558F13A70C4300F28716 /* SchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolViewController.h; sourceTree = "<group>"; };
+		D955559013A70C4400F28716 /* SchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolViewController.m; sourceTree = "<group>"; };
+		D955559113A70C4400F28716 /* SchoolViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SchoolViewController.xib; sourceTree = "<group>"; };
+		D955559413A71AFA00F28716 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		D955559513A71AFA00F28716 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		D95DB04813A2AD43009ED227 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		D95DB04A13A2AD4F009ED227 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		D95DB04C13A2B453009ED227 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -211,6 +220,8 @@
 				D95DB09113A2C765009ED227 /* ScheduleNotSupportedViewController.m */,
 				D92B82F713A16849001A254A /* LearnViewController.h */,
 				D92B82F813A16849001A254A /* LearnViewController.m */,
+				D955558F13A70C4300F28716 /* SchoolViewController.h */,
+				D955559013A70C4400F28716 /* SchoolViewController.m */,
 				D960FFD4139DC1E400CD6795 /* ScheduleViewController.h */,
 				D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */,
 				D960FFC9139DBCCD00CD6795 /* RecordingsListViewController.h */,
@@ -369,6 +380,8 @@
 		D960FFD3139DBE6300CD6795 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D955559413A71AFA00F28716 /* logo.png */,
+				D955559513A71AFA00F28716 /* logo@2x.png */,
 				D95DB04A13A2AD4F009ED227 /* icon@2x.png */,
 				D95DB04813A2AD43009ED227 /* icon.png */,
 				D92B82EF13A16383001A254A /* about@2x.png */,
@@ -380,6 +393,7 @@
 				D92B82E013A13C7A001A254A /* record.png */,
 				D92B82E113A13C7A001A254A /* schedule.png */,
 				D92B82E713A13C94001A254A /* gradient_background.png */,
+				D955559113A70C4400F28716 /* SchoolViewController.xib */,
 				D95DB09213A2C765009ED227 /* ScheduleNotSupportedViewController.xib */,
 				D92B82F913A1684A001A254A /* LearnViewController.xib */,
 				D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */,
@@ -479,6 +493,9 @@
 				D95DB04B13A2AD4F009ED227 /* icon@2x.png in Resources */,
 				D95DB08B13A2C5E6009ED227 /* Kal.bundle in Resources */,
 				D95DB09413A2C766009ED227 /* ScheduleNotSupportedViewController.xib in Resources */,
+				D955559313A70C4400F28716 /* SchoolViewController.xib in Resources */,
+				D955559613A71AFA00F28716 /* logo.png in Resources */,
+				D955559713A71AFA00F28716 /* logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +529,7 @@
 				D955557D13A6FBE500F28716 /* ASINetworkQueue.m in Sources */,
 				D955557E13A6FBE500F28716 /* Reachability.m in Sources */,
 				D955558213A6FC0C00F28716 /* JSONKit.m in Sources */,
+				D955559213A70C4400F28716 /* SchoolViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

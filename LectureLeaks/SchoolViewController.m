@@ -1,22 +1,19 @@
 //
-//  LearnViewController.m
+//  SchoolViewController.m
 //  LectureLeaks
 //
-//  Created by Christopher Ballinger on 6/9/11.
+//  Created by Christopher Ballinger on 6/13/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "LearnViewController.h"
-#import "RecordingsListViewController.h"
 #import "SchoolViewController.h"
 #import "ASIHTTPRequest.h"
 #import "JSONKit.h"
 
-#define kCellIdentifier @"Cell"
+@implementation SchoolViewController
 
-@implementation LearnViewController
-
-@synthesize contentArray;
+@synthesize contentList;
+@synthesize schoolName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -52,19 +49,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSURL *url = [NSURL URLWithString:@"http://lectureleaks.pagekite.me/api4/schools/"];
+    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.pagekite.me/api4/school/%@/",schoolName];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSURL *url = [NSURL URLWithString:urlString];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setDelegate:self];
     [request startAsynchronous]; 
-        
-    contentArray = [[NSMutableArray alloc] init];
-    NSMutableArray *myRecordings = [[NSMutableArray alloc] init];
-    [myRecordings addObject:@"My Recordings"];
-        
-    [contentArray addObject:myRecordings];
     
-    self.title = @"Learn";
+    contentList = [[NSMutableArray alloc] init];
 
+    self.title = schoolName;
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request
@@ -75,28 +69,14 @@
     JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
     NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
     
-    NSMutableArray *featuredSchools = [[NSMutableArray alloc] init];
-    NSMutableArray *allSchools = [[NSMutableArray alloc] init];
-    
     for(int i = 0; i < [items count]; i++)
     {
         NSDictionary *tmp = [items objectAtIndex:i];
         NSDictionary *fields = [tmp objectForKey:@"fields"];
-        NSString *name = [fields objectForKey:@"name"];
-        NSNumber *featured = [fields objectForKey:@"featured"];
-        if([featured boolValue])
-        {
-            [featuredSchools addObject:name];
-        }
-        else
-        {
-            [allSchools addObject:name];
-        }
-            
+        NSString *subject = [fields objectForKey:@"subject"];
+        [contentList addObject:subject];
     }
     
-    [contentArray addObject:featuredSchools];
-    [contentArray addObject:allSchools];
     [items release];
     
     [self.tableView reloadData];
@@ -111,45 +91,62 @@
     [alert release];
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return [contentArray count];
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [[contentArray objectAtIndex:section] count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if(section == 0)
-    {
-        return @"My Recordings";
-    }
-    else if(section == 1)
-    {
-        return @"Featured";
-    }
-    else
-    {
-        return @"All Schools";
-    }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [contentList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-	if (cell == nil)
-	{
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:kCellIdentifier] autorelease];
-	}
-	
-	// get the view controller's info dictionary based on the indexPath's row
-	NSArray *section = [contentArray objectAtIndex:indexPath.section];
-	cell.textLabel.text = [section objectAtIndex:indexPath.row];
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    // Configure the cell...
+    cell.textLabel.text = [contentList objectAtIndex:indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-	return cell;
+    
+    return cell;
 }
 
 /*
@@ -203,17 +200,6 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
-    if(indexPath.section == 0 && indexPath.row == 0)
-    {
-        RecordingsListViewController *recordingListController = [[RecordingsListViewController alloc] init];
-        [self.navigationController pushViewController:recordingListController animated:YES];
-    }
-    else
-    {
-        SchoolViewController *schoolController = [[SchoolViewController alloc] init];
-        schoolController.schoolName = [((NSArray*)[contentArray objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:schoolController animated:YES];
-    }
 }
 
 @end
