@@ -13,8 +13,9 @@
 
 @interface LecturePlayerViewController : UIViewController {
     Lecture* lecture;
-    AVAudioPlayer* localPlayer;
-    AVPlayer* remotePlayer;
+    int duration;
+    BOOL isPlaying;
+    AVPlayer* player;
     UILabel *titleLabel;
     UILabel *classLabel;
     UILabel *schoolLabel;
@@ -26,6 +27,7 @@
     UISlider *playerSlider;
     UIBarButtonItem *playButton;
     UIBarButtonItem *stopButton;
+    UIBarButtonItem *submitButton;
     
 }
 @property (nonatomic, retain) Lecture* lecture;
@@ -40,6 +42,7 @@
 @property (nonatomic, retain) IBOutlet UISlider *playerSlider;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *playButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *stopButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *submitButton;
 
 - (IBAction)submitPressed:(id)sender;
 - (IBAction)playPressed:(id)sender;

@@ -49,6 +49,7 @@
 		D95555A213A7234800F28716 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95555A013A7234700F28716 /* CourseViewController.m */; };
 		D95555A313A7234800F28716 /* CourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95555A113A7234800F28716 /* CourseViewController.xib */; };
 		D95555A513A7508700F28716 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95555A413A7508600F28716 /* MediaPlayer.framework */; };
+		D95555A713A7CA4800F28716 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95555A613A7CA4700F28716 /* CoreMedia.framework */; };
 		D95DB04913A2AD43009ED227 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D95DB04813A2AD43009ED227 /* icon.png */; };
 		D95DB04B13A2AD4F009ED227 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D95DB04A13A2AD4F009ED227 /* icon@2x.png */; };
 		D95DB04D13A2B453009ED227 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB04C13A2B453009ED227 /* EventKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -157,6 +158,7 @@
 		D95555A013A7234700F28716 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
 		D95555A113A7234800F28716 /* CourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseViewController.xib; sourceTree = "<group>"; };
 		D95555A413A7508600F28716 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		D95555A613A7CA4700F28716 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D95DB04813A2AD43009ED227 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		D95DB04A13A2AD4F009ED227 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		D95DB04C13A2B453009ED227 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -199,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95555A713A7CA4800F28716 /* CoreMedia.framework in Frameworks */,
 				D95555A513A7508700F28716 /* MediaPlayer.framework in Frameworks */,
 				D955558E13A7024A00F28716 /* libz.1.2.3.dylib in Frameworks */,
 				D955558C13A7022500F28716 /* MobileCoreServices.framework in Frameworks */,
@@ -355,7 +358,6 @@
 		D960FF95139DB6EC00CD6795 = {
 			isa = PBXGroup;
 			children = (
-				D95555A413A7508600F28716 /* MediaPlayer.framework */,
 				D960FFAA139DB6EC00CD6795 /* LectureLeaks */,
 				D960FFA3139DB6EC00CD6795 /* Frameworks */,
 				D955558313A6FC4600F28716 /* External Frameworks */,
@@ -374,6 +376,8 @@
 		D960FFA3139DB6EC00CD6795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D95555A613A7CA4700F28716 /* CoreMedia.framework */,
+				D95555A413A7508600F28716 /* MediaPlayer.framework */,
 				D955558D13A7024A00F28716 /* libz.1.2.3.dylib */,
 				D955558B13A7022500F28716 /* MobileCoreServices.framework */,
 				D955558913A7021D00F28716 /* SystemConfiguration.framework */,
@@ -657,7 +661,7 @@
 					Kal,
 				);
 				INFOPLIST_FILE = "LectureLeaks/LectureLeaks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -685,7 +689,7 @@
 					Kal,
 				);
 				INFOPLIST_FILE = "LectureLeaks/LectureLeaks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

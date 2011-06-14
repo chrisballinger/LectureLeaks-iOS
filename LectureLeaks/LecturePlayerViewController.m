@@ -22,6 +22,7 @@
 @synthesize playerSlider;
 @synthesize playButton;
 @synthesize stopButton;
+@synthesize submitButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,7 +39,7 @@
     [classLabel release];
     [schoolLabel release];
     [dateLabel release];
-    [localPlayer release];
+    [player release];
     [lecture release];
     [durationLabel release];
     [currentTimeLabel release];
@@ -47,6 +48,7 @@
     [submitLabel release];
     [playButton release];
     [stopButton release];
+    [submitButton release];
     [super dealloc];
 }
 
@@ -68,37 +70,55 @@
     schoolLabel.text = lecture.school;
     dateLabel.text = [lecture.date description];
         
-	NSError *error;
-    if(!lecture.isRemoteFile)
-    {
-        localPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:lecture.url error:&error];
-        
-        if (localPlayer == nil)
-            NSLog(@"%@",[error description]);
-        
-        
-        
-        playerUpdateTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
-                                                            selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
-        int hour, minute, second;
-        NSTimeInterval elapsedTime = localPlayer.duration;
-        hour = elapsedTime / 3600;
-        minute = (elapsedTime - hour * 3600) / 60;
-        second = (elapsedTime - hour * 3600 - minute * 60);
-        durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
-    }
+    NSURL *url; 
+    if(lecture.isRemoteFile)
+        url = [NSURL URLWithString:@"http://thenewfreedom.net/zro/11-z-ro-cant_leave_drank_alone_ft_lil_o.mp3"];
     else
-    {
-        remotePlayer = [[AVPlayer alloc] initWithURL:lecture.url];
-        NSLog(@"remotePlayer: %@", remotePlayer.error);
-        [remotePlayer play];
-    }
+        url = lecture.url;
     
+    player = [[AVPlayer alloc] initWithURL:url];
+    
+    CMTime durationTime = player.currentItem.asset.duration;
+    duration = (int)CMTimeGetSeconds(durationTime);
+    
+    //NSLog(@"%@",url);
+    //NSLog(@"remotePlayer: %@", player.error);
 
+    if(lecture.isRemoteFile)
+        submitButton.enabled = NO;
+    else
+        submitButton.enabled = YES;
+
+    isPlaying = NO;
+    
+    int hour, minute, second;
+    NSTimeInterval elapsedTime = duration;
+    hour = elapsedTime / 3600;
+    minute = (elapsedTime - hour * 3600) / 60;
+    second = (elapsedTime - hour * 3600 - minute * 60);
+    durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+    
+    playerUpdateTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+                                                        selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[player currentItem]];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
     self.title = @"Lecture";
 
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    [self stopPressed:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [player pause];
+    [playerUpdateTimer invalidate];
 }
 
 - (void)viewDidUnload
@@ -113,31 +133,35 @@
     [self setSubmitLabel:nil];
     [self setPlayButton:nil];
     [self setStopButton:nil];
+    [self setSubmitButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
 // Update the call timer once a second.
 - (void) updateElapsedTime:(NSTimer *) timer
 {
 	int hour, minute, second;
-	NSTimeInterval elapsedTime = localPlayer.currentTime;
+    int currentTime;
+    
+
+    currentTime = player.currentTime.value / player.currentTime.timescale;
+
+    
+	NSTimeInterval elapsedTime = currentTime;
 	hour = elapsedTime / 3600;
 	minute = (elapsedTime - hour * 3600) / 60;
 	second = (elapsedTime - hour * 3600 - minute * 60);
 	currentTimeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
     
-    if(localPlayer.duration != 0)
-        self.playerSlider.value = localPlayer.currentTime / localPlayer.duration;
-    if(localPlayer.currentTime == 0)
+    
+    
+    if(duration != 0)
+    {
+        self.playerSlider.value = currentTime / ((float)duration);
+    }
+    if(!isPlaying)
     {
         stopButton.enabled = NO;
         playButton.title = @"Play";
@@ -146,9 +170,11 @@
 
 - (IBAction)seek:(id)sender 
 {
-    localPlayer.currentTime = self.playerSlider.value * localPlayer.duration;
+
+    float currentTime = self.playerSlider.value * duration;
+    [player seekToTime:CMTimeMakeWithSeconds(currentTime, 1)];
+
     [self updateElapsedTime:nil];
-    [localPlayer play];
 }
 
 
@@ -157,23 +183,27 @@
 
 - (IBAction)playPressed:(id)sender 
 {
-    if(![localPlayer isPlaying])
+    if(!isPlaying)
     {
-        [localPlayer play];
+        [player play];
         playButton.title = @"Pause";
         stopButton.enabled = YES;
+        isPlaying = YES;
     }
     else
     {
-        [localPlayer pause];
+        [player pause];
         playButton.title = @"Play";
+        isPlaying = NO;
     }
 }
 
 - (IBAction)stopPressed:(id)sender 
 {
-    [localPlayer stop];
-    localPlayer.currentTime = 0;
+
+    [player pause];
+    [player seekToTime:CMTimeMakeWithSeconds(0, 1)];
+
     [self updateElapsedTime:nil];
     stopButton.enabled = NO;
     playButton.title = @"Play";
