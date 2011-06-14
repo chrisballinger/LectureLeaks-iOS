@@ -23,6 +23,8 @@
     UILabel *submitLabel;
     NSTimer *playerUpdateTimer;
     UISlider *playerSlider;
+    UIBarButtonItem *playButton;
+    UIBarButtonItem *stopButton;
     
 }
 @property (nonatomic, retain) Lecture* lecture;
@@ -35,6 +37,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *currentTimeLabel;
 @property (nonatomic, retain)     NSTimer *playerUpdateTimer;
 @property (nonatomic, retain) IBOutlet UISlider *playerSlider;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *playButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *stopButton;
 
 - (IBAction)submitPressed:(id)sender;
 - (IBAction)playPressed:(id)sender;

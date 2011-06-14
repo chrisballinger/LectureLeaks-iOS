@@ -20,6 +20,8 @@
 @synthesize lecture;
 @synthesize playerUpdateTimer;
 @synthesize playerSlider;
+@synthesize playButton;
+@synthesize stopButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,6 +45,8 @@
     [playerUpdateTimer release];
     [playerSlider release];
     [submitLabel release];
+    [playButton release];
+    [stopButton release];
     [super dealloc];
 }
 
@@ -101,6 +105,8 @@
     [self setCurrentTimeLabel:nil];
     [self setPlayerSlider:nil];
     [self setSubmitLabel:nil];
+    [self setPlayButton:nil];
+    [self setStopButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -125,6 +131,8 @@
     
     if(player.duration != 0)
         self.playerSlider.value = player.currentTime / player.duration;
+    else
+        stopButton.enabled = NO;
 }
 
 - (IBAction)seek:(id)sender 
@@ -143,10 +151,13 @@
     if(![player isPlaying])
     {
         [player play];
+        playButton.title = @"Pause";
+        stopButton.enabled = YES;
     }
     else
     {
         [player pause];
+        playButton.title = @"Play";
     }
 }
 
@@ -155,5 +166,7 @@
     [player stop];
     player.currentTime = 0;
     [self updateElapsedTime:nil];
+    stopButton.enabled = NO;
+    playButton.title = @"Play";
 }
 @end
