@@ -10,7 +10,6 @@
 		D91F378B139ECFB5007D2B9D /* RecordingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D91F3789139ECFB5007D2B9D /* RecordingViewController.mm */; };
 		D91F378C139ECFB5007D2B9D /* RecordingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91F378A139ECFB5007D2B9D /* RecordingViewController.xib */; };
 		D91F37A5139EDD4D007D2B9D /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = D91F37A3139EDD4D007D2B9D /* AQRecorder.mm */; };
-		D91F37B9139EE19D007D2B9D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91F37B8139EE19D007D2B9D /* AudioToolbox.framework */; };
 		D92B82CD13A09BB7001A254A /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B82CC13A09BB7001A254A /* Lecture.m */; };
 		D92B82D213A0A950001A254A /* LecturePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B82D013A0A94F001A254A /* LecturePlayerViewController.m */; };
 		D92B82D313A0A950001A254A /* LecturePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */; };
@@ -39,7 +38,6 @@
 		D955558813A701FC00F28716 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D955558713A701FC00F28716 /* CFNetwork.framework */; };
 		D955558A13A7021D00F28716 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D955558913A7021D00F28716 /* SystemConfiguration.framework */; };
 		D955558C13A7022500F28716 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D955558B13A7022500F28716 /* MobileCoreServices.framework */; };
-		D955558E13A7024A00F28716 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D955558D13A7024A00F28716 /* libz.1.2.3.dylib */; };
 		D955559213A70C4400F28716 /* SchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D955559013A70C4400F28716 /* SchoolViewController.m */; };
 		D955559313A70C4400F28716 /* SchoolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D955559113A70C4400F28716 /* SchoolViewController.xib */; };
 		D955559613A71AFA00F28716 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D955559413A71AFA00F28716 /* logo.png */; };
@@ -48,12 +46,11 @@
 		D955559C13A71C8200F28716 /* SubjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D955559A13A71C8200F28716 /* SubjectViewController.xib */; };
 		D95555A213A7234800F28716 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95555A013A7234700F28716 /* CourseViewController.m */; };
 		D95555A313A7234800F28716 /* CourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95555A113A7234800F28716 /* CourseViewController.xib */; };
-		D95555A513A7508700F28716 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95555A413A7508600F28716 /* MediaPlayer.framework */; };
 		D95555A713A7CA4800F28716 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95555A613A7CA4700F28716 /* CoreMedia.framework */; };
 		D95DB04913A2AD43009ED227 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D95DB04813A2AD43009ED227 /* icon.png */; };
 		D95DB04B13A2AD4F009ED227 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D95DB04A13A2AD4F009ED227 /* icon@2x.png */; };
-		D95DB04D13A2B453009ED227 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB04C13A2B453009ED227 /* EventKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		D95DB04F13A2B458009ED227 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB04E13A2B457009ED227 /* EventKitUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D95DB04D13A2B453009ED227 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB04C13A2B453009ED227 /* EventKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		D95DB04F13A2B458009ED227 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB04E13A2B457009ED227 /* EventKitUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		D95DB08713A2C58F009ED227 /* libKal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D95DB08613A2C58F009ED227 /* libKal.a */; };
 		D95DB08B13A2C5E6009ED227 /* Kal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D95DB08A13A2C5E6009ED227 /* Kal.bundle */; };
 		D95DB0A913A2D0F3009ED227 /* EventKitDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D95DB0A813A2D0F2009ED227 /* EventKitDataSource.m */; };
@@ -72,6 +69,8 @@
 		D960FFD2139DBE4300CD6795 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD0139DBE4300CD6795 /* AboutViewController.xib */; };
 		D960FFD7139DC1E400CD6795 /* ScheduleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */; };
 		D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */; };
+		D9B0A4A513A8434A0011379B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B0A4A413A8434A0011379B /* libz.dylib */; };
+		D9B0A4A713A8478C0011379B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91F37B8139EE19D007D2B9D /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,7 +142,6 @@
 		D955558713A701FC00F28716 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D955558913A7021D00F28716 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D955558B13A7022500F28716 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		D955558D13A7024A00F28716 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		D955558F13A70C4300F28716 /* SchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolViewController.h; sourceTree = "<group>"; };
 		D955559013A70C4400F28716 /* SchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolViewController.m; sourceTree = "<group>"; };
 		D955559113A70C4400F28716 /* SchoolViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SchoolViewController.xib; sourceTree = "<group>"; };
@@ -189,6 +187,7 @@
 		D960FFD4139DC1E400CD6795 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScheduleViewController.mm; sourceTree = "<group>"; };
 		D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleViewController.xib; sourceTree = "<group>"; };
+		D9B0A4A413A8434A0011379B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,9 +195,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9B0A4A713A8478C0011379B /* AudioToolbox.framework in Frameworks */,
+				D9B0A4A513A8434A0011379B /* libz.dylib in Frameworks */,
 				D95555A713A7CA4800F28716 /* CoreMedia.framework in Frameworks */,
-				D95555A513A7508700F28716 /* MediaPlayer.framework in Frameworks */,
-				D955558E13A7024A00F28716 /* libz.1.2.3.dylib in Frameworks */,
 				D955558C13A7022500F28716 /* MobileCoreServices.framework in Frameworks */,
 				D955558A13A7021D00F28716 /* SystemConfiguration.framework in Frameworks */,
 				D955558813A701FC00F28716 /* CFNetwork.framework in Frameworks */,
@@ -206,7 +205,6 @@
 				D95DB04F13A2B458009ED227 /* EventKitUI.framework in Frameworks */,
 				D95DB04D13A2B453009ED227 /* EventKit.framework in Frameworks */,
 				D92B82D513A0ACC3001A254A /* AVFoundation.framework in Frameworks */,
-				D91F37B9139EE19D007D2B9D /* AudioToolbox.framework in Frameworks */,
 				D960FFA5139DB6EC00CD6795 /* UIKit.framework in Frameworks */,
 				D960FFA7139DB6EC00CD6795 /* Foundation.framework in Frameworks */,
 				D960FFA9139DB6EC00CD6795 /* CoreGraphics.framework in Frameworks */,
@@ -369,9 +367,9 @@
 		D960FFA3139DB6EC00CD6795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9B0A4A413A8434A0011379B /* libz.dylib */,
 				D95555A613A7CA4700F28716 /* CoreMedia.framework */,
 				D95555A413A7508600F28716 /* MediaPlayer.framework */,
-				D955558D13A7024A00F28716 /* libz.1.2.3.dylib */,
 				D955558B13A7022500F28716 /* MobileCoreServices.framework */,
 				D955558913A7021D00F28716 /* SystemConfiguration.framework */,
 				D955558713A701FC00F28716 /* CFNetwork.framework */,
@@ -465,6 +463,9 @@
 /* Begin PBXProject section */
 		D960FF97139DB6EC00CD6795 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = D960FF9A139DB6EC00CD6795 /* Build configuration list for PBXProject "LectureLeaks" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -615,6 +616,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -629,6 +631,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -656,11 +659,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-weak_library",
-					/usr/lib/libSystem.B.dylib,
-				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -684,11 +683,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-weak_library",
-					/usr/lib/libSystem.B.dylib,
-				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

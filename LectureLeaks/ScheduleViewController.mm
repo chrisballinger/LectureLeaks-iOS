@@ -90,7 +90,7 @@
 {
     // iOS 4+ only
     EKEventEditViewController *eventViewController = [[EKEventEditViewController alloc] init];
-    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    EKEventStore *eventStore = [[[EKEventStore alloc] init] autorelease];
     
     eventViewController.eventStore = eventStore;
     eventViewController.editViewDelegate = self;

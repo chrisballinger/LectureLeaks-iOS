@@ -62,6 +62,7 @@
     [myRecordings addObject:@"My Recordings"];
         
     [contentArray addObject:myRecordings];
+    [myRecordings release];
     
     self.title = @"Learn";
 
@@ -98,6 +99,8 @@
     [contentArray addObject:featuredSchools];
     [contentArray addObject:allSchools];
     [items release];
+    [featuredSchools release];
+    [allSchools release];
     
     [self.tableView reloadData];
 }
@@ -141,7 +144,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
 	if (cell == nil)
 	{
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:kCellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier] autorelease];
 	}
 	
 	// get the view controller's info dictionary based on the indexPath's row
@@ -195,24 +198,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
     if(indexPath.section == 0 && indexPath.row == 0)
     {
         RecordingsListViewController *recordingListController = [[RecordingsListViewController alloc] init];
         [self.navigationController pushViewController:recordingListController animated:YES];
+        [recordingListController release];
     }
     else
     {
         SchoolViewController *schoolController = [[SchoolViewController alloc] init];
         schoolController.schoolName = [((NSArray*)[contentArray objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:schoolController animated:YES];
+        [schoolController release];
     }
 }
 

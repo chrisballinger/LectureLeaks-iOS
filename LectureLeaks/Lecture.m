@@ -59,7 +59,7 @@
     newLecture.subject = [metadata objectForKey:@"subject"];
     newLecture.tags = [metadata objectForKey:@"tags"];
     newLecture.url = url;
-    newLecture.date = [[NSDate alloc] initWithTimeIntervalSince1970:[prefix doubleValue]];
+    newLecture.date = [[[NSDate alloc] initWithTimeIntervalSince1970:[prefix doubleValue]] autorelease];
     newLecture.submitDate = [metadata objectForKey:@"submitDate"];
     newLecture.isRemoteFile = NO;
     
