@@ -22,6 +22,7 @@
 @synthesize submitDate;
 @synthesize approved;
 @synthesize isRemoteFile;
+@synthesize plistName;
 
 + (id)lectureWithName:(NSString*)name course:(NSString*)course professor:(NSString*)professor school:(NSString*)school subject:(NSString*)subject tags:(NSString*)tags url:(NSURL*)url approved:(NSNumber*)approved date:(NSDate*)date submitDate:(NSDate*)submitDate
 {
@@ -51,7 +52,7 @@
     Lecture *newLecture = [[[self alloc] init] autorelease];
     NSString *prefix = [[fileName componentsSeparatedByString:@"."] objectAtIndex:0];
 
-    
+        
     newLecture.name = [metadata objectForKey:@"name"];
     newLecture.course = [metadata objectForKey:@"course"];
     newLecture.professor = [metadata objectForKey:@"professor"];
@@ -59,9 +60,10 @@
     newLecture.subject = [metadata objectForKey:@"subject"];
     newLecture.tags = [metadata objectForKey:@"tags"];
     newLecture.url = url;
-    newLecture.date = [[[NSDate alloc] initWithTimeIntervalSince1970:[prefix doubleValue]] autorelease];
+    newLecture.date = [[[NSDate alloc] initWithTimeIntervalSince1970:[prefix intValue]] autorelease];
     newLecture.submitDate = [metadata objectForKey:@"submitDate"];
     newLecture.isRemoteFile = NO;
+    newLecture.plistName = [prefix stringByAppendingString:@".plist"];
     
     return newLecture;
 }
@@ -72,7 +74,6 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *metadataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    
     
     NSMutableDictionary *metadata = [[[NSMutableDictionary alloc] init] autorelease];
     [metadata setObject:name forKey:@"name"];
@@ -87,8 +88,8 @@
 
 -(void)deleteFiles
 {
-    NSString *fileName = [NSString stringWithFormat:@"%f.plist", [date timeIntervalSince1970]];
-    NSString *metadataFileName = [fileName stringByReplacingOccurrencesOfString:@"caf" withString:@"plist"];
+    NSString *metadataFileName = plistName; 
+    NSString *fileName = [metadataFileName stringByReplacingOccurrencesOfString:@".plist" withString:@".caf"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [paths objectAtIndex:0];
     NSString *cafPath = [documentsDirectoryPath stringByAppendingPathComponent: fileName];
