@@ -70,30 +70,23 @@
     classLabel.text = lecture.course;
     schoolLabel.text = lecture.school;
     dateLabel.text = [lecture.date description];
-        
+    
     NSURL *url; 
     if(lecture.isRemoteFile)
-        url = [NSURL URLWithString:@"http://thenewfreedom.net/zro/11-z-ro-cant_leave_drank_alone_ft_lil_o.mp3"];
+    url = [NSURL URLWithString:@"http://thenewfreedom.net/zro/11-z-ro-cant_leave_drank_alone_ft_lil_o.mp3"];
     else
         url = lecture.url;
     
     player = [[AVPlayer alloc] initWithURL:url];
     
-    duration = (player.currentItem.duration.value / player.currentItem.duration.timescale);
-
+    
     if(lecture.isRemoteFile)
         submitButton.enabled = NO;
     else
         submitButton.enabled = YES;
-
+    
     isPlaying = NO;
     
-    int hour, minute, second;
-    NSTimeInterval elapsedTime = duration;
-    hour = elapsedTime / 3600;
-    minute = (elapsedTime - hour * 3600) / 60;
-    second = (elapsedTime - hour * 3600 - minute * 60);
-    durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
     
     playerUpdateTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
                                                         selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
@@ -105,7 +98,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
     self.title = @"Lecture";
-
+    
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
@@ -139,38 +132,48 @@
 // Update the call timer once a second.
 - (void) updateElapsedTime:(NSTimer *) timer
 {
-	int hour, minute, second;
-    int currentTime;
-    
-
-    currentTime = player.currentTime.value / player.currentTime.timescale;
-
-    
-	NSTimeInterval elapsedTime = currentTime;
-	hour = elapsedTime / 3600;
-	minute = (elapsedTime - hour * 3600) / 60;
-	second = (elapsedTime - hour * 3600 - minute * 60);
-	currentTimeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
-    
-    
-    
-    if(duration != 0)
+    if(player.currentItem.status == AVPlayerItemStatusReadyToPlay)
     {
-        self.playerSlider.value = currentTime / ((float)duration);
+        
+        int currentTime;
+        
+        
+        currentTime = player.currentTime.value / player.currentTime.timescale;
+        CMTime itemDuration = player.currentItem.asset.duration;
+        duration = itemDuration.value / itemDuration.timescale;
+        
+        
+        [self updateLabel:currentTimeLabel withTime:currentTime];
+        [self updateLabel:durationLabel withTime:duration];
+        
+        if(duration != 0)
+        {
+            self.playerSlider.value = currentTime / ((float)duration);
+        }
+        if(!isPlaying)
+        {
+            stopButton.enabled = NO;
+            playButton.title = @"Play";
+            playButton.enabled = YES;
+        }
     }
-    if(!isPlaying)
-    {
-        stopButton.enabled = NO;
-        playButton.title = @"Play";
-    }
+}
+
+-(void) updateLabel:(UILabel*)label withTime:(NSTimeInterval)time
+{
+    int hour, minute, second;
+	hour = time / 3600;
+	minute = (time - hour * 3600) / 60;
+	second = (time - hour * 3600 - minute * 60);
+	label.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
 }
 
 - (IBAction)seek:(id)sender 
 {
-
+    
     float currentTime = self.playerSlider.value * duration;
     [player seekToTime:CMTimeMakeWithSeconds(currentTime, 1)];
-
+    
     [self updateElapsedTime:nil];
 }
 
@@ -197,10 +200,10 @@
 
 - (IBAction)stopPressed:(id)sender 
 {
-
+    
     [player pause];
     [player seekToTime:CMTimeMakeWithSeconds(0, 1)];
-
+    
     [self updateElapsedTime:nil];
     stopButton.enabled = NO;
     playButton.title = @"Play";

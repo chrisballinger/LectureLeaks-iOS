@@ -49,6 +49,7 @@
 - (IBAction)playPressed:(id)sender;
 - (IBAction)stopPressed:(id)sender;
 - (void) updateElapsedTime:(NSTimer *) timer;
+- (void) updateLabel:(UILabel*)label withTime:(NSTimeInterval)time;
 - (IBAction)seek:(id)sender;
 
 @end

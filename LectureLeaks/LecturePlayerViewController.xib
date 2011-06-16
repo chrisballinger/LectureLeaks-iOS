@@ -283,7 +283,8 @@
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIBarButtonItem" id="560049645">
-								<string key="IBUITitle">Play</string>
+								<bool key="IBUIEnabled">NO</bool>
+								<string key="IBUITitle">Loading...</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<float key="IBUIWidth">96</float>
 								<int key="IBUIStyle">1</int>
