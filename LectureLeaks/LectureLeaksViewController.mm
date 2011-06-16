@@ -71,27 +71,23 @@
     RecordingViewController *recordController = [[RecordingViewController alloc] init];
     
     [self.navigationController pushViewController:recordController animated:YES];
-    [recordController release];
 }
 
 - (IBAction)learnPressed:(id)sender 
 {
     LearnViewController *learnController = [[LearnViewController alloc] init];
     [self.navigationController pushViewController:learnController animated:YES];
-    [learnController release];
 }
 
 - (IBAction)schedulePressed:(id)sender 
 {
     ScheduleViewController *scheduleController = [[ScheduleViewController alloc] init];
     [self.navigationController pushViewController:scheduleController animated:YES];
-    [scheduleController release];
 }
 
 - (IBAction)aboutPressed:(id)sender 
 {
     AboutViewController *aboutController = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:aboutController animated:YES];
-    [aboutController release];
 }
 @end

@@ -11,14 +11,6 @@
 #import "LectureLeaksViewController.h"
 #import "RecordingViewController.h"
 
-void interruptionListener(	void *	inClientData,
-                          UInt32	inInterruptionState);
-void propListener(	void *                  inClientData,
-                  AudioSessionPropertyID	inID,
-                  UInt32                  inDataSize,
-                  const void *            inData);
-
-
 @implementation LectureLeaksAppDelegate
 
 

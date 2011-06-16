@@ -120,9 +120,6 @@
         [navController pushViewController:recordingListController animated:NO];
         [navController pushViewController:lecturePlayerController animated:YES];
         [lecture release];
-        [learnController release];
-        [recordingListController release];
-        [lecturePlayerController release];
     }
     else
     {

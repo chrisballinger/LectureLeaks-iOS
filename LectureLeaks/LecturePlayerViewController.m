@@ -23,6 +23,7 @@
 @synthesize playButton;
 @synthesize stopButton;
 @synthesize submitButton;
+@synthesize player;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,11 +79,7 @@
     
     player = [[AVPlayer alloc] initWithURL:url];
     
-    CMTime durationTime = player.currentItem.asset.duration;
-    duration = (int)CMTimeGetSeconds(durationTime);
-    
-    //NSLog(@"%@",url);
-    //NSLog(@"remotePlayer: %@", player.error);
+    duration = (player.currentItem.duration.value / player.currentItem.duration.timescale);
 
     if(lecture.isRemoteFile)
         submitButton.enabled = NO;

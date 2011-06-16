@@ -43,6 +43,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *playButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *stopButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *submitButton;
+@property (nonatomic, retain)     AVPlayer* player;
 
 - (IBAction)submitPressed:(id)sender;
 - (IBAction)playPressed:(id)sender;
