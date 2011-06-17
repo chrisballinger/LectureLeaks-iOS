@@ -74,6 +74,10 @@
 		D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */; };
 		D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */; };
 		D9DCB28413AAE7E900584F12 /* FirstLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */; };
+		D9DCB29013AAF39100584F12 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DCB28E13AAF39000584F12 /* SettingsViewController.m */; };
+		D9DCB29113AAF39100584F12 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB28F13AAF39000584F12 /* SettingsViewController.xib */; };
+		D9DCB29413AAF9B600584F12 /* gears.png in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB29213AAF9B600584F12 /* gears.png */; };
+		D9DCB29513AAF9B600584F12 /* gears@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB29313AAF9B600584F12 /* gears@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +198,11 @@
 		D9DCB28013AAE7E900584F12 /* FirstLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstLaunchViewController.h; path = ../FirstLaunchViewController.h; sourceTree = "<group>"; };
 		D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstLaunchViewController.m; path = ../FirstLaunchViewController.m; sourceTree = "<group>"; };
 		D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FirstLaunchViewController.xib; path = ../FirstLaunchViewController.xib; sourceTree = "<group>"; };
+		D9DCB28D13AAF39000584F12 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		D9DCB28E13AAF39000584F12 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		D9DCB28F13AAF39000584F12 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		D9DCB29213AAF9B600584F12 /* gears.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gears.png; sourceTree = "<group>"; };
+		D9DCB29313AAF9B600584F12 /* gears@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +237,8 @@
 				D92B82CC13A09BB7001A254A /* Lecture.m */,
 				D960FFB3139DB6EC00CD6795 /* LectureLeaksAppDelegate.h */,
 				D960FFB4139DB6EC00CD6795 /* LectureLeaksAppDelegate.mm */,
+				D9DCB28D13AAF39000584F12 /* SettingsViewController.h */,
+				D9DCB28E13AAF39000584F12 /* SettingsViewController.m */,
 				D960FFB9139DB6EC00CD6795 /* LectureLeaksViewController.h */,
 				D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.mm */,
 				D9DCB28013AAE7E900584F12 /* FirstLaunchViewController.h */,
@@ -418,7 +429,8 @@
 		D960FFD3139DBE6300CD6795 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */,
+				D9DCB29213AAF9B600584F12 /* gears.png */,
+				D9DCB29313AAF9B600584F12 /* gears@2x.png */,
 				D955559413A71AFA00F28716 /* logo.png */,
 				D955559513A71AFA00F28716 /* logo@2x.png */,
 				D95DB04A13A2AD4F009ED227 /* icon@2x.png */,
@@ -432,6 +444,8 @@
 				D92B82E013A13C7A001A254A /* record.png */,
 				D92B82E113A13C7A001A254A /* schedule.png */,
 				D92B82E713A13C94001A254A /* gradient_background.png */,
+				D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */,
+				D9DCB28F13AAF39000584F12 /* SettingsViewController.xib */,
 				D95555A113A7234800F28716 /* CourseViewController.xib */,
 				D955559113A70C4400F28716 /* SchoolViewController.xib */,
 				D92B82F913A1684A001A254A /* LearnViewController.xib */,
@@ -538,6 +552,9 @@
 				D955559C13A71C8200F28716 /* SubjectViewController.xib in Resources */,
 				D95555A313A7234800F28716 /* CourseViewController.xib in Resources */,
 				D9DCB28413AAE7E900584F12 /* FirstLaunchViewController.xib in Resources */,
+				D9DCB29113AAF39100584F12 /* SettingsViewController.xib in Resources */,
+				D9DCB29413AAF9B600584F12 /* gears.png in Resources */,
+				D9DCB29513AAF9B600584F12 /* gears@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +591,7 @@
 				D955559B13A71C8200F28716 /* SubjectViewController.m in Sources */,
 				D95555A213A7234800F28716 /* CourseViewController.m in Sources */,
 				D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */,
+				D9DCB29013AAF39100584F12 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

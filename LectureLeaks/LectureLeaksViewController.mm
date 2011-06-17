@@ -11,6 +11,7 @@
 #import "LearnViewController.h"
 #import "AboutViewController.h"
 #import "ScheduleViewController.h"
+#import "SettingsViewController.h"
 
 @implementation LectureLeaksViewController
 
@@ -74,5 +75,10 @@
 {
     AboutViewController *aboutController = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:aboutController animated:YES];
+}
+
+- (IBAction)settingsPressed:(id)sender {
+    SettingsViewController *settingsController = [[SettingsViewController alloc] init];
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 @end

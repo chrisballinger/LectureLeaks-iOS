@@ -16,5 +16,6 @@
 - (IBAction)learnPressed:(id)sender;
 - (IBAction)schedulePressed:(id)sender;
 - (IBAction)aboutPressed:(id)sender;
+- (IBAction)settingsPressed:(id)sender;
 
 @end
