@@ -9,6 +9,7 @@
 #import "LectureLeaksAppDelegate.h"
 
 #import "LectureLeaksViewController.h"
+#import "FirstLaunchViewController.h"
 #import "RecordingViewController.h"
 
 @implementation LectureLeaksAppDelegate
@@ -102,10 +103,26 @@ void propListener(	void *                  inClientData,
         error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, propListener, self);
         if (error) NSLog(@"ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
     }
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"data.plist"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    UIViewController *rootController;
+    
+    if ([fileManager fileExistsAtPath: path])
+    {
+        rootController = self.viewController;
+    }
+    else
+    {
+        FirstLaunchViewController *firstLaunchController = [[FirstLaunchViewController alloc] init];
+        rootController = firstLaunchController;
+    }
 
     
-    navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
-    self.viewController.navigationController = self.navigationController;
+    navigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
         
     self.window.rootViewController = self.navigationController;
 

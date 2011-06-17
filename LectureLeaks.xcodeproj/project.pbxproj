@@ -72,6 +72,8 @@
 		D960FFD2139DBE4300CD6795 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD0139DBE4300CD6795 /* AboutViewController.xib */; };
 		D960FFD7139DC1E400CD6795 /* ScheduleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */; };
 		D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */; };
+		D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */; };
+		D9DCB28413AAE7E900584F12 /* FirstLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +191,9 @@
 		D960FFD4139DC1E400CD6795 /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScheduleViewController.mm; sourceTree = "<group>"; };
 		D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleViewController.xib; sourceTree = "<group>"; };
+		D9DCB28013AAE7E900584F12 /* FirstLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstLaunchViewController.h; path = ../FirstLaunchViewController.h; sourceTree = "<group>"; };
+		D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstLaunchViewController.m; path = ../FirstLaunchViewController.m; sourceTree = "<group>"; };
+		D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FirstLaunchViewController.xib; path = ../FirstLaunchViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +230,8 @@
 				D960FFB4139DB6EC00CD6795 /* LectureLeaksAppDelegate.mm */,
 				D960FFB9139DB6EC00CD6795 /* LectureLeaksViewController.h */,
 				D960FFBA139DB6EC00CD6795 /* LectureLeaksViewController.mm */,
+				D9DCB28013AAE7E900584F12 /* FirstLaunchViewController.h */,
+				D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */,
 				D955559E13A71D9600F28716 /* Schedule */,
 				D955559D13A71D6A00F28716 /* Learn */,
 				D960FFCE139DBE4300CD6795 /* AboutViewController.h */,
@@ -411,6 +418,7 @@
 		D960FFD3139DBE6300CD6795 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */,
 				D955559413A71AFA00F28716 /* logo.png */,
 				D955559513A71AFA00F28716 /* logo@2x.png */,
 				D95DB04A13A2AD4F009ED227 /* icon@2x.png */,
@@ -529,6 +537,7 @@
 				D955559713A71AFA00F28716 /* logo@2x.png in Resources */,
 				D955559C13A71C8200F28716 /* SubjectViewController.xib in Resources */,
 				D95555A313A7234800F28716 /* CourseViewController.xib in Resources */,
+				D9DCB28413AAE7E900584F12 /* FirstLaunchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +573,7 @@
 				D955559213A70C4400F28716 /* SchoolViewController.m in Sources */,
 				D955559B13A71C8200F28716 /* SubjectViewController.m in Sources */,
 				D95555A213A7234800F28716 /* CourseViewController.m in Sources */,
+				D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

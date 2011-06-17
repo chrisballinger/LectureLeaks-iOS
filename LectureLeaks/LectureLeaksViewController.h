@@ -12,8 +12,6 @@
     
 }
 
-@property (nonatomic, retain) UINavigationController *navigationController;
-
 - (IBAction)recordPressed:(id)sender;
 - (IBAction)learnPressed:(id)sender;
 - (IBAction)schedulePressed:(id)sender;
