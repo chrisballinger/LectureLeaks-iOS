@@ -75,6 +75,13 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
     self.title = @"Record";
 
+    NSString* fileName = @"data.plist";
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];        
+    NSString *metadataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    NSDictionary *metadata = [[[NSDictionary alloc] initWithContentsOfFile:metadataPath] autorelease];
+    
+    schoolTextField.text = [metadata objectForKey:@"school"];
 }
 
 - (void)viewDidUnload
