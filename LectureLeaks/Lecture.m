@@ -44,7 +44,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];        
     NSString* path = [documentsDirectory stringByAppendingPathComponent:fileName];
-    NSString* cafPath = [path stringByReplacingOccurrencesOfString:@".plist" withString:@".caf"];
+    NSString* cafPath = [path stringByReplacingOccurrencesOfString:@".audio.plist" withString:@".caf"];
     NSURL *url = [NSURL fileURLWithPath:cafPath];
     
     NSDictionary *metadata = [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
@@ -68,7 +68,7 @@
 
 -(void)saveMetadata
 {
-    NSString *fileName = [NSString stringWithFormat:@"%d.plist", (int)[date timeIntervalSince1970]];
+    NSString *fileName = [NSString stringWithFormat:@"%d.audio.plist", (int)[date timeIntervalSince1970]];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *metadataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
@@ -88,7 +88,7 @@
 -(void)deleteFiles
 {
     NSString *fileName = [NSString stringWithFormat:@"%d.caf", (int)[date timeIntervalSince1970]];
-    NSString *metadataFileName = [fileName stringByReplacingOccurrencesOfString:@".caf" withString:@".plist"];
+    NSString *metadataFileName = [fileName stringByReplacingOccurrencesOfString:@".caf" withString:@".audio.plist"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [paths objectAtIndex:0];
     NSString *cafPath = [documentsDirectoryPath stringByAppendingPathComponent: fileName];

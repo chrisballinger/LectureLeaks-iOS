@@ -29,7 +29,7 @@
         
         while ((filename = [direnum nextObject] )) 
         {
-            if ([filename hasSuffix:@".plist"]) 
+            if ([filename hasSuffix:@".audio.plist"]) 
             {                                   
                 newLecture = [Lecture lectureWithFile:filename];
                 [lectureList addObject:newLecture];
