@@ -94,6 +94,11 @@
     
     eventViewController.eventStore = eventStore;
     eventViewController.editViewDelegate = self;
+    
+    EKRecurrenceRule *recur = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly interval:1 end:nil];
+    eventViewController.event.recurrenceRule = recur;
+    eventViewController.event.alarms = [NSArray arrayWithObject:[EKAlarm alarmWithRelativeOffset:-5*60]];
+    
     [self presentModalViewController: eventViewController animated:YES];
     [eventViewController release];
 }

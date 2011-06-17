@@ -10,6 +10,7 @@
 #import "LecturePlayerViewController.h"
 #import "LearnViewController.h"
 #import "RecordingsListViewController.h"
+#import <EventKit/EventKit.h>
 
 @implementation RecordingViewController
 
@@ -82,6 +83,16 @@
     NSDictionary *metadata = [[[NSDictionary alloc] initWithContentsOfFile:metadataPath] autorelease];
     
     schoolTextField.text = [metadata objectForKey:@"school"];
+    
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    int secondsBefore = 15*60;
+    int secondsAfter = 60*60;
+    
+    NSArray *matchingEvents = [eventStore eventsMatchingPredicate:[eventStore predicateForEventsWithStartDate:[NSDate dateWithTimeIntervalSinceNow:secondsBefore] endDate:[NSDate dateWithTimeIntervalSinceNow:secondsAfter] calendars:nil]];
+    if(matchingEvents)
+        classTextField.text = [[matchingEvents objectAtIndex:0] title];
+    
+    [eventStore release];
 }
 
 - (void)viewDidUnload
