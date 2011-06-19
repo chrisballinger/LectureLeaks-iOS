@@ -20,5 +20,6 @@
 @property (nonatomic, retain) NSString *metadataPath;
 
 - (IBAction)savePressed:(id)sender;
+- (IBAction)cancelPressed:(id)sender;
 
 @end
