@@ -1,6 +1,6 @@
 //
 //  Lecture.m
-//  CopRecorder
+//  LectureLeaks
 //
 //  Created by Christopher Ballinger on 6/9/11.
 //  Copyright 2011. All rights reserved.

@@ -10,6 +10,7 @@
 #import "LecturePlayerViewController.h"
 #import "LearnViewController.h"
 #import "RecordingsListViewController.h"
+#import "LectureLeaksViewController.h"
 #import <EventKit/EventKit.h>
 
 @implementation RecordingViewController
@@ -123,21 +124,21 @@
         
         [recordingTimer invalidate];
         
-        UINavigationController *navController = self.navigationController;
-        
         LearnViewController *learnController = [[LearnViewController alloc] init];
         RecordingsListViewController *recordingListController = [[RecordingsListViewController alloc] init];
         LecturePlayerViewController *lecturePlayerController = [[LecturePlayerViewController alloc] init];
+        LectureLeaksViewController *dashboardController  = [[LectureLeaksViewController alloc] init];
         
         lecturePlayerController.lecture = self.lecture;
-        
-        [[self retain] autorelease];
-        
-        [navController popViewControllerAnimated:NO];
-        [navController pushViewController:learnController animated:NO];
-        [navController pushViewController:recordingListController animated:NO];
-        [navController pushViewController:lecturePlayerController animated:YES];
+                
+        NSArray *controllers = [NSArray arrayWithObjects:dashboardController,learnController,recordingListController,lecturePlayerController,nil];
+        [self.navigationController setViewControllers:controllers animated:YES];
+         
         [lecture release];
+        [learnController release];
+        [recordingListController release];
+        [lecturePlayerController release];
+        [dashboardController release];
     }
     else
     {
