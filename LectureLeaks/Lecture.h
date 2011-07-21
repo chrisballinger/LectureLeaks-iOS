@@ -40,5 +40,7 @@
 
 - (void)saveMetadata;
 - (void)deleteFiles;
+- (void)submitRecordingWithDelegate:(id)delegate;
+
 
 @end

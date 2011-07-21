@@ -7,7 +7,7 @@
 //
 
 #import "LecturePlayerViewController.h"
-
+#import "ASIFormDataRequest.h"
 
 @implementation LecturePlayerViewController
 @synthesize titleLabel;
@@ -17,6 +17,8 @@
 @synthesize currentTimeLabel;
 @synthesize dateLabel;
 @synthesize submitLabel;
+@synthesize submitProgressLabel;
+@synthesize progressView;
 @synthesize lecture;
 @synthesize playerUpdateTimer;
 @synthesize playerSlider;
@@ -50,6 +52,8 @@
     [playButton release];
     [stopButton release];
     [submitButton release];
+    [progressView release];
+    [submitProgressLabel release];
     [super dealloc];
 }
 
@@ -70,11 +74,13 @@
     classLabel.text = lecture.course;
     schoolLabel.text = lecture.school;
     dateLabel.text = [lecture.date description];
+    if(lecture.submitDate)
+        submitLabel.text = [lecture.submitDate description];
     
     NSURL *url; 
-    if(lecture.isRemoteFile)
+    /*if(lecture.isRemoteFile)
     url = [NSURL URLWithString:@"http://thenewfreedom.net/zro/11-z-ro-cant_leave_drank_alone_ft_lil_o.mp3"];
-    else
+    else*/
         url = lecture.url;
     
     player = [[AVPlayer alloc] initWithURL:url];
@@ -124,6 +130,8 @@
     [self setPlayButton:nil];
     [self setStopButton:nil];
     [self setSubmitButton:nil];
+    [self setProgressView:nil];
+    [self setSubmitProgressLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -178,7 +186,20 @@
 }
 
 
-- (IBAction)submitPressed:(id)sender {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1)
+    {
+        [lecture submitRecordingWithDelegate:self];
+        submitProgressLabel.text = @"Submitting...";
+        submitProgressLabel.textColor = [UIColor whiteColor];
+    }
+}
+
+- (IBAction)submitPressed:(id)sender 
+{
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Submit to LectureLeaks" message:@"Would you like to submit your recording to www.lectureleaks.com?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:nil] autorelease];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert show];
 }
 
 - (IBAction)playPressed:(id)sender 
@@ -209,4 +230,32 @@
     playButton.title = @"Play";
     isPlaying = NO;
 }
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Complete" message:@"The recording was uploaded successfully to www.lectureleaks.com" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+    
+    // Set TRUE if file was sent properly
+    lecture.submitDate = [NSDate date];
+    [lecture saveMetadata];
+    
+    submitProgressLabel.text = @"Submission successful!";
+    submitProgressLabel.textColor = [UIColor greenColor];
+    submitLabel.text = [lecture.submitDate description];
+    progressView.hidden = TRUE;
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Error" message:@"Upload failed, please check your internet connection and try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+    
+    submitProgressLabel.text = @"Submission failed!";
+    submitProgressLabel.textColor = [UIColor redColor];
+    progressView.hidden = TRUE;
+}
+
 @end

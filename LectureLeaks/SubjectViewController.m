@@ -49,7 +49,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.pagekite.me/api4/school/%@/subject/%@/",schoolName,subjectName];
+    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.com/api4/school/%@/subject/%@/",schoolName,subjectName];
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSURL *url = [NSURL URLWithString:urlString];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -65,15 +65,23 @@
 {
     // Use when fetching binary data
     NSData *jsonData = [request responseData];
-    
+    NSLog(@"%@",[request responseString]);
+
+    NSString *fix = [[request responseString] stringByReplacingOccurrencesOfString:@"'" withString:@"\""];
+    fix = [fix stringByReplacingOccurrencesOfString:@"\": u\""withString:@"\": \""];
+    NSLog(@"%@",fix);
     JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
-    NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
+    //NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
+    NSArray *items = [[jsonKitDecoder objectWithUTF8String:(const unsigned char*)[fix UTF8String] length:[fix length]] retain];
+
+    //JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
+    //NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
     
     for(int i = 0; i < [items count]; i++)
     {
         NSDictionary *tmp = [items objectAtIndex:i];
-        NSDictionary *fields = [tmp objectForKey:@"fields"];
-        NSString *course = [fields objectForKey:@"course"];
+        //NSDictionary *fields = [tmp objectForKey:@"fields"];
+        NSString *course = [tmp objectForKey:@"course__name"];
         if(course)
             [contentList addObject:course];
     }

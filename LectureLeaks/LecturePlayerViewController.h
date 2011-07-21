@@ -29,7 +29,11 @@
     UIBarButtonItem *stopButton;
     UIBarButtonItem *submitButton;
     
+    UIProgressView *progressView;
+    UILabel *submitProgressLabel;
 }
+@property (nonatomic, retain) IBOutlet UILabel *submitProgressLabel;
+@property (nonatomic, retain) IBOutlet UIProgressView *progressView;
 @property (nonatomic, retain) Lecture* lecture;
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property (nonatomic, retain) IBOutlet UILabel *classLabel;

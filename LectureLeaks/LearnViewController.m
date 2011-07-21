@@ -71,6 +71,7 @@
 {
     // Use when fetching binary data
     NSData *jsonData = [request responseData];
+    NSLog(@"%@",[request responseString]);
     
     JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
     NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];

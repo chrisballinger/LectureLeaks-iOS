@@ -44,7 +44,7 @@
 {
     [super viewDidLoad];
 
-    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.pagekite.me/api4/school/%@/subject/%@/course/%@/",schoolName,subjectName,courseName];
+    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.com/api4/school/%@/subject/%@/course/%@/",schoolName,subjectName,courseName];
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSURL *url = [NSURL URLWithString:urlString];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -60,11 +60,13 @@
 {
     // Use when fetching binary data
     NSData *jsonData = [request responseData];
+    NSLog(@"%@",[request responseString]);
+
     
     JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
     NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
     Lecture *lecture;
-    NSString *prefix = @"http://lectureleaks.pagekite.me/uploads/";
+    NSString *prefix = @"http://lectureleaks.com/uploads/";
     
     for(int i = 0; i < [items count]; i++)
     {

@@ -50,7 +50,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.pagekite.me/api4/school/%@/",schoolName];
+    NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.com/api4/school/%@/",schoolName];
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSURL *url = [NSURL URLWithString:urlString];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -65,18 +65,37 @@
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     // Use when fetching binary data
-    NSData *jsonData = [request responseData];
-    
+    NSData *jsonData = [[request responseData] retain];
+    NSLog(@"%@",[request responseString]);
+
+    NSString *fix = [[request responseString] stringByReplacingOccurrencesOfString:@"'" withString:@"\""];
+    fix = [fix stringByReplacingOccurrencesOfString:@"\": u\""withString:@"\": \""];
+    NSLog(@"%@",fix);
     JSONDecoder *jsonKitDecoder = [JSONDecoder decoder];
-    NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
+    //NSArray *items = [[jsonKitDecoder objectWithData:jsonData] retain];
+    NSArray *items = [[jsonKitDecoder objectWithUTF8String:(const unsigned char*)[fix UTF8String] length:[fix length]] retain];
     
-    for(int i = 0; i < [items count]; i++)
+    NSLog(@"%d",[items count]);
+    if([items count] > 0)
     {
-        NSDictionary *tmp = [items objectAtIndex:i];
-        NSDictionary *fields = [tmp objectForKey:@"fields"];
-        NSString *subject = [fields objectForKey:@"subject"];
+        for(int i = 0; i < [items count]; i++)
+        {
+            NSDictionary *tmp = [items objectAtIndex:i];
+            //NSDictionary *fields = [tmp objectForKey:@"fields"];
+            NSString *subject = [tmp objectForKey:@"subject__name"];
+            NSLog(@"%@",subject);
+            if(subject)
+                [contentList addObject:subject];
+        }
+    }
+    else
+    {
+        NSDictionary *tmp = [[jsonKitDecoder objectWithData:jsonData] retain];
+        NSString *subject = [tmp objectForKey:@"subject__name"];
+        NSLog(@"%d %@",[tmp count], subject);
         if(subject)
             [contentList addObject:subject];
+        [tmp release];
     }
     
     [items release];
