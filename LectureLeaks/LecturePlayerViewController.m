@@ -8,6 +8,7 @@
 
 #import "LecturePlayerViewController.h"
 #import "ASIFormDataRequest.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation LecturePlayerViewController
 @synthesize titleLabel;
@@ -104,6 +105,11 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
     self.title = @"Lecture";
+    
+    UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
+    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);    
+    UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+    AudioSessionSetProperty (kAudioSessionProperty_OverrideAudioRoute,sizeof (audioRouteOverride),&audioRouteOverride);
     
 }
 
