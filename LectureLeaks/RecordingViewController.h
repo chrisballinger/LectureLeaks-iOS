@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AQRecorder.h"
+//#import "AQRecorder.h"
 #import "Lecture.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface RecordingViewController : UIViewController <UITextFieldDelegate>
 {
@@ -20,8 +21,9 @@
     NSTimer *recordingTimer;
     NSTimeInterval startTime;
     Lecture *lecture;
-@public
-    AQRecorder *recorder;
+//@public
+//    AQRecorder *recorder;
+    NSDate* date;
 }
 @property (nonatomic, retain) IBOutlet UILabel *recordingLabel;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
@@ -32,7 +34,8 @@
 @property (nonatomic, retain) NSTimer *recordingTimer;
 @property (nonatomic, retain) Lecture *lecture;
 @property NSTimeInterval startTime;
-@property (readonly) AQRecorder *recorder;
+//@property (readonly) AQRecorder *recorder;
+@property (nonatomic, retain) AVAudioRecorder *recorder;
 
 - (void) updateElapsedTime:(NSTimer *) timer;
 - (IBAction)record:(id)sender;

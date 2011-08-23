@@ -12,6 +12,32 @@
 #import "RecordingsListViewController.h"
 #import "LectureLeaksViewController.h"
 #import <EventKit/EventKit.h>
+#import <CoreAudio/CoreAudioTypes.h>
+
+static Boolean IsAACHardwareEncoderAvailable(void)
+{
+    Boolean isAvailable = false;
+	
+    // get an array of AudioClassDescriptions for all installed encoders for the given format 
+    // the specifier is the format that we are interested in - this is 'aac ' in our case
+    UInt32 encoderSpecifier = kAudioFormatMPEG4AAC;
+    UInt32 size;
+	
+    OSStatus result = AudioFormatGetPropertyInfo(kAudioFormatProperty_Encoders, sizeof(encoderSpecifier), &encoderSpecifier, &size);
+    if (result) { printf("AudioFormatGetPropertyInfo kAudioFormatProperty_Encoders result %lu %4.4s\n", result, (char*)&result); return false; }
+	
+    UInt32 numEncoders = size / sizeof(AudioClassDescription);
+    AudioClassDescription encoderDescriptions[numEncoders];
+    
+    result = AudioFormatGetProperty(kAudioFormatProperty_Encoders, sizeof(encoderSpecifier), &encoderSpecifier, &size, encoderDescriptions);
+    if (result) { printf("AudioFormatGetProperty kAudioFormatProperty_Encoders result %lu %4.4s\n", result, (char*)&result); return false; }
+    
+    for (UInt32 i=0; i < numEncoders; ++i) {
+        if (encoderDescriptions[i].mSubType == kAudioFormatMPEG4AAC && encoderDescriptions[i].mManufacturer == kAppleHardwareAudioCodecManufacturer) isAvailable = true;
+    }
+	
+    return isAvailable;
+}
 
 @implementation RecordingViewController
 
@@ -29,28 +55,65 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        recorder = new AQRecorder();
+        date = [[NSDate date] retain];
+        time_t unixTime = (time_t) [date timeIntervalSince1970];
+        NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];        
+        NSString* path = [documentsDirectory stringByAppendingPathComponent:currentFileName];
+        NSURL *url = [NSURL fileURLWithPath:path];
+        NSError *error;
         
-        OSStatus error = AudioSessionSetActive(true); 
+        int kAudioFormat;
+        
+        if(IsAACHardwareEncoderAvailable())
+        {
+            kAudioFormat = kAudioFormatMPEG4AAC;
+        }
+        else
+        {
+            kAudioFormat = kAudioFormatAppleIMA4;
+        }
+        
+        NSDictionary *recordSettings =
+        
+        [[NSDictionary alloc] initWithObjectsAndKeys:
+         
+         [NSNumber numberWithFloat: 44100.0],                 AVSampleRateKey,
+         [NSNumber numberWithInt: kAudioFormat], AVFormatIDKey,
+         [NSNumber numberWithInt: 1],                         AVNumberOfChannelsKey,
+         [NSNumber numberWithInt: AVAudioQualityMax],         AVEncoderAudioQualityKey,
+         
+         nil];
+        
+        recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recordSettings error:&error];
+        
+        if(error)
+            NSLog(@"%@",[error description]);
+        
+        [recorder prepareToRecord];
+        
+        /*OSStatus error = AudioSessionSetActive(true); 
         if (error) 
         {
             NSLog(@"AudioSessionSetActive (true) failed");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             [alert release];
-        }
+        }*/
     }
     return self;
 }
 
 - (void)dealloc
 {
-    delete recorder;
+    [recorder release];
     [recordingLabel release];
     [recordButton release];
     [titleTextField release];
     [classTextField release];
     [schoolTextField release];
+    [date release];
     [super dealloc];
 }
 
@@ -117,10 +180,10 @@
 
 - (IBAction)record:(id)sender 
 {
-    if(recorder->IsRunning())
+    if(recorder.recording)
     {
-        recorder->StopRecord();
-        AudioSessionSetActive(false);
+        [recorder stop];
+        //AudioSessionSetActive(false);
         
         [recordingTimer invalidate];
         
@@ -151,7 +214,6 @@
         else
         {
             recordButton.title = @"Stop";
-            NSDate* date = [NSDate date];
             time_t unixTime = (time_t) [date timeIntervalSince1970];
             NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -171,7 +233,8 @@
             schoolTextField.enabled = NO;
             
                          
-            recorder->StartRecord((CFStringRef)currentFileName);
+            //recorder->StartRecord((CFStringRef)currentFileName);
+            [recorder record];
             
             startTime = [NSDate timeIntervalSinceReferenceDate];
             recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self

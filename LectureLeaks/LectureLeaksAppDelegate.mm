@@ -10,7 +10,6 @@
 
 #import "LectureLeaksViewController.h"
 #import "FirstLaunchViewController.h"
-#import "RecordingViewController.h"
 
 @implementation LectureLeaksAppDelegate
 
@@ -19,69 +18,11 @@
 @synthesize viewController=_viewController;
 @synthesize navigationController;
 
-#pragma mark AudioSession listeners
-
-void interruptionListener(	void *	inClientData,
-                          UInt32	inInterruptionState)
-{
-	RecordingViewController *THIS = (RecordingViewController*)inClientData;
-	if (inInterruptionState == kAudioSessionBeginInterruption)
-	{
-		if (THIS->recorder->IsRunning()) 
-        {
-			THIS->recorder->StopRecord();
-		}
-    }
-}
-
-void propListener(	void *                  inClientData,
-                  AudioSessionPropertyID	inID,
-                  UInt32                  inDataSize,
-                  const void *            inData)
-{
-	RecordingViewController *THIS = (RecordingViewController*)inClientData;
-	if (inID == kAudioSessionProperty_AudioRouteChange)
-	{
-		CFDictionaryRef routeDictionary = (CFDictionaryRef)inData;			
-		//CFShow(routeDictionary);
-		CFNumberRef reason = (CFNumberRef)CFDictionaryGetValue(routeDictionary, CFSTR(kAudioSession_AudioRouteChangeKey_Reason));
-		SInt32 reasonVal;
-		CFNumberGetValue(reason, kCFNumberSInt32Type, &reasonVal);
-		if (reasonVal != kAudioSessionRouteChangeReason_CategoryChange)
-		{		
-			// stop the queue if we had a non-policy route change
-			if (THIS->recorder->IsRunning()) 
-            {
-                THIS->recorder->StopRecord();
-			}
-		}	
-	}
-	else if (inID == kAudioSessionProperty_AudioInputAvailable)
-	{
-		if (inDataSize == sizeof(UInt32)) {
-			UInt32 isAvailable = *(UInt32*)inData;
-			// disable recording if input is not available
-            if(isAvailable > 0)
-            {
-                //THIS->btn_record.enabled =  YES;
-                AudioSessionSetActive(true);
-            }
-            else
-            {
-                //THIS->btn_record.enabled =  NO;
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-                [alert release];
-            }
-		}
-	}
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    OSStatus error = AudioSessionInitialize(NULL, NULL, interruptionListener, self);
+    /*OSStatus error = AudioSessionInitialize(NULL, NULL, interruptionListener, self);
     if (error) NSLog(@"ERROR INITIALIZING AUDIO SESSION! %ld\n", error);
     else 
     {
@@ -102,7 +43,7 @@ void propListener(	void *                  inClientData,
         // we also need to listen to see if input availability changes
         error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, propListener, self);
         if (error) NSLog(@"ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
-    }
+    }*/
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];

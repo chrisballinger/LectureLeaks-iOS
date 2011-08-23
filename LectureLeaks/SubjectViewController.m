@@ -64,7 +64,7 @@
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     // Use when fetching binary data
-    NSData *jsonData = [request responseData];
+    //NSData *jsonData = [request responseData];
     NSLog(@"%@",[request responseString]);
 
     NSString *fix = [[request responseString] stringByReplacingOccurrencesOfString:@"'" withString:@"\""];

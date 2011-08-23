@@ -72,6 +72,7 @@
 		D960FFD7139DC1E400CD6795 /* ScheduleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */; };
 		D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */; };
 		D9710A0813D883E6005A34D6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9710A0713D883E6005A34D6 /* libz.dylib */; };
+		D9C529461404282C00C7D79F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C529451404282C00C7D79F /* CoreAudio.framework */; };
 		D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */; };
 		D9DCB28413AAE7E900584F12 /* FirstLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */; };
 		D9DCB29013AAF39100584F12 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DCB28E13AAF39000584F12 /* SettingsViewController.m */; };
@@ -196,6 +197,7 @@
 		D960FFD5139DC1E400CD6795 /* ScheduleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScheduleViewController.mm; sourceTree = "<group>"; };
 		D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleViewController.xib; sourceTree = "<group>"; };
 		D9710A0713D883E6005A34D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D9C529451404282C00C7D79F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		D9DCB28013AAE7E900584F12 /* FirstLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstLaunchViewController.h; path = ../FirstLaunchViewController.h; sourceTree = "<group>"; };
 		D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstLaunchViewController.m; path = ../FirstLaunchViewController.m; sourceTree = "<group>"; };
 		D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FirstLaunchViewController.xib; path = ../FirstLaunchViewController.xib; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C529461404282C00C7D79F /* CoreAudio.framework in Frameworks */,
 				D9710A0813D883E6005A34D6 /* libz.dylib in Frameworks */,
 				D95555A713A7CA4800F28716 /* CoreMedia.framework in Frameworks */,
 				D95555A513A7508700F28716 /* MediaPlayer.framework in Frameworks */,
@@ -370,6 +373,7 @@
 		D960FF95139DB6EC00CD6795 = {
 			isa = PBXGroup;
 			children = (
+				D9C529451404282C00C7D79F /* CoreAudio.framework */,
 				D9710A0713D883E6005A34D6 /* libz.dylib */,
 				D960FFAA139DB6EC00CD6795 /* LectureLeaks */,
 				D960FFA3139DB6EC00CD6795 /* Frameworks */,
@@ -489,6 +493,9 @@
 /* Begin PBXProject section */
 		D960FF97139DB6EC00CD6795 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = D960FF9A139DB6EC00CD6795 /* Build configuration list for PBXProject "LectureLeaks" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -638,16 +645,21 @@
 		D960FFBF139DB6EC00CD6795 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -655,14 +667,19 @@
 		D960FFC0139DB6EC00CD6795 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -675,7 +692,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LectureLeaks/LectureLeaks-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"/Developer/Extras/CoreAudio/PublicUtility/$(inherited)",
 					Kal,
@@ -685,11 +701,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-weak_library",
-					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -703,7 +714,6 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LectureLeaks/LectureLeaks-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"/Developer/Extras/CoreAudio/PublicUtility/$(inherited)",
 					Kal,
@@ -713,11 +723,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-weak_library",
-					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

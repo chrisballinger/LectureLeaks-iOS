@@ -52,7 +52,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];        
     self.metadataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    self.metadata = [[[NSDictionary alloc] initWithContentsOfFile:metadataPath] autorelease];
+    self.metadata = [[[NSMutableDictionary alloc] initWithContentsOfFile:metadataPath] autorelease];
     
     schoolTextField.text = [metadata objectForKey:@"school"];
 }
