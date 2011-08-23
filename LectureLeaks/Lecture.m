@@ -100,7 +100,7 @@
     [fileManager removeItemAtPath:plistPath error:nil];
 }
 
-- (void)submitRecordingWithDelegate:(id)delegate;
+- (void)submitRecordingWithDelegate:(id)delegate token:(NSString*)token;
 {
     
     if([name isEqualToString:@""] || [subject isEqualToString:@""])
@@ -118,9 +118,14 @@
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlString]];
         
         [request setPostValue:name forKey:@"name"];
+        [request setPostValue:@"No description." forKey:@"desc"];
         [request setPostValue:school forKey:@"school"];
-        [request setPostValue:subject forKey:@"subject"];
+        [request setPostValue:@"Unavailable" forKey:@"subject"];
         [request setPostValue:course forKey:@"course"];
+        [request setPostValue:@"Unavailable" forKey:@"professor"];
+        [request setPostValue:token forKey:@"csrfmiddlewaretoken"];
+        
+        NSLog(@"%@, %@, %@, %@, %@",name, school, subject, course, [url description]);
         
         //[request setTimeOutSeconds:20];
         
@@ -129,7 +134,7 @@
         }
         
         LecturePlayerViewController* lecturePlayer = (LecturePlayerViewController*)delegate;
-        [request setData:recording withFileName:[NSString stringWithFormat:@"%d.caf",unixTime] andContentType:@"audio/x-caf" forKey:@"rec_file"];
+        [request setData:recording withFileName:[NSString stringWithFormat:@"%d.caf",unixTime] andContentType:@"audio/x-caf" forKey:@"doc_file"];
         lecturePlayer.progressView.progress = 0.0;
         lecturePlayer.progressView.hidden = FALSE;
         [request setShowAccurateProgress:YES];

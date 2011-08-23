@@ -27,6 +27,8 @@
 @synthesize stopButton;
 @synthesize submitButton;
 @synthesize player;
+@synthesize permissionSwitch;
+@synthesize permissionLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +57,8 @@
     [submitButton release];
     [progressView release];
     [submitProgressLabel release];
+    [permissionSwitch release];
+    [permissionLabel release];
     [super dealloc];
 }
 
@@ -90,7 +94,11 @@
     if(lecture.isRemoteFile)
         submitButton.enabled = NO;
     else
+    {
         submitButton.enabled = YES;
+        permissionLabel.hidden = NO;
+        permissionSwitch.hidden = NO;
+    }
     
     isPlaying = NO;
     
@@ -138,6 +146,8 @@
     [self setSubmitButton:nil];
     [self setProgressView:nil];
     [self setSubmitProgressLabel:nil];
+    [self setPermissionSwitch:nil];
+    [self setPermissionLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -195,7 +205,12 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1)
     {
-        [lecture submitRecordingWithDelegate:self];
+        NSString *urlString = @"http://lectureleaks.com/uploadnocaptcha/";
+        ASIHTTPRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlString]];
+        [request setTag:420];
+        [request setDelegate:self];
+        [request startAsynchronous];
+        
         submitProgressLabel.text = @"Submitting...";
         submitProgressLabel.textColor = [UIColor whiteColor];
     }
@@ -203,9 +218,18 @@
 
 - (IBAction)submitPressed:(id)sender 
 {
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Submit to LectureLeaks" message:@"Would you like to submit your recording to www.lectureleaks.com?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:nil] autorelease];
-    [alert addButtonWithTitle:@"Yes"];
-    [alert show];
+    if(permissionSwitch.on)
+    {
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Submit to LectureLeaks" message:@"Would you like to submit your recording to www.lectureleaks.com?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:nil] autorelease];
+        [alert addButtonWithTitle:@"Yes"];
+        [alert show];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Request Permission" message:@"Please request permission from your instructor before submitting this recording." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 - (IBAction)playPressed:(id)sender 
@@ -239,18 +263,39 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Complete" message:@"The recording was uploaded successfully to www.lectureleaks.com" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    [alert release];
-    
-    // Set TRUE if file was sent properly
-    lecture.submitDate = [NSDate date];
-    [lecture saveMetadata];
-    
-    submitProgressLabel.text = @"Submission successful!";
-    submitProgressLabel.textColor = [UIColor greenColor];
-    submitLabel.text = [lecture.submitDate description];
-    progressView.hidden = TRUE;
+    if(request.tag == 420)
+    {
+        NSString *message = [request responseString];
+        NSString *startString = @"name='csrfmiddlewaretoken' value='";
+        NSString *endString = @"' /></div>";
+        NSRange htmlStart = [message rangeOfString:startString];
+
+        NSString *substr = [message substringFromIndex:htmlStart.location + [startString length]];
+        NSRange htmlEnd = [substr rangeOfString:endString];
+        
+        NSString *substr2 = [substr substringToIndex:htmlEnd.location];
+        
+        NSLog(@"Stripped: %@",substr2);
+
+        [lecture submitRecordingWithDelegate:self token:substr2];
+
+
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Complete" message:@"The recording was uploaded successfully to www.lectureleaks.com" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        [alert release];
+        
+        // Set TRUE if file was sent properly
+        lecture.submitDate = [NSDate date];
+        [lecture saveMetadata];
+        
+        submitProgressLabel.text = @"Submission successful!";
+        submitProgressLabel.textColor = [UIColor greenColor];
+        submitLabel.text = [lecture.submitDate description];
+        progressView.hidden = TRUE;
+    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
