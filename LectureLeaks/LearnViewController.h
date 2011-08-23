@@ -12,6 +12,7 @@
 @interface LearnViewController : UITableViewController 
 {
     NSMutableArray *contentArray;
+    BOOL isDataLoaded;
 }
 
 @property (nonatomic, retain) NSMutableArray *contentArray;

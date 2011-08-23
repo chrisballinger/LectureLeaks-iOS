@@ -73,6 +73,7 @@
 		D960FFD8139DC1E400CD6795 /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */; };
 		D9710A0813D883E6005A34D6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D9710A0713D883E6005A34D6 /* libz.dylib */; };
 		D9C529461404282C00C7D79F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C529451404282C00C7D79F /* CoreAudio.framework */; };
+		D9C529481404318300C7D79F /* ow.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C529471404318300C7D79F /* ow.png */; };
 		D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */; };
 		D9DCB28413AAE7E900584F12 /* FirstLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */; };
 		D9DCB29013AAF39100584F12 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DCB28E13AAF39000584F12 /* SettingsViewController.m */; };
@@ -198,6 +199,7 @@
 		D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleViewController.xib; sourceTree = "<group>"; };
 		D9710A0713D883E6005A34D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D9C529451404282C00C7D79F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		D9C529471404318300C7D79F /* ow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ow.png; sourceTree = "<group>"; };
 		D9DCB28013AAE7E900584F12 /* FirstLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstLaunchViewController.h; path = ../FirstLaunchViewController.h; sourceTree = "<group>"; };
 		D9DCB28113AAE7E900584F12 /* FirstLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstLaunchViewController.m; path = ../FirstLaunchViewController.m; sourceTree = "<group>"; };
 		D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FirstLaunchViewController.xib; path = ../FirstLaunchViewController.xib; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 		D960FFD3139DBE6300CD6795 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D9C529471404318300C7D79F /* ow.png */,
 				D9DCB29213AAF9B600584F12 /* gears.png */,
 				D9DCB29313AAF9B600584F12 /* gears@2x.png */,
 				D955559413A71AFA00F28716 /* logo.png */,
@@ -564,6 +567,7 @@
 				D9DCB29113AAF39100584F12 /* SettingsViewController.xib in Resources */,
 				D9DCB29413AAF9B600584F12 /* gears.png in Resources */,
 				D9DCB29513AAF9B600584F12 /* gears@2x.png in Resources */,
+				D9C529481404318300C7D79F /* ow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,10 +52,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSURL *url = [NSURL URLWithString:@"http://lectureleaks.com/api4/schools/"];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request setDelegate:self];
-    [request startAsynchronous]; 
+    if(!isDataLoaded)
+    {
+        NSURL *url = [NSURL URLWithString:@"http://lectureleaks.com/api4/schools/"];
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+        [request setDelegate:self];
+        [request startAsynchronous]; 
+    }
         
     contentArray = [[NSMutableArray alloc] init];
     NSMutableArray *myRecordings = [[NSMutableArray alloc] init];
@@ -101,6 +104,7 @@
     [items release];
     
     [self.tableView reloadData];
+    isDataLoaded = YES;
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
