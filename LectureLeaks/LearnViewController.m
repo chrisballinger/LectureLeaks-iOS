@@ -87,8 +87,8 @@
         NSDictionary *tmp = [items objectAtIndex:i];
         NSDictionary *fields = [tmp objectForKey:@"fields"];
         NSString *name = [fields objectForKey:@"name"];
-        NSNumber *featured = [fields objectForKey:@"featured"];
-        if([featured boolValue])
+        //NSNumber *featured = [fields objectForKey:@"featured"];
+        if([name isEqualToString:@"Harvard University"] || [name isEqualToString:@"Yale University"] || [name isEqualToString:@"Massachusetts Institute Of Technology"])
         {
             [featuredSchools addObject:name];
         }
