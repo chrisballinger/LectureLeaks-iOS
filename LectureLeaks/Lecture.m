@@ -100,7 +100,7 @@
     [fileManager removeItemAtPath:plistPath error:nil];
 }
 
-- (void)submitRecordingWithDelegate:(id)delegate token:(NSString*)token;
+- (void)submitRecordingWithDelegate:(id)delegate
 {
     
     if([name isEqualToString:@""] || [subject isEqualToString:@""])
@@ -123,7 +123,6 @@
         [request setPostValue:@"Unavailable" forKey:@"subject"];
         [request setPostValue:course forKey:@"course"];
         [request setPostValue:@"Unavailable" forKey:@"professor"];
-        [request setPostValue:token forKey:@"csrfmiddlewaretoken"];
         
         NSLog(@"%@, %@, %@, %@, %@",name, school, subject, course, [url description]);
         

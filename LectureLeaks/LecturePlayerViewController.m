@@ -205,14 +205,10 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1)
     {
-        NSString *urlString = @"http://lectureleaks.com/uploadnocaptcha/";
-        ASIHTTPRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlString]];
-        [request setTag:420];
-        [request setDelegate:self];
-        [request startAsynchronous];
-        
         submitProgressLabel.text = @"Submitting...";
         submitProgressLabel.textColor = [UIColor whiteColor];
+        
+        [lecture submitRecordingWithDelegate:self];
     }
 }
 
@@ -263,44 +259,23 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    if(request.tag == 420)
-    {
-        NSString *message = [request responseString];
-        NSString *startString = @"name='csrfmiddlewaretoken' value='";
-        NSString *endString = @"' /></div>";
-        NSRange htmlStart = [message rangeOfString:startString];
-
-        NSString *substr = [message substringFromIndex:htmlStart.location + [startString length]];
-        NSRange htmlEnd = [substr rangeOfString:endString];
-        
-        NSString *substr2 = [substr substringToIndex:htmlEnd.location];
-        
-        NSLog(@"Stripped: %@",substr2);
-
-        [lecture submitRecordingWithDelegate:self token:substr2];
-
-
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Complete" message:@"The recording was uploaded successfully to www.lectureleaks.com" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        [alert release];
-        
-        // Set TRUE if file was sent properly
-        lecture.submitDate = [NSDate date];
-        [lecture saveMetadata];
-        
-        submitProgressLabel.text = @"Submission successful!";
-        submitProgressLabel.textColor = [UIColor greenColor];
-        submitLabel.text = [lecture.submitDate description];
-        progressView.hidden = TRUE;
-    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Complete" message:@"The recording was uploaded successfully to www.lectureleaks.com" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
+    [alert release];
+    
+    // Set TRUE if file was sent properly
+    lecture.submitDate = [NSDate date];
+    [lecture saveMetadata];
+    
+    submitProgressLabel.text = @"Submission successful!";
+    submitProgressLabel.textColor = [UIColor greenColor];
+    submitLabel.text = [lecture.submitDate description];
+    progressView.hidden = TRUE;
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Error" message:@"Upload failed, please check your internet connection and try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload Error" message:@"Upload failed, please check your internet connection and try again." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alert show];
     [alert release];
     

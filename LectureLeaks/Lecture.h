@@ -40,6 +40,6 @@
 
 - (void)saveMetadata;
 - (void)deleteFiles;
-- (void)submitRecordingWithDelegate:(id)delegate token:(NSString*)token;
+- (void)submitRecordingWithDelegate:(id)delegate;
 
 @end
