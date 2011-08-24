@@ -10,6 +10,8 @@
 
 
 @implementation AboutViewController
+@synthesize aboutLabel;
+@synthesize aboutScrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +24,8 @@
 
 - (void)dealloc
 {
+    [aboutLabel release];
+    [aboutScrollView release];
     [super dealloc];
 }
 
@@ -41,11 +45,17 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
     self.title = @"About";
-
+    
+    CGFloat width = aboutLabel.frame.size.width;
+    CGFloat height = aboutLabel.frame.size.height;
+    
+    [aboutScrollView setContentSize:(CGSizeMake(width, height))];
 }
 
 - (void)viewDidUnload
 {
+    [self setAboutLabel:nil];
+    [self setAboutScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -57,4 +67,18 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        NSURL *url = [NSURL URLWithString:@"http://www.openwatch.net"];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
+- (IBAction)openwatchPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Open Link" message:@"Open www.openwatch.net in Safari?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alert show];
+    [alert release];
+}
 @end

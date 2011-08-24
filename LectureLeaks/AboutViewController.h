@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AboutViewController : UIViewController {
+@interface AboutViewController : UIViewController <UIAlertViewDelegate> {
     
 }
+- (IBAction)openwatchPressed:(id)sender;
+@property (retain, nonatomic) IBOutlet UILabel *aboutLabel;
+@property (retain, nonatomic) IBOutlet UIScrollView *aboutScrollView;
 
 @end
