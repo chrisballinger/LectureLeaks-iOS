@@ -11,7 +11,7 @@
 #import "Lecture.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface RecordingViewController : UIViewController <UITextFieldDelegate>
+@interface RecordingViewController : UIViewController <UITextFieldDelegate, AVAudioSessionDelegate>
 {
     UILabel *recordingLabel;
     UIBarButtonItem *recordButton;

@@ -10,6 +10,7 @@
 
 #import "LectureLeaksViewController.h"
 #import "FirstLaunchViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation LectureLeaksAppDelegate
 
@@ -44,6 +45,14 @@
         error = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable, propListener, self);
         if (error) NSLog(@"ERROR ADDING AUDIO SESSION PROP LISTENER! %ld\n", error);
     }*/
+    NSError *setCategoryErr = nil;
+    NSError *activationErr  = nil;
+    [[AVAudioSession sharedInstance]
+     setCategory: AVAudioSessionCategoryPlayAndRecord
+     error: &setCategoryErr];
+    [[AVAudioSession sharedInstance]
+     setActive: YES
+     error: &activationErr];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];

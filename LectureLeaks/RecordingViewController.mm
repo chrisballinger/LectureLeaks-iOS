@@ -261,5 +261,12 @@ static Boolean IsAACHardwareEncoderAvailable(void)
     return YES;
 }
 
+-(void)beginInterruption
+{
+    if(recorder.recording)
+    {
+        [self record:nil];
+    }
+}
 
 @end
