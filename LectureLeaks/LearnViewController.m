@@ -102,12 +102,10 @@
         {
             [featuredSchools addObject:name];
         }
-        else
-        {
-            [allSchools addObject:name];
-        }
-            
+        [allSchools addObject:name];
     }
+    
+    [allSchools sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     [contentArray addObject:featuredSchools];
     [contentArray addObject:allSchools];
