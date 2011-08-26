@@ -502,7 +502,7 @@
     // If delegate was set make the callback
     self.alpha = 0.0f;
     
-	if(delegate != nil) {
+	if(delegate) {
         if ([delegate respondsToSelector:@selector(hudWasHidden:)]) {
             [delegate performSelector:@selector(hudWasHidden:) withObject:self];
         } else if ([delegate respondsToSelector:@selector(hudWasHidden)]) {

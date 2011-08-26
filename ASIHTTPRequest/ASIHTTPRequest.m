@@ -1951,8 +1951,12 @@ static NSOperationQueue *sharedQueue = nil;
 		return;
 	}
 
-	if (delegate && [delegate respondsToSelector:didReceiveResponseHeadersSelector]) {
-		[delegate performSelector:didReceiveResponseHeadersSelector withObject:self withObject:newResponseHeaders];
+	if (delegate) 
+    {
+        if([delegate respondsToSelector:didReceiveResponseHeadersSelector])
+        {
+            [delegate performSelector:didReceiveResponseHeadersSelector withObject:self withObject:newResponseHeaders];
+        }
 	}
 
 	#if NS_BLOCKS_AVAILABLE

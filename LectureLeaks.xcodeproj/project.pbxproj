@@ -81,6 +81,8 @@
 		D9DCB29113AAF39100584F12 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB28F13AAF39000584F12 /* SettingsViewController.xib */; };
 		D9DCB29413AAF9B600584F12 /* gears.png in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB29213AAF9B600584F12 /* gears.png */; };
 		D9DCB29513AAF9B600584F12 /* gears@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9DCB29313AAF9B600584F12 /* gears@2x.png */; };
+		ECD1282C14076DBC007AD698 /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD1282914076DBC007AD698 /* NSDateAdditions.m */; };
+		ECD1282D14076DBC007AD698 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD1282B14076DBC007AD698 /* UIViewAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +211,10 @@
 		D9DCB28F13AAF39000584F12 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		D9DCB29213AAF9B600584F12 /* gears.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gears.png; sourceTree = "<group>"; };
 		D9DCB29313AAF9B600584F12 /* gears@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gears@2x.png"; sourceTree = "<group>"; };
+		ECD1282814076DBC007AD698 /* NSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDateAdditions.h; path = Kal/NSDateAdditions.h; sourceTree = "<group>"; };
+		ECD1282914076DBC007AD698 /* NSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDateAdditions.m; path = Kal/NSDateAdditions.m; sourceTree = "<group>"; };
+		ECD1282A14076DBC007AD698 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIViewAdditions.h; path = Kal/UIViewAdditions.h; sourceTree = "<group>"; };
+		ECD1282B14076DBC007AD698 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIViewAdditions.m; path = Kal/UIViewAdditions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +373,10 @@
 		D95DB08C13A2C5F6009ED227 /* Kal */ = {
 			isa = PBXGroup;
 			children = (
+				ECD1282814076DBC007AD698 /* NSDateAdditions.h */,
+				ECD1282914076DBC007AD698 /* NSDateAdditions.m */,
+				ECD1282A14076DBC007AD698 /* UIViewAdditions.h */,
+				ECD1282B14076DBC007AD698 /* UIViewAdditions.m */,
 				D95DB08613A2C58F009ED227 /* libKal.a */,
 				D95DB08A13A2C5E6009ED227 /* Kal.bundle */,
 				D95DB07D13A2C48F009ED227 /* Kal.xcodeproj */,
@@ -607,6 +617,8 @@
 				D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */,
 				D9DCB29013AAF39100584F12 /* SettingsViewController.m in Sources */,
 				D944751C14073F5D00AE9A34 /* MBProgressHUD.m in Sources */,
+				ECD1282C14076DBC007AD698 /* NSDateAdditions.m in Sources */,
+				ECD1282D14076DBC007AD698 /* UIViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,10 +663,7 @@
 		D960FFBF139DB6EC00CD6795 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -664,7 +673,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
@@ -673,17 +682,14 @@
 		D960FFC0139DB6EC00CD6795 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -703,7 +709,6 @@
 					Kal,
 				);
 				INFOPLIST_FILE = "LectureLeaks/LectureLeaks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -725,7 +730,6 @@
 					Kal,
 				);
 				INFOPLIST_FILE = "LectureLeaks/LectureLeaks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
