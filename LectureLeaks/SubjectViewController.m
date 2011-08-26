@@ -41,7 +41,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    //[super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -55,6 +55,8 @@
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setDelegate:self];
     [request startAsynchronous]; 
+    
+    [self showHUD];
         
     contentList = [[NSMutableArray alloc] init];
     
@@ -90,7 +92,7 @@
     
     [self.mainTableView reloadData];
     
-    [HUD hide:YES afterDelay:1.0];
+    [self hideHUD];
 }
 
 #pragma mark - Table view delegate
@@ -101,6 +103,9 @@
     courseController.courseName = [contentList objectAtIndex:indexPath.row];
     courseController.schoolName = self.schoolName;
     courseController.subjectName = self.subjectName;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     [self.navigationController pushViewController:courseController animated:YES];
     [courseController release];
 }

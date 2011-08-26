@@ -77,6 +77,11 @@
     [HUD show:YES];
 }
 
+-(void)hideHUD
+{
+    [HUD hide:YES afterDelay:0.75];
+}
+
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     // Use when fetching binary data
@@ -117,7 +122,7 @@
     
     [self.mainTableView reloadData];
     
-    [HUD hide:YES afterDelay:1.0];
+    [self hideHUD];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -128,7 +133,7 @@
     [alert show];
     [alert release];
     
-    [HUD hide:YES afterDelay:1.0];
+    [self hideHUD];
 }
 
 - (void)viewDidUnload
@@ -236,6 +241,9 @@
     SubjectViewController *subjectController = [[SubjectViewController alloc] init];
     subjectController.subjectName = [contentList objectAtIndex:indexPath.row];
     subjectController.schoolName = self.schoolName;
+    
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:subjectController animated:YES];
     [subjectController release];
 }

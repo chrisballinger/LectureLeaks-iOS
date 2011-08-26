@@ -42,7 +42,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    //[super viewDidLoad];
 
     NSString *urlString = [NSString stringWithFormat:@"http://lectureleaks.com/api4/school/%@/subject/%@/course/%@/",schoolName,subjectName,courseName];
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
@@ -50,6 +50,8 @@
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setDelegate:self];
     [request startAsynchronous]; 
+    [self showHUD];
+
     
     contentList = [[NSMutableArray alloc] init];
     
@@ -102,7 +104,7 @@
     
     [self.mainTableView reloadData];
     
-    [HUD hide:YES afterDelay:1.0];
+    [self hideHUD];
 }
 
 
@@ -175,6 +177,9 @@
 {
     LecturePlayerViewController *lecturePlayerController = [[LecturePlayerViewController alloc] init];
     lecturePlayerController.lecture = [contentList objectAtIndex:indexPath.row];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     [self.navigationController pushViewController:lecturePlayerController animated:YES];
     [lecturePlayerController release];
 }

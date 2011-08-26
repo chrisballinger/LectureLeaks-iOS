@@ -116,7 +116,7 @@
     [self.learnTableView reloadData];
     isDataLoaded = YES;
     
-    [HUD hide:YES afterDelay:1.0];
+    [HUD hide:YES afterDelay:0.5];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -127,7 +127,7 @@
     [alert show];
     [alert release];
     
-    [HUD hide:YES afterDelay:1.0];
+    [HUD hide:YES afterDelay:0.5];
 }
 
 #pragma mark - Table view data source

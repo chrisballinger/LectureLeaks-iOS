@@ -22,5 +22,6 @@
 @property (retain, nonatomic) IBOutlet UITableView *mainTableView;
 
 -(void)showHUD;
+-(void)hideHUD;
 
 @end
