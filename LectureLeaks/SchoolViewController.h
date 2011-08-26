@@ -7,14 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 
-@interface SchoolViewController : UITableViewController {
+@interface SchoolViewController : UIViewController <MBProgressHUDDelegate> {
     NSMutableArray *contentList;
     NSString *schoolName;
+    
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic, retain) NSMutableArray *contentList;
 @property (nonatomic, retain) NSString *schoolName;
+@property (retain, nonatomic) IBOutlet UITableView *mainTableView;
+
+-(void)showHUD;
 
 @end

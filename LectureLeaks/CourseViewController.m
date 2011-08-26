@@ -16,9 +16,9 @@
 
 @synthesize courseName;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:@"SchoolViewController" bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -54,6 +54,8 @@
     contentList = [[NSMutableArray alloc] init];
     
     self.title = courseName;
+    
+    
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request
@@ -98,7 +100,9 @@
     
     [items release];
     
-    [self.tableView reloadData];
+    [self.mainTableView reloadData];
+    
+    [HUD hide:YES afterDelay:1.0];
 }
 
 

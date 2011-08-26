@@ -25,6 +25,7 @@
 		D92B82F613A16385001A254A /* schedule@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92B82F213A16384001A254A /* schedule@2x.png */; };
 		D92B82FA13A1684A001A254A /* LearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92B82F813A16849001A254A /* LearnViewController.m */; };
 		D92B82FB13A1684A001A254A /* LearnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D92B82F913A1684A001A254A /* LearnViewController.xib */; };
+		D944751C14073F5D00AE9A34 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D944751A14073F5D00AE9A34 /* MBProgressHUD.m */; };
 		D955557613A6FBE500F28716 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = D955556013A6FBE500F28716 /* ASIAuthenticationDialog.m */; };
 		D955557713A6FBE500F28716 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = D955556313A6FBE500F28716 /* ASIDataCompressor.m */; };
 		D955557813A6FBE500F28716 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = D955556513A6FBE500F28716 /* ASIDataDecompressor.m */; };
@@ -43,9 +44,7 @@
 		D955559613A71AFA00F28716 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D955559413A71AFA00F28716 /* logo.png */; };
 		D955559713A71AFA00F28716 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D955559513A71AFA00F28716 /* logo@2x.png */; };
 		D955559B13A71C8200F28716 /* SubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D955559913A71C8200F28716 /* SubjectViewController.m */; };
-		D955559C13A71C8200F28716 /* SubjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D955559A13A71C8200F28716 /* SubjectViewController.xib */; };
 		D95555A213A7234800F28716 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95555A013A7234700F28716 /* CourseViewController.m */; };
-		D95555A313A7234800F28716 /* CourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95555A113A7234800F28716 /* CourseViewController.xib */; };
 		D95555A513A7508700F28716 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95555A413A7508600F28716 /* MediaPlayer.framework */; };
 		D95555A713A7CA4800F28716 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95555A613A7CA4700F28716 /* CoreMedia.framework */; };
 		D95DB04913A2AD43009ED227 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D95DB04813A2AD43009ED227 /* icon.png */; };
@@ -124,6 +123,8 @@
 		D92B82F713A16849001A254A /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
 		D92B82F813A16849001A254A /* LearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnViewController.m; sourceTree = "<group>"; };
 		D92B82F913A1684A001A254A /* LearnViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearnViewController.xib; sourceTree = "<group>"; };
+		D944751A14073F5D00AE9A34 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		D944751B14073F5D00AE9A34 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		D955555F13A6FBE500F28716 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		D955556013A6FBE500F28716 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		D955556113A6FBE500F28716 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -151,7 +152,6 @@
 		D955558713A701FC00F28716 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D955558913A7021D00F28716 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D955558B13A7022500F28716 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		D955558D13A7024A00F28716 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		D955558F13A70C4300F28716 /* SchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolViewController.h; sourceTree = "<group>"; };
 		D955559013A70C4400F28716 /* SchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolViewController.m; sourceTree = "<group>"; };
 		D955559113A70C4400F28716 /* SchoolViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SchoolViewController.xib; sourceTree = "<group>"; };
@@ -159,10 +159,8 @@
 		D955559513A71AFA00F28716 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		D955559813A71C8200F28716 /* SubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectViewController.h; sourceTree = "<group>"; };
 		D955559913A71C8200F28716 /* SubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectViewController.m; sourceTree = "<group>"; };
-		D955559A13A71C8200F28716 /* SubjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectViewController.xib; sourceTree = "<group>"; };
 		D955559F13A7234700F28716 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
 		D95555A013A7234700F28716 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
-		D95555A113A7234800F28716 /* CourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseViewController.xib; sourceTree = "<group>"; };
 		D95555A413A7508600F28716 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		D95555A613A7CA4700F28716 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D95DB04813A2AD43009ED227 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
@@ -262,6 +260,15 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		D944751D14073F6100AE9A34 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D944751A14073F5D00AE9A34 /* MBProgressHUD.m */,
+				D944751B14073F5D00AE9A34 /* MBProgressHUD.h */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		D955555E13A6FBE500F28716 /* ASIHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,7 +318,7 @@
 		D955558313A6FC4600F28716 /* External Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D95DB08613A2C58F009ED227 /* libKal.a */,
+				D944751D14073F6100AE9A34 /* MBProgressHUD */,
 				D955557F13A6FC0C00F28716 /* JSONKit */,
 				D955555E13A6FBE500F28716 /* ASIHTTPRequest */,
 				D95DB08C13A2C5F6009ED227 /* Kal */,
@@ -360,6 +367,7 @@
 		D95DB08C13A2C5F6009ED227 /* Kal */ = {
 			isa = PBXGroup;
 			children = (
+				D95DB08613A2C58F009ED227 /* libKal.a */,
 				D95DB08A13A2C5E6009ED227 /* Kal.bundle */,
 				D95DB07D13A2C48F009ED227 /* Kal.xcodeproj */,
 			);
@@ -369,8 +377,6 @@
 		D960FF95139DB6EC00CD6795 = {
 			isa = PBXGroup;
 			children = (
-				D9C529451404282C00C7D79F /* CoreAudio.framework */,
-				D9710A0713D883E6005A34D6 /* libz.dylib */,
 				D960FFAA139DB6EC00CD6795 /* LectureLeaks */,
 				D960FFA3139DB6EC00CD6795 /* Frameworks */,
 				D955558313A6FC4600F28716 /* External Frameworks */,
@@ -389,9 +395,10 @@
 		D960FFA3139DB6EC00CD6795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9C529451404282C00C7D79F /* CoreAudio.framework */,
+				D9710A0713D883E6005A34D6 /* libz.dylib */,
 				D95555A613A7CA4700F28716 /* CoreMedia.framework */,
 				D95555A413A7508600F28716 /* MediaPlayer.framework */,
-				D955558D13A7024A00F28716 /* libz.1.2.3.dylib */,
 				D955558B13A7022500F28716 /* MobileCoreServices.framework */,
 				D955558913A7021D00F28716 /* SystemConfiguration.framework */,
 				D955558713A701FC00F28716 /* CFNetwork.framework */,
@@ -451,7 +458,6 @@
 				D92B82E713A13C94001A254A /* gradient_background.png */,
 				D9DCB28213AAE7E900584F12 /* FirstLaunchViewController.xib */,
 				D9DCB28F13AAF39000584F12 /* SettingsViewController.xib */,
-				D95555A113A7234800F28716 /* CourseViewController.xib */,
 				D955559113A70C4400F28716 /* SchoolViewController.xib */,
 				D92B82F913A1684A001A254A /* LearnViewController.xib */,
 				D92B82D113A0A94F001A254A /* LecturePlayerViewController.xib */,
@@ -460,7 +466,6 @@
 				D91F378A139ECFB5007D2B9D /* RecordingViewController.xib */,
 				D960FFD0139DBE4300CD6795 /* AboutViewController.xib */,
 				D960FFBC139DB6EC00CD6795 /* LectureLeaksViewController.xib */,
-				D955559A13A71C8200F28716 /* SubjectViewController.xib */,
 				D960FFD6139DC1E400CD6795 /* ScheduleViewController.xib */,
 			);
 			name = Resources;
@@ -557,8 +562,6 @@
 				D955559313A70C4400F28716 /* SchoolViewController.xib in Resources */,
 				D955559613A71AFA00F28716 /* logo.png in Resources */,
 				D955559713A71AFA00F28716 /* logo@2x.png in Resources */,
-				D955559C13A71C8200F28716 /* SubjectViewController.xib in Resources */,
-				D95555A313A7234800F28716 /* CourseViewController.xib in Resources */,
 				D9DCB28413AAE7E900584F12 /* FirstLaunchViewController.xib in Resources */,
 				D9DCB29113AAF39100584F12 /* SettingsViewController.xib in Resources */,
 				D9DCB29413AAF9B600584F12 /* gears.png in Resources */,
@@ -603,6 +606,7 @@
 				D95555A213A7234800F28716 /* CourseViewController.m in Sources */,
 				D9DCB28313AAE7E900584F12 /* FirstLaunchViewController.m in Sources */,
 				D9DCB29013AAF39100584F12 /* SettingsViewController.m in Sources */,
+				D944751C14073F5D00AE9A34 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

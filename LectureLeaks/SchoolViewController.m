@@ -14,11 +14,12 @@
 @implementation SchoolViewController
 
 @synthesize schoolName;
+@synthesize mainTableView;
 @synthesize contentList;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:@"SchoolViewController" bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -27,6 +28,7 @@
 
 - (void)dealloc
 {
+    [mainTableView release];
     [super dealloc];
 }
 
@@ -57,9 +59,22 @@
     [request setDelegate:self];
     [request startAsynchronous]; 
     
+    [self showHUD];
+    
     contentList = [[NSMutableArray alloc] init];
 
     self.title = schoolName;
+}
+
+-(void)showHUD
+{
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    
+    HUD.delegate = self;
+    HUD.labelText = @"Loading";
+    
+    [HUD show:YES];
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request
@@ -100,7 +115,9 @@
     
     [items release];
     
-    [self.tableView reloadData];
+    [self.mainTableView reloadData];
+    
+    [HUD hide:YES afterDelay:1.0];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -110,10 +127,13 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"A network error has occurred. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     [alert release];
+    
+    [HUD hide:YES afterDelay:1.0];
 }
 
 - (void)viewDidUnload
 {
+    [self setMainTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -218,6 +238,16 @@
     subjectController.schoolName = self.schoolName;
     [self.navigationController pushViewController:subjectController animated:YES];
     [subjectController release];
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
 }
 
 @end

@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-
-@interface LearnViewController : UITableViewController 
+@interface LearnViewController : UIViewController <MBProgressHUDDelegate>
 {
     NSMutableArray *contentArray;
     BOOL isDataLoaded;
+    
+    MBProgressHUD *HUD;
 }
 
 @property (nonatomic, retain) NSMutableArray *contentArray;
+@property (retain, nonatomic) IBOutlet UITableView *learnTableView;
 
 @end

@@ -15,9 +15,9 @@
 
 @synthesize subjectName;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:@"SchoolViewController" bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -55,7 +55,7 @@
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setDelegate:self];
     [request startAsynchronous]; 
-    
+        
     contentList = [[NSMutableArray alloc] init];
     
     self.title = subjectName;
@@ -88,7 +88,9 @@
     
     [items release];
     
-    [self.tableView reloadData];
+    [self.mainTableView reloadData];
+    
+    [HUD hide:YES afterDelay:1.0];
 }
 
 #pragma mark - Table view delegate

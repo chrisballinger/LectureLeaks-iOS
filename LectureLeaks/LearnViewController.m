@@ -17,10 +17,11 @@
 @implementation LearnViewController
 
 @synthesize contentArray;
+@synthesize learnTableView;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -29,6 +30,7 @@
 
 - (void)dealloc
 {
+    [learnTableView release];
     [super dealloc];
 }
 
@@ -57,7 +59,15 @@
         NSURL *url = [NSURL URLWithString:@"http://lectureleaks.com/api4/schools/"];
         ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
         [request setDelegate:self];
-        [request startAsynchronous]; 
+        [request startAsynchronous];
+        
+        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:HUD];
+        
+        HUD.delegate = self;
+        HUD.labelText = @"Loading";
+        
+        [HUD show:YES];
     }
         
     contentArray = [[NSMutableArray alloc] init];
@@ -103,8 +113,10 @@
     [contentArray addObject:allSchools];
     [items release];
     
-    [self.tableView reloadData];
+    [self.learnTableView reloadData];
     isDataLoaded = YES;
+    
+    [HUD hide:YES afterDelay:1.0];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -114,6 +126,8 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"A network error has occurred. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     [alert release];
+    
+    [HUD hide:YES afterDelay:1.0];
 }
 
 #pragma mark - Table view data source
@@ -173,6 +187,22 @@
         schoolController.schoolName = [((NSArray*)[contentArray objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:schoolController animated:YES];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+    [HUD release];
+	HUD = nil;
+}
+
+- (void)viewDidUnload {
+    [self setLearnTableView:nil];
+    [super viewDidUnload];
+}
 @end
