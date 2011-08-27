@@ -88,6 +88,7 @@
     else*/
         url = lecture.url;
     
+    AVAudioSession *session = [AVAudioSession sharedInstance]; [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     player = [[AVPlayer alloc] initWithURL:url];
     
     

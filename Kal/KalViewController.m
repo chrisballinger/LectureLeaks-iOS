@@ -111,7 +111,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
   if (numberOfAppending == 0) {
     return [self selectedDate];
   } else {
-    return [[self selectedDate] addTimeInterval:60*60*24*(numberOfAppending)];
+    return [[self selectedDate] dateByAddingTimeInterval:60*60*24*(numberOfAppending)];
   }
 }
 

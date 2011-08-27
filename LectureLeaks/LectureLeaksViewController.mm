@@ -79,6 +79,7 @@
 
 - (IBAction)settingsPressed:(id)sender {
     SettingsViewController *settingsController = [[SettingsViewController alloc] init];
+    //[self presentModalViewController:settingsController animated:YES];
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 @end

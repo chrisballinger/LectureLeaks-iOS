@@ -55,52 +55,7 @@ static Boolean IsAACHardwareEncoderAvailable(void)
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        date = [[NSDate date] retain];
-        time_t unixTime = (time_t) [date timeIntervalSince1970];
-        NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];        
-        NSString* path = [documentsDirectory stringByAppendingPathComponent:currentFileName];
-        NSURL *url = [NSURL fileURLWithPath:path];
-        NSError *error;
         
-        int kAudioFormat;
-        
-        if(IsAACHardwareEncoderAvailable())
-        {
-            kAudioFormat = kAudioFormatMPEG4AAC;
-        }
-        else
-        {
-            kAudioFormat = kAudioFormatAppleIMA4;
-        }
-        
-        NSDictionary *recordSettings =
-        
-        [[NSDictionary alloc] initWithObjectsAndKeys:
-         
-         [NSNumber numberWithFloat: 44100.0],                 AVSampleRateKey,
-         [NSNumber numberWithInt: kAudioFormat], AVFormatIDKey,
-         [NSNumber numberWithInt: 1],                         AVNumberOfChannelsKey,
-         [NSNumber numberWithInt: AVAudioQualityMax],         AVEncoderAudioQualityKey,
-         
-         nil];
-        
-        recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recordSettings error:&error];
-        
-        if(error)
-            NSLog(@"%@",[error description]);
-        
-        [recorder prepareToRecord];
-        
-        /*OSStatus error = AudioSessionSetActive(true); 
-        if (error) 
-        {
-            NSLog(@"AudioSessionSetActive (true) failed");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            [alert release];
-        }*/
     }
     return self;
 }
@@ -127,22 +82,54 @@ static Boolean IsAACHardwareEncoderAvailable(void)
 
 #pragma mark - View lifecycle
 
-- (void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [super viewWillAppear:animated];
     
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
-    self.title = @"Record";
-
-    NSString* fileName = @"data.plist";
+    date = [[NSDate date] retain];
+    time_t unixTime = (time_t) [date timeIntervalSince1970];
+    NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];        
+    NSString* path = [documentsDirectory stringByAppendingPathComponent:currentFileName];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    NSError *error;
+    
+    int kAudioFormat;
+    
+    if(IsAACHardwareEncoderAvailable())
+    {
+        kAudioFormat = kAudioFormatMPEG4AAC;
+    }
+    else
+    {
+        kAudioFormat = kAudioFormatAppleIMA4;
+    }
+    
+    NSDictionary *recordSettings =
+    
+    [[NSDictionary alloc] initWithObjectsAndKeys:
+     
+     [NSNumber numberWithFloat: 44100.0],                 AVSampleRateKey,
+     [NSNumber numberWithInt: kAudioFormat], AVFormatIDKey,
+     [NSNumber numberWithInt: 1],                         AVNumberOfChannelsKey,
+     [NSNumber numberWithInt: AVAudioQualityMax],         AVEncoderAudioQualityKey,
+     
+     nil];
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance]; [session setCategory:AVAudioSessionCategoryRecord error:nil];
+    
+    recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recordSettings error:&error];
+    recorder.delegate = self;
+    
+    if(error)
+        NSLog(@"%@",[error description]);
+    
+    //[recorder prepareToRecord];
+    
+    NSString* fileName = @"data.plist";
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [paths objectAtIndex:0];        
     NSString *metadataPath = [documentsDirectory stringByAppendingPathComponent:fileName];
     NSDictionary *metadata = [[[NSDictionary alloc] initWithContentsOfFile:metadataPath] autorelease];
     
@@ -159,6 +146,25 @@ static Boolean IsAACHardwareEncoderAvailable(void)
     [eventStore release];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    
+    /*OSStatus error = AudioSessionSetActive(true); 
+     if (error) 
+     {
+     NSLog(@"AudioSessionSetActive (true) failed");
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Error" message:@"If you are trying to record on an iPod Touch, headphones with a microphone must be plugged in before you can record." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+     [alert show];
+     [alert release];
+     }*/
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient_background.png"]];
+    self.title = @"Record";
+}
+
 - (void)viewDidUnload
 {
     [self setRecordingLabel:nil];
@@ -167,6 +173,7 @@ static Boolean IsAACHardwareEncoderAvailable(void)
     [self setTitleTextField:nil];
     [self setClassTextField:nil];
     [self setSchoolTextField:nil];
+    [self setRecorder:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -187,21 +194,7 @@ static Boolean IsAACHardwareEncoderAvailable(void)
         
         [recordingTimer invalidate];
         
-        LearnViewController *learnController = [[LearnViewController alloc] init];
-        RecordingsListViewController *recordingListController = [[RecordingsListViewController alloc] init];
-        LecturePlayerViewController *lecturePlayerController = [[LecturePlayerViewController alloc] init];
-        LectureLeaksViewController *dashboardController  = [[LectureLeaksViewController alloc] init];
         
-        lecturePlayerController.lecture = self.lecture;
-                
-        NSArray *controllers = [NSArray arrayWithObjects:dashboardController,learnController,recordingListController,lecturePlayerController,nil];
-        [self.navigationController setViewControllers:controllers animated:YES];
-         
-        [lecture release];
-        [learnController release];
-        [recordingListController release];
-        [lecturePlayerController release];
-        [dashboardController release];
     }
     else
     {
@@ -213,32 +206,43 @@ static Boolean IsAACHardwareEncoderAvailable(void)
         }
         else
         {
-            recordButton.title = @"Stop";
-            time_t unixTime = (time_t) [date timeIntervalSince1970];
-            NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];        
-            NSString* path = [documentsDirectory stringByAppendingPathComponent:currentFileName];
-            NSURL *url = [NSURL fileURLWithPath:path];
+            if([recorder record])
+            {
+                time_t unixTime = (time_t) [date timeIntervalSince1970];
+                NSString* currentFileName = [NSString stringWithFormat:@"%d.caf",unixTime];
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];        
+                NSString* path = [documentsDirectory stringByAppendingPathComponent:currentFileName];
+                NSURL *url = [NSURL fileURLWithPath:path];
+                
+                UIColor *grey = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+                titleTextField.textColor = grey;
+                classTextField.textColor = grey;
+                schoolTextField.textColor = grey;
+                titleTextField.enabled = NO;
+                classTextField.enabled = NO;
+                schoolTextField.enabled = NO;
+
+                lecture = [Lecture lectureWithName:titleTextField.text course:classTextField.text professor:nil school:schoolTextField.text subject:nil tags:nil url:url approved:FALSE date:date submitDate:nil];
+                [lecture saveMetadata];
+                [lecture retain];
+                
+                startTime = [NSDate timeIntervalSinceReferenceDate];
+                recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+                                                                 selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
+                
+                recordButton.title = @"Stop";
+
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recording Error" message:@"The recorder failed to start." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                [alert show];
+                [alert release];
+
+            }
             
-            lecture = [Lecture lectureWithName:titleTextField.text course:classTextField.text professor:nil school:schoolTextField.text subject:nil tags:nil url:url approved:FALSE date:date submitDate:nil];
-            [lecture saveMetadata];
-            [lecture retain];
-            UIColor *grey = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
-            titleTextField.textColor = grey;
-            classTextField.textColor = grey;
-            schoolTextField.textColor = grey;
-            titleTextField.enabled = NO;
-            classTextField.enabled = NO;
-            schoolTextField.enabled = NO;
             
-                         
-            //recorder->StartRecord((CFStringRef)currentFileName);
-            [recorder record];
-            
-            startTime = [NSDate timeIntervalSinceReferenceDate];
-            recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self
-                                                             selector:@selector(updateElapsedTime:) userInfo:nil repeats:YES] retain];
 
         }
         
@@ -265,8 +269,38 @@ static Boolean IsAACHardwareEncoderAvailable(void)
 {
     if(recorder.recording)
     {
+        // stop recording
         [self record:nil];
     }
+}
+
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
+{
+    AVAudioSession *session = [AVAudioSession sharedInstance]; [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    LearnViewController *learnController = [[LearnViewController alloc] init];
+    RecordingsListViewController *recordingListController = [[RecordingsListViewController alloc] init];
+    LecturePlayerViewController *lecturePlayerController = [[LecturePlayerViewController alloc] init];
+    LectureLeaksViewController *dashboardController  = [[LectureLeaksViewController alloc] init];
+    
+    lecturePlayerController.lecture = self.lecture;
+    
+    NSArray *controllers = [NSArray arrayWithObjects:dashboardController,learnController,recordingListController,lecturePlayerController,nil];
+    [self.navigationController setViewControllers:controllers animated:YES];
+    
+    [lecture release];
+    [learnController release];
+    [recordingListController release];
+    [lecturePlayerController release];
+    [dashboardController release];
+}
+
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recording Error" message:[error description] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
+    [alert release];
+    NSLog(@"recording error: %@", [error description]);
 }
 
 @end
