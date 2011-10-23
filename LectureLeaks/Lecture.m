@@ -79,10 +79,15 @@
     [metadata setObject:name forKey:@"name"];
     [metadata setObject:course forKey:@"course"];
     [metadata setObject:school forKey:@"school"];
+    
+    if(professor)
+        [metadata setObject:professor forKey:@"professor"];
+    else
+        [metadata setObject:[NSNull null] forKey:@"professor"];
     if(submitDate)
         [metadata setObject:submitDate forKey:@"submitDate"];
     else
-        [metadata setObject:@"nil" forKey:@"submitDate"];
+        [metadata setObject:[NSNull null] forKey:@"submitDate"];
     [metadata writeToFile:metadataPath atomically:YES];
 }
 
@@ -122,9 +127,9 @@
         [request setPostValue:school forKey:@"school"];
         [request setPostValue:@"Unavailable" forKey:@"subject"];
         [request setPostValue:course forKey:@"course"];
-        [request setPostValue:@"Unavailable" forKey:@"professor"];
+        [request setPostValue:professor forKey:@"professor"]; // email field
         
-        NSLog(@"%@, %@, %@, %@, %@",name, school, subject, course, [url description]);
+        NSLog(@"%@, %@, %@, %@, %@, %@",name, school, subject, course, [url description], professor);
         
         //[request setTimeOutSeconds:20];
         

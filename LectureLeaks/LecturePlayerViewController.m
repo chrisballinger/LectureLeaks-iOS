@@ -29,6 +29,8 @@
 @synthesize player;
 @synthesize permissionSwitch;
 @synthesize permissionLabel;
+@synthesize emailLabel;
+@synthesize emailTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +61,8 @@
     [submitProgressLabel release];
     [permissionSwitch release];
     [permissionLabel release];
+    [emailLabel release];
+    [emailTextField release];
     [super dealloc];
 }
 
@@ -82,11 +86,7 @@
     if(lecture.submitDate)
         submitLabel.text = [lecture.submitDate description];
     
-    NSURL *url; 
-    /*if(lecture.isRemoteFile)
-    url = [NSURL URLWithString:@"http://thenewfreedom.net/zro/11-z-ro-cant_leave_drank_alone_ft_lil_o.mp3"];
-    else*/
-        url = lecture.url;
+    NSURL *url = lecture.url;
     
     AVAudioSession *session = [AVAudioSession sharedInstance]; [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     player = [[AVPlayer alloc] initWithURL:url];
@@ -99,6 +99,11 @@
         submitButton.enabled = YES;
         permissionLabel.hidden = NO;
         permissionSwitch.hidden = NO;
+        emailLabel.hidden = NO;
+        emailTextField.hidden = NO;
+        
+        if(lecture.professor)
+            emailTextField.text = lecture.professor;
     }
     
     isPlaying = NO;
@@ -149,6 +154,8 @@
     [self setSubmitProgressLabel:nil];
     [self setPermissionSwitch:nil];
     [self setPermissionLabel:nil];
+    [self setEmailLabel:nil];
+    [self setEmailTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -209,6 +216,9 @@
         submitProgressLabel.text = @"Submitting...";
         submitProgressLabel.textColor = [UIColor whiteColor];
         
+        lecture.professor = emailTextField.text;
+        [lecture saveMetadata];
+        
         [lecture submitRecordingWithDelegate:self];
     }
 }
@@ -217,9 +227,31 @@
 {
     if(permissionSwitch.on)
     {
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Submit to LectureLeaks" message:@"Would you like to submit your recording to www.lectureleaks.com?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:nil] autorelease];
-        [alert addButtonWithTitle:@"Yes"];
-        [alert show];
+        // stolen from http://cocoawithlove.com/2009/06/verifying-that-string-is-email-address.html
+        NSString *emailRegEx =
+        @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+        @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+        @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+        @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+        @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+        @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+        @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        
+        NSPredicate *regExPredicate =
+        [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+        BOOL myStringMatchesRegEx = [regExPredicate evaluateWithObject:emailTextField.text];
+        
+        if(myStringMatchesRegEx)
+        {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Submit to LectureLeaks" message:@"Would you like to submit your recording to www.lectureleaks.com?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:nil] autorelease];
+            [alert addButtonWithTitle:@"Yes"];
+            [alert show];
+        }
+        else
+        {
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Invalid Email" message:@"Please enter a valid email address and try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+            [alert show];
+        }
     }
     else
     {
@@ -283,6 +315,11 @@
     submitProgressLabel.text = @"Submission failed!";
     submitProgressLabel.textColor = [UIColor redColor];
     progressView.hidden = TRUE;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

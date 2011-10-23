@@ -11,7 +11,7 @@
 #import "Lecture.h"
 
 
-@interface LecturePlayerViewController : UIViewController {
+@interface LecturePlayerViewController : UIViewController <UITextFieldDelegate> {
     Lecture* lecture;
     int duration;
     BOOL isPlaying;
@@ -50,6 +50,8 @@
 @property (nonatomic, retain)     AVPlayer* player;
 @property (retain, nonatomic) IBOutlet UISwitch *permissionSwitch;
 @property (retain, nonatomic) IBOutlet UILabel *permissionLabel;
+@property (retain, nonatomic) IBOutlet UILabel *emailLabel;
+@property (retain, nonatomic) IBOutlet UITextField *emailTextField;
 
 - (IBAction)submitPressed:(id)sender;
 - (IBAction)playPressed:(id)sender;
