@@ -500,6 +500,7 @@
 							<int key="IBUIAutocorrectionType">1</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
+						<int key="IBUIClearButtonMode">1</int>
 						<reference key="IBUIFontDescription" ref="487697373"/>
 						<reference key="IBUIFont" ref="453252200"/>
 					</object>

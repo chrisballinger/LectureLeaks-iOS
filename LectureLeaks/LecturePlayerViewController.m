@@ -241,7 +241,7 @@
         [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
         BOOL myStringMatchesRegEx = [regExPredicate evaluateWithObject:emailTextField.text];
         
-        if(myStringMatchesRegEx)
+        if(myStringMatchesRegEx || [emailTextField.text isEqualToString:@""])
         {
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Submit to LectureLeaks" message:@"Would you like to submit your recording to www.lectureleaks.com?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:nil] autorelease];
             [alert addButtonWithTitle:@"Yes"];
