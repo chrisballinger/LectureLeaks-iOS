@@ -135,6 +135,11 @@
 {
     [player pause];
     [playerUpdateTimer invalidate];
+    
+    if(!lecture.isRemoteFile)
+    {
+        [lecture saveMetadata];
+    }
 }
 
 - (void)viewDidUnload

@@ -83,11 +83,11 @@
     if(professor)
         [metadata setObject:professor forKey:@"professor"];
     else
-        [metadata setObject:[NSNull null] forKey:@"professor"];
+        [metadata setObject:@"" forKey:@"professor"];
     if(submitDate)
         [metadata setObject:submitDate forKey:@"submitDate"];
     else
-        [metadata setObject:[NSNull null] forKey:@"submitDate"];
+        [metadata setObject:@"" forKey:@"submitDate"];
     [metadata writeToFile:metadataPath atomically:YES];
 }
 
